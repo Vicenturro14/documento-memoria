@@ -1,0 +1,180 @@
+\chapter{Análisis y Diseño}
+
+\section{Modelo de Datos}
+
+\subsection{Modelo de datos actual}
+El repositorio del sistema de titulación tiene varios módulos y cada uno tiene sus 
+propias entidades que pueden relacionarse con las de otros módulos. No todas las
+entidades son relevantes el módulo de asignación de comisiones examinadoras, por lo que
+solo se describirán las entidades que se relacionan con el módulo de asignación de
+comisiones examinadoras y el módulo de titulación. Es importante mencionar que el modelo
+de datos que se describirá a continuación es el modelo en su estado previo a este trabajo
+de título.
+
+El módulo principal es el módulo de titulación, que se puede ver en la figura 
+\ref{fig:modelo_titulacion}. Este módulo contiene las entidades Tema, Solicitud, 
+Propuesta y Documento. Estas representan el tema de un trabajo de título, una solicitud 
+de un estudiante a un tema, un trabajo de título de un estudiante en el contexto del 
+ramo de Introducción al Trabajo de Título y los documentos con los informes que deben 
+entregar los estudiantes, respectivamente.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/diagramas/titulacion.png}
+    \caption{Diagrama del modelo de datos del módulo de titulación.}
+    \label{fig:modelo_titulacion}
+\end{figure}
+
+El módulo de comisiones examinadoras contiene a las entidades Comision y 
+AlumnoCursandoMemoria, como muestra la figura \ref{fig:modelo_comisiones}. Comisión 
+representa una comisión examinadora de un trabajo de título. Contiene una relación con la 
+entidad Solicitud, que representa el tema del trabajo de título, y una relación con la entidad 
+Solicitud, que representa la solicitud del tema. Además, tiene una relación de n a n con la 
+entidad Evaluador del módulo de evaluación, que representa los integrantes de la comisión
+examinadora.
+
+AlumnoCursandoMemoria representa a un estudiante que está cursando Trabajo de título. 
+Contiene al estudiante a través de una relación con la entidad Persona del módulo kernel 
+y se asocia a una memoria a través de la solicitud del tema. Además, contiene el periodo 
+académico en el que el estudiante cursa el ramo Trabajo de título y tiene una relación con 
+la entidad Comision, que representa la comisión examinadora que se le asigna al estudiante.
+Por último, tiene el estado de la defensa, que indica si la defensa ha sido aprobada, reprobada o si
+la defensa aún no ha sido realizada. Los posibles estados son \textit{pendiente}, 
+\textit{aprobado} y \textit{reprobado}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/diagramas/comisiones.png}
+    \caption{Diagrama del modelo de datos del módulo de asignación de comisiones examinadoras.}
+    \label{fig:modelo_comisiones}
+\end{figure}
+
+El módulo de evaluación contiene a las entidades Evaluador, que corresponden a personas
+que evaluan, como los integrantes de una comisión examinadora. El módulo de departamento
+proporciona las entidades Funcionario y Estudiante. Funcionario representa a 
+funcionarios del departamento y en el caso de titulación, representa a académicos del 
+departamento que son guías o coguías de trabajos de título. Estudiantes representa a 
+estudiantes del DCC.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{imagenes/diagramas/departamento_evaluacion.png}
+    \caption{Entidades de los módulos departamento y evaluación.}
+    \label{fig:modelo_departamento}
+\end{figure}
+
+
+El módulo de docencia proporciona los periodos académicos y el 
+módulo de investigación proporciona Area, que representa áreas de conocimiento dentro de 
+computación y permite asignar áreas de conocimiento tanto a los académicos como a los 
+temas de trabajo de título. Por último, el módulo kernel proporciona la entidad 
+Persona, que representa a cualquier usuario de la plataforma.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{imagenes/diagramas/investigacion.png}
+    \caption{Entidades de los módulos docencia, investigación y kernel.}
+    \label{fig:modelo_docencia_investigacion_kernel}
+\end{figure}
+
+
+\subsection{Cambios en el modelo de datos}
+
+Tomando en cuenta el modelo de datos actual y las funcionalidades que se desea agregar a 
+la herramienta, el modelo de datos no sufrirá muchos cambios, ya que la mayoría de las
+funcionalidades trabajan con datos que ya se encuentran en el modelo. La única 
+funcionalidad que requiere un cambio es la de publicar las comisiones examinadoras, puesto
+que se necesita diferenciar entre comisiones que han sido publicadas y aquellas que no lo
+han sido. Para lograr esto, se agregará la entidad ComisionBorrador que tendrá los mismos
+atributos que Comision, pero que se diferenciará por el hecho de que no ha sido
+publicada. De esta forma, la publicación de comisiones examinadoras por API se realizará con
+los datos de la entidad Comision.
+
+
+\section{Diseño de Mockups}\label{sec:ta:mockups}
+Es importante recalcar que la herramienta es una extensión del trabajo realizado por un 
+equipo de Ingeniería de Software II y del sistema de titulación, por lo tanto, en la 
+mayoría de los mockups se utilizan las interfaces ya existentes como base.
+
+\subsection{Interfaz principal del módulo de comisiones examinadoras}
+\label{subsec:ta:mockups:comisiones}
+El primer diseño en ser realizado fue el de la interfaz principal del módulo de 
+asignación de comisiones examinadoras. La interfaz original se puede ver en la figura
+\ref{fig:ingsoft_comisiones} y mientras que la propuesta se puede ver en la figura
+\ref{fig:mockup_listado_comisiones}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.77\linewidth]{imagenes/mockups/listado_comisiones.png}
+    \caption{Mockup de la interfaz principal del módulo de comisiones examinadoras.}
+    \label{fig:mockup_listado_comisiones}
+\end{figure}
+
+Ambas interfaces son similares, ya que la tabla mantiene la misma estructura. Comenzando
+por la parte superior, se mantiene el selector de periodo académico y el botón de
+\textit{Sincronizar}. El botón \textit{Descargar} es equivalente al botón 
+\textit{Exportar} de la interfaz original, solo cambia el texto y el ícono. Se agregó un 
+botón con ícono de gráfico que permite mostrar y esconder un gráfico con la cantidad de
+comisiones examinadoras y memorias guíadas por cada profesor en el periodo académico 
+seleccionado, que se muestra en la figura \ref{fig:mockup_grafico_comisiones}, las columnas
+están ordenadas de forma descendiente por la cantidad de carga de cada profesor. Como se
+trata de varios profesores, se decidió que el gráfico no tenga etiquetas en el eje X, 
+pues no serían visibles y saturaría el gráfico. En su lugar, se muestra el nombre del profesor y 
+la cantidad de comisiones examinadoras y memorias guíadas al pasar el mouse por encima de
+una barra del gráfico.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{imagenes/mockups/grafico_comisiones.png}
+    \caption{Mockup del gráfico de comisiones examinadoras.}
+    \label{fig:mockup_grafico_comisiones}
+\end{figure}
+
+También se agregó el botón \textit{Publicar} que permite publicar las comisiones 
+examinadoras en el sistema de titulación, permitiendo que las comisiones asignadas se
+muestren en la ficha del estudiante y estén disponibles para exportar. Al presionar 
+\textit{Publicar}, aparece un modal con un mensaje de confirmación, indicando si es que
+quedan memorias sin comisión asignada y cuántas son, en caso que que hayan. Esto se puede
+ver en la figura \ref{fig:mockup_confirmacion_subida_comisiones}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{imagenes/mockups/confirmacion_subida_comisiones.png}
+    \caption{Mockup de la confirmación de la publicación de comisiones examinadoras.}
+    \label{fig:mockup_confirmacion_subida_comisiones}
+\end{figure}
+
+Más abajo, al costado del buscador, se agregó un filtro que permite ajustar si en la 
+tabla se muestran todas las memorias, solo las memorias con comisión incompleta o solo
+las memorias con comisión completa. Este filtro se puede ver en la figura \ref{fig:mockup_filtro_comisiones}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{imagenes/mockups/filtro_comisiones_zoom.png}
+    \caption{Mockup del filtro de la interfaz principal del módulo de comisiones examinadoras.}
+    \label{fig:mockup_filtro_comisiones}
+\end{figure}
+
+Por último, en la tabla se decidió que en los botones de acción, es decir, 
+\textit{Agregar} y \textit{Editar}, se mostrarán solo los íconos de + y lápiz,
+respectivamente, porque se consideró que sin el texto se mantendría la claridad de la
+acción que realizan y se disminuiría la densidad de texto en la tabla.
+
+
+\subsection{Ficha de un estudiante con comisión asignada}
+Después, se diseñó la interfaz de la ficha de un estudiante desde la vista de un 
+estudiante con la comisión examinadora que le ha sido asignada, que se puede ver en la 
+figura \ref{fig:mockup_ficha_estudiante}. No se cambió nada de la interfaz original,
+solo se agregó la sección de la comisión examinadora. Esta sección se ubica bajo la 
+sección de Tema en una tabla con el mismo formato visual que las otras tablas de la ficha
+del estudiante. Cada fila corresponde a un integrante de la comisión examinadora, 
+indicando el rol dentro de la comisión, una imagen del integrante, su nombre y correo 
+electrónico.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\linewidth]{imagenes/mockups/ficha_estudiante.png}
+    \caption{Mockup de la ficha de un estudiante desde la vista de un estudiante
+    con la comisión examinadora asignada.}
+    \label{fig:mockup_ficha_estudiante}
+\end{figure}

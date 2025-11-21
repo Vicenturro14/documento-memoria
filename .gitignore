@@ -1,3 +1,15 @@
 .svn
 .svn/*
 memoria_latex.zip
+
+# Generated files
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.lof
+*.lot
+*.fdb_latexmk
+*.gz
+*.fls

@@ -2,19 +2,19 @@
 %  memorias o tesis en inglés (borrando el archivo .aux)
 \documentclass{umemoria} 
 
-\depto{Departamento de ???}
-\author{Nombre Completo Autor}
-\title{Título de la Memoria/Tesis}
+\depto{Departamento de Ciencias de la Computación}
+\author{Vicente Esteban Olivares Gómez}
+\title{MÓDULO DE ASIGNACIÓN DE COMISIONES EXAMINADOREAS EN EL SISTEMA DE TITULACIÓN DCC}
 
 % incluir ambos comandos para una doble titulación
 %  o quitar el comando que no aplica
-\memoria{Ingenier[o/a?] Civil en ???}
-\tesis{Magíster en ???}
+\memoria{Ingeniero Civil en Computación}
+% \tesis{Magíster en ???}
 %\tesis{Doctor en ???} % incluir solo este comando para doctorados
 
 % puede haber varios profesores guía seperados por coma;
 % pero si es una memoria, solo puede haber un profesor guía
-\guia{Nombre Completo Guía} 
+\guia{María Cecilia Bastarrica Pineyro} 
 
 % puede haber varios profesores co-guía seperados por coma;
 % pero si es una memoria, el profesor co-guía será el primer
@@ -22,8 +22,7 @@
 %\coguia{Nombre Completo Co-Guía} % incluir en caso de co-guía de *tesis*
 
 %\cotutela{Nombre Institución} % incluir en caso de cotutela
-
-\comision{Nombre Completo Uno,Nombre Completo Dos,Nombre Completo Tres}
+\comision{César Ramón Guerrero Saldivia, Francisco Javier Gutiérrez Figueroa}
 
 %\auspicio{Nombre Institución} % incluir en caso de recibir financiamiento
 
@@ -31,6 +30,9 @@
 %\anho{2021} % incluir solo para reemplazar el año actual
 
 \usepackage{lipsum}
+\usepackage{url}
+\usepackage{subcaption}
+\usepackage{multicol}
 
 \begin{document}
 
@@ -57,15 +59,15 @@ Una dedicatoria corta.
 \end{thanks}
 
 \tableofcontents
-\listoftables % opcional
+% \listoftables % opcional
 \listoffigures % opcional
 
 \mainmatter
 
-\input{intro.tex}
-\input{cap2.tex}
-\input{cap3.tex}
-\input{conclu.tex}
+\input{secciones/1.introduccion.tex}
+\input{secciones/2.estado_del_arte.tex}
+\input{secciones/3.analisis_diseno.tex}
+\input{secciones/4.implementacion.tex}
 
 % ver https://www.overleaf.com/learn/latex/Glossaries
 % \input{glosario.tex} % opcional
@@ -76,6 +78,6 @@ Una dedicatoria corta.
 
 % opcional ...
 \begin{appendices}
-\input{anexoA.tex}
+\input{secciones/anexoA.tex}
 \end{appendices}
 \end{document}
