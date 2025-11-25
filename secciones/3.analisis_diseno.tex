@@ -5,7 +5,7 @@
 \subsection{Modelo de datos actual}
 El repositorio del sistema de titulación tiene varios módulos y cada uno tiene sus 
 propias entidades que pueden relacionarse con las de otros módulos. No todas las
-entidades son relevantes el módulo de asignación de comisiones examinadoras, por lo que
+entidades son relevantes para el módulo de asignación de comisiones examinadoras, por lo que
 solo se describirán las entidades que se relacionan con el módulo de asignación de
 comisiones examinadoras y el módulo de titulación. Es importante mencionar que el modelo
 de datos que se describirá a continuación es el modelo en su estado previo a este trabajo
@@ -28,7 +28,7 @@ entregar los estudiantes, respectivamente.
 El módulo de comisiones examinadoras contiene a las entidades Comision y 
 AlumnoCursandoMemoria, como muestra la figura \ref{fig:modelo_comisiones}. Comisión 
 representa una comisión examinadora de un trabajo de título. Contiene una relación con la 
-entidad Solicitud, que representa el tema del trabajo de título, y una relación con la entidad 
+entidad Tema, que representa el tema del trabajo de título, y una relación con la entidad 
 Solicitud, que representa la solicitud del tema. Además, tiene una relación de n a n con la 
 entidad Evaluador del módulo de evaluación, que representa los integrantes de la comisión
 examinadora.
@@ -50,7 +50,7 @@ la defensa aún no ha sido realizada. Los posibles estados son \textit{pendiente
 \end{figure}
 
 El módulo de evaluación contiene a las entidades Evaluador, que corresponden a personas
-que evaluan, como los integrantes de una comisión examinadora. El módulo de departamento
+que evalúan, como los integrantes de una comisión examinadora. El módulo de departamento
 proporciona las entidades Funcionario y Estudiante. Funcionario representa a 
 funcionarios del departamento y en el caso de titulación, representa a académicos del 
 departamento que son guías o coguías de trabajos de título. Estudiantes representa a 
@@ -134,7 +134,7 @@ También se agregó el botón \textit{Publicar} que permite publicar las comisio
 examinadoras en el sistema de titulación, permitiendo que las comisiones asignadas se
 muestren en la ficha del estudiante y estén disponibles para exportar. Al presionar 
 \textit{Publicar}, aparece un modal con un mensaje de confirmación, indicando si es que
-quedan memorias sin comisión asignada y cuántas son, en caso que que hayan. Esto se puede
+quedan memorias sin comisión asignada y cuántas son, en caso de que haya. Esto se puede
 ver en la figura \ref{fig:mockup_confirmacion_subida_comisiones}.
 
 \begin{figure}[ht]
