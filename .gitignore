@@ -10,6 +10,7 @@ memoria_latex.zip
 *.out
 *.lof
 *.lot
+*.toc
 *.fdb_latexmk
 *.gz
 *.fls
