@@ -102,18 +102,24 @@ atributos que Comision, pero que se diferenciará por el hecho de que no ha sido
 publicada. De esta forma, la publicación de comisiones examinadoras por API se realizará con
 los datos de la entidad Comision.
 
-\subsection{Cambios al Modelo de Datos durante el desarrollo}\label{sec:ta:cambios_modelo_datos_desarrollo}
+\subsection{Cambios al Modelo de Datos Durante el Desarrollo}\label{sec:ta:cambios_modelo_datos_desarrollo}
 
-Durante el desarrollo de la herramienta, se realizaron cambios al modelo de datos que no
-se planificaron inicialmente. A continuación se detallará las modificaciones realizadas
-por cada módulo y la razón por la que se realizaron.
+A continuación se detallará las modificaciones realizadas al modelo de datos que no fueron
+planificadas inicialmente, por cada módulo y la razón por la que se realizaron.
 
 En primer lugar, en el módulo de titulación se agregó el atributo tema a la entidad
-Propuesta, que corresponde al tema de la memoria. Se agregó este atributo, puesto que
+Propuesta, que corresponde al tema de la memoria. Este se agregó, puesto que
 anteriormente solo se podía acceder al tema de una memoria a través de la entidad
 Solicitud. Esto no era práctico y tampoco hace sentido, ya que Propuesta
 representa una memoria en el ramo de Introducción al Trabajo de Título y toda memoria
 debe tener un tema.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{imagenes/diagramas/modelo_titulacion_nuevo.png}
+    \caption{Diagrama del modelo de datos del módulo de titulación.}
+    \label{fig:modelo_titulacion_nuevo}
+\end{figure}
 
 Luego, en el módulo de docencia, se agregó la entidad Curso, que representa una sección
 de un ramo en un periodo académico específico. Esta entidad tiene los atributos periodo,
@@ -123,6 +129,13 @@ se obtienen los cursos de un periodo académico. Se agregó esta entidad para id
 el curso al que pertenece una memoria y así poder exportar las comisiones examinadoras
 asignadas al Sistema de Seguimiento de Memorias, puesto que en tal sistema se separan las
 memorias por curso.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\linewidth]{imagenes/diagramas/modelo_docencia_nuevo.png}
+    \caption{Diagrama del modelo de datos del módulo de docencia.}
+    \label{fig:modelo_docencia_nuevo}
+\end{figure}
 
 En el módulo de comisiones examinadoras se eliminó el atributo solicitud de la entidad
 Comision, puesto que no es necesario que desde una comisión se acceda a la solicitud al
@@ -144,6 +157,13 @@ Esta entidad representa una memoria en el ramo de Trabajo de Título y tiene los
 estudiante, comision, tema, periodo, curso, tipo de memoria, estado de defensa y
 memoriaEnE. Esta última es una referencia a la entidad Propuesta, que corresponde a
 la misma memoria, pero en el ramo de Introducción al Trabajo de Título.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/diagramas/modelo_trabajotitulo_comision_nuevo.png}
+    \caption{Diagrama del modelo de datos de los módulos de comisiones examinadoras y trabajo de título.}
+    \label{fig:modelo_trabajo_titulo_nuevo}
+\end{figure}
 
 \begin{itemize}
     \item Titulación
