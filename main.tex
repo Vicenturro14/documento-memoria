@@ -40,7 +40,7 @@
 \maketitle
 
 \begin{resumen}
-\lipsum[1-4]
+    \lipsum[1-4]
 \end{resumen}
 
 % opcional: incluir para tesis en inglés;
@@ -51,11 +51,11 @@
 %\end{abstract}
 
 \begin{dedicatoria}
-Una dedicatoria corta.
+    Una dedicatoria corta.
 \end{dedicatoria}
 
 \begin{thanks}
-\lipsum[1-2]
+    \lipsum[1-2]
 \end{thanks}
 
 \tableofcontents
@@ -66,9 +66,11 @@ Una dedicatoria corta.
 
 \input{secciones/1.introduccion.tex}
 \input{secciones/2.estado_del_arte.tex}
-\input{secciones/3.analisis_diseno.tex}
+\input{secciones/3.1.analisis.tex}
+\input{secciones/3.2.disenno.tex}
 \input{secciones/4.implementacion.tex}
 \input{secciones/5.validacion.tex}
+\input{secciones/6.conclusiones.tex}
 
 % ver https://www.overleaf.com/learn/latex/Glossaries
 % \input{glosario.tex} % opcional
@@ -78,7 +80,7 @@ Una dedicatoria corta.
 \bibliography{bibliografia}
 
 % opcional ...
-\begin{appendices}
-\input{secciones/anexoA.tex}
-\end{appendices}
+% \begin{appendices}
+%     \input{secciones/anexoA.tex}
+% \end{appendices}
 \end{document}

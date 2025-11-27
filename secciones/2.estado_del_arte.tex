@@ -3,8 +3,8 @@
 Actualmente existen varios proyectos y sistemas relacionados con el proceso de titulación
 en el DCC. Dentro de estos se encuentran el sistema de titulación del DCC, el Sistema de
 Monitoreo de Memorias \cite{SistemaMonitoreoMemorias}, un sistema de recomendación de
-comisiones \cite{SistemaRecomendacion} y un sistema de asignación de comisiones 
-desarrollado por un grupo del curso CC5401 Ingeniería de Software II. A continuación se 
+comisiones \cite{SistemaRecomendacion} y un sistema de asignación de comisiones
+desarrollado por un grupo del curso CC5401 Ingeniería de Software II. A continuación se
 describen las características y las limitaciones de estos sistemas, relacionadas con la
 asignación de comisiones examinadoras.
 
@@ -13,8 +13,8 @@ asignación de comisiones examinadoras.
 
 El sistema de titulación del DCC es un sistema web en producción que ofrece distintas
 funcionalidades dependiendo de si se es estudiante, profesor o coordinador de titulación.
-Como estudiante, se pueden ver un listado de temas para trabajos de título, solicitar 
-la inscripción en un tema, subir propuestas su memoria y su informe final del curso 
+Como estudiante, se pueden ver un listado de temas para trabajos de título, solicitar
+la inscripción en un tema, subir propuestas su memoria y su informe final del curso
 Introducción al Trabajo de Título. Además se puede ver su ficha personal, que incluye
 la etapa actual del trabajo de título, el tema del trabajo de título junto a su guía.
 Además, se puede descargar la propuesta de memoria y el informe final de Introducción al
@@ -47,60 +47,60 @@ comisiones examinadoras ni de visualizar las comisiones asignadas a cada estudia
 corresponden a Trabajo de Título.
 
 
-\section{Sistema de Monitoreo de Memorias}\label{sec:sa:sistema}
+\section{Sistema de Seguimiento de Memorias}\label{sec:sa:sistema}
 
-El Sistema de Monitoreo de Memorias (SMM), es un sistema desarrollado por Matías Rivas
+El Sistema de Seguimiento de Memorias (SSM), es un sistema desarrollado por Matías Rivas
 Aguilera en 2024 como su memoria para optar al título de Ingeniero Civil en Computación
 \cite{SistemaMonitoreoMemorias}. En la figura \ref{fig:smm_principal} se puede apreciar
-la vista principal del SMM. Este sistema se encuentra en producción desde julio de 2025 y
-permite a la jefatura de estudios monitorear los plazos de entrega de los informes 
-finales de Trabajo de Título y gestionar la corrección de los mismos. Para realizar esta 
-tarea, el sistema requiere saber cuales son las comisiones examinadoras asignadas a cada 
+la vista principal del SSM. Este sistema se encuentra en producción desde julio de 2025 y
+permite a la jefatura de estudios monitorear los plazos de entrega de los informes
+finales de Trabajo de Título y gestionar la corrección de los mismos. Para realizar esta
+tarea, el sistema requiere saber cuales son las comisiones examinadoras asignadas a cada
 trabajo de título y el método que se utiliza para obtenerlos es que el usuario los ingrese,
-por lo que el sistema permite agregar, eliminar y modificar memorias, estudiantes, profesores 
-y miembros de comisiones examinadoras. El ingreso de esta información es realizado por la 
+por lo que el sistema permite agregar, eliminar y modificar memorias, estudiantes, profesores
+y miembros de comisiones examinadoras. El ingreso de esta información es realizado por la
 jefatura de estudios, una vez la coordinación de titulación realice la asignación de las
 comisiones. Esto sucede a más tardar en la semana académica número 12 de cada semestre.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.9\linewidth]{imagenes/smm_main.png}
-    \caption{Vista principal del SMM que muestra un listado de memoristas.}
+    \caption{Vista principal del SSM que muestra un listado de memoristas.}
     \label{fig:smm_principal}
 \end{figure}
 
-El SMM ofrece dos formas de ingresar miembros de comisiones examinadoras. La primera es de
+El SSM ofrece dos formas de ingresar miembros de comisiones examinadoras. La primera es de
 forma directa, llenando un formulario que permite asignar un/a profesor/a a la vez a una
 memoria a la que se asigna. La segunda es mediante la subida de un archivo CSV que sirve
-para agregar varias memorias simultáneamente, como se muestra en la figura 
-\ref{fig:smm_csv}. Cada línea del archivo representa una memoria y debe contener 
+para agregar varias memorias simultáneamente, como se muestra en la figura
+\ref{fig:smm_csv}. Cada línea del archivo representa una memoria y debe contener
 las siguientes columnas:
 \begin{multicols}{3}
-\begin{itemize}
-    \item Estudiante
-    \item Correo Estudiante
-    \item Tema
-    \item Guías
-    \item Correos Guías
-    \item Coguías
-    \item Correos Coguías
-    \item Integrantes
-    \item Correos Integrantes
-\end{itemize}
+    \begin{itemize}
+        \item Estudiante
+        \item Correo Estudiante
+        \item Tema
+        \item Guías
+        \item Correos Guías
+        \item Coguías
+        \item Correos Coguías
+        \item Integrantes
+        \item Correos Integrantes
+    \end{itemize}
 \end{multicols}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.9\linewidth]{imagenes/smm_csv.png}
-    \caption{Formulario de subida de archivo CSV del SMM.}
+    \caption{Formulario de subida de archivo CSV del SSM.}
     \label{fig:smm_csv}
 \end{figure}
 
-La principal limitación del SMM respecto a la asignación de comisiones examinadoras es
+La principal limitación del SSM respecto a la asignación de comisiones examinadoras es
 que fue desarrollado para que sea utilizado por la jefatura de estudios
 \cite[p.~3]{SistemaMonitoreoMemorias}. Como la coordinación de titulación es la encargada
 de asignar las comisiones, el sistema fue diseñado para facilitar el registro de
-comisiones ya definidas y no la asignación de estas. 
+comisiones ya definidas y no la asignación de estas.
 
 Este enfoque se puede ver en la asignación de integrantes a una comisión mediante la
 subida de un archivo CSV, que permite agregar varias memorias simultáneamente, haciendo
@@ -111,27 +111,27 @@ tener al menos un/a profesor/a con jerarquía de profesor/a.
 \cite[p.~17]{ReglamentoEstudios}
 
 En el caso de la asignación de integrantes a una comisión mediante un formulario, también
-se puede notar que el SMM no está diseñado para asignar integrantes a comisiones 
+se puede notar que el SSM no está diseñado para asignar integrantes a comisiones
 examinadoras, ya que el formulario no permite asignar varios integrantes a una comisión a
 la vez como se puede apreciar en la figura \ref{fig:smm_form}. Como por cada comisión se
 requieren al menos 2 integrantes además de los guías, se debe llenar al menos tres veces
-el formulario por cada comisión, lo que resulta ineficiente y tedioso. 
+el formulario por cada comisión, lo que resulta ineficiente y tedioso.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.9\linewidth]{imagenes/smm_form.png}
-    \caption{Formulario del SMM para agregar a un integrante a la comisión de una 
-    memoria, seleccionando el profesor deseado y el rol que tendrá.}
+    \caption{Formulario del SSM para agregar a un integrante a la comisión de una
+        memoria, seleccionando el profesor deseado y el rol que tendrá.}
     \label{fig:smm_form}
 \end{figure}
 
 \section{Sistema de recomendación de comisiones}\label{sec:sa:recomendacion}
 
-El Sistema de recomendación de comisiones \cite{SistemaRecomendacion} es un sistema que 
-no se encuentra en producción y fue desarrollado por Rodrigo Oportot González en 2024 
-como su memoria para optar al título de Ingeniero Civil en Computación. Este sistema 
+El Sistema de recomendación de comisiones \cite{SistemaRecomendacion} es un sistema que
+no se encuentra en producción y fue desarrollado por Rodrigo Oportot González en 2024
+como su memoria para optar al título de Ingeniero Civil en Computación. Este sistema
 propone 7 profesores/as candidatos/as para la comisión examinadora de una memoria,
-basándose en el área de conocimiento de los/as profesores/as y el tema del trabajo de 
+basándose en el área de conocimiento de los/as profesores/as y el tema del trabajo de
 título. Para esto, utiliza procesamiento de lenguaje natural y Machine Learning.
 
 Este sistema es conveniente para la asignación de comisiones examinadoras, ya que ofrece
@@ -139,7 +139,7 @@ candidatos/as según su área de conocimiento, permitiendo tener comisiones con 
 conocimiento en el tema del trabajo de título. No obstante, estas propuestas no toman
 en cuenta la cantidad de comisiones que han sido asignadas a cada profesor/a, lo que
 puede resultar en profesores/as con mucha carga y que no tengan el tiempo necesario para
-examinar las memorias. Además, cae en la misma falta que el SMM, ya que tampoco se tiene
+examinar las memorias. Además, cae en la misma falta que el SSM, ya que tampoco se tiene
 en cuenta restricciones sobre la conformación de comisiones examinadoras, como que cada
 comisión debe tener al menos un/a profesor/a con jerarquía de profesor/a.
 \cite[p.~17]{ReglamentoEstudios}
@@ -149,14 +149,14 @@ comisión debe tener al menos un/a profesor/a con jerarquía de profesor/a.
 
 El Sistema de Asignación de Comisiones es un sistema piloto que fue desarrollado por un
 equipo del curso CC5401 Ingeniería de Software II durante el semestre de otoño de 2025.
-Se trata de una primera versión de una extensión del sistema de titulación del DCC que 
-agrega un módulo para asignar comisiones examinadoras para los trabajos de título. La 
+Se trata de una primera versión de una extensión del sistema de titulación del DCC que
+agrega un módulo para asignar comisiones examinadoras para los trabajos de título. La
 interfaz principal de este módulo lista los estudiantes que están cursando el ramo Trabajo
 de Título del periodo académico seleccionado. Cada fila indica el título de una memoria,
 el nombre del estudiante, el nombre del guía, el nombre del coguía si es que se tiene y
 los miembros de la comisión examinadora si estos fueron asignados. Al final de cada fila
 se encuentra un botón que permite agregar una comisión examinadora en caso de que no
-se le haya asignado una. Esta interfaz se puede apreciar en la figura 
+se le haya asignado una. Esta interfaz se puede apreciar en la figura
 \ref{fig:ingsoft_comisiones}. Sobre la tabla, a la izquierda se encuentra una barra de
 búsqueda que permite buscar filas por el contenido de cualquiera de sus campos.
 
@@ -167,42 +167,42 @@ búsqueda que permite buscar filas por el contenido de cualquiera de sus campos.
     \label{fig:ingsoft_comisiones}
 \end{figure}
 
-Sobre la barra de búsqueda se encuentran los botones de \textit{Sincronizar} y 
+Sobre la barra de búsqueda se encuentran los botones de \textit{Sincronizar} y
 \textit{Exportar}. El botón \textit{Sincronizar} actualiza el listado de estudiantes que
-cursaron o se encuentran cursando el ramo Trabajo de Título en el periodo académico 
+cursaron o se encuentran cursando el ramo Trabajo de Título en el periodo académico
 seleccionado. Para lograr esto, primero se obtienen a los integrantes del ramo desde la
-API de UCampus. Luego, se obtiene el tema de cada estudiante desde el sistema de 
-titulación, buscando el último registro de aprobación de Introducción al Trabajo de 
+API de UCampus. Luego, se obtiene el tema de cada estudiante desde el sistema de
+titulación, buscando el último registro de aprobación de Introducción al Trabajo de
 Título asociado al estudiante. La funcionalidad de este botón es útil, pero debe hacerse
-manualmente. Además, fuera de este botón, no hay otro mecanismo en el sistema de 
-titulación para obtener a los integrantes del ramo Trabajo de Título. El botón 
+manualmente. Además, fuera de este botón, no hay otro mecanismo en el sistema de
+titulación para obtener a los integrantes del ramo Trabajo de Título. El botón
 \textit{Exportar} permite exportar la lista de comisiones asignadas a un archivo CSV.
 Este tiene las siguientes columnas:
 
 \begin{multicols}{3}
-\begin{itemize}
-    \item Título
-    \item Periodo
-    \item Estudiante
-    \item Guía
-    \item Coguía
-    \item Estado
-    \item Evaluadores
-    \item Correos
-\end{itemize}
+    \begin{itemize}
+        \item Título
+        \item Periodo
+        \item Estudiante
+        \item Guía
+        \item Coguía
+        \item Estado
+        \item Evaluadores
+        \item Correos
+    \end{itemize}
 \end{multicols}
 
-El archivo exportado tiene el potencial de ser utilizado para importar comisiones 
-examinadoras asignadas al SMM, ya que contiene toda la información requerida por este 
-sistema e incluso más, sin embargo, las columnas tienen distintos nombres y la 
+El archivo exportado tiene el potencial de ser utilizado para importar comisiones
+examinadoras asignadas al SSM, ya que contiene toda la información requerida por este
+sistema e incluso más, sin embargo, las columnas tienen distintos nombres y la
 información se encuentra en otro formato. Por ejemplo, el archivo CSV generado tiene el
-caracter \texttt{;} (punto y coma) como separador, mientras que el SMM requiere que el 
+caracter \texttt{;} (punto y coma) como separador, mientras que el SSM requiere que el
 caracter \texttt{,} (coma) sea el separador.
 
 Este sistema fue diseñado para ser utilizado por la coordinación de titulación del DCC,
 por lo que al agregar o editar comisiones toma en cuenta elementos como la cantidad de
 comisiones a las que ha sido asignada cada profesor/a y que se puedan agregar varios
-miembros a una comisión en un mismo formulario. Además, en el formulario se permite 
+miembros a una comisión en un mismo formulario. Además, en el formulario se permite
 buscar profesores por nombre y área de conocimiento, como se puede ver en la figura
 \ref{subfig:ingsoft_buscar}.
 
@@ -226,11 +226,11 @@ buscar profesores por nombre y área de conocimiento, como se puede ver en la fi
 
 Como se mencionó anteriormente, el Sistema de Asignación de Comisiones es un sistema
 piloto, por lo que no tiene todas las características deseadas. En primer lugar, faltan
-validaciones al momento de asignar miembros a una comisión examinadora, haciendo posible 
-asignar a los profesores guía y coguía como integrantes de la misma comisión examinadora, 
+validaciones al momento de asignar miembros a una comisión examinadora, haciendo posible
+asignar a los profesores guía y coguía como integrantes de la misma comisión examinadora,
 quedando registrados dos veces en la comisión. En segundo lugar, no se encuentra bien
 integrado con el sistema de titulación, sobre el cual fue desarrollado. Esto se debe a
 que el sistema permite asignar comisiones examinadoras a memoristas y exportarlas, pero
 las comisiones asignadas no son visibles en otros módulos del sistema de titulación, en
 los que sería deseable verlas, como por ejemplo las fichas de los estudiantes. En tercer
-lugar, el sistema no se encuentra directamente integrado con el SMM.
+lugar, el sistema no se encuentra directamente integrado con el SSM.

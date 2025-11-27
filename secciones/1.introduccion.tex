@@ -4,13 +4,13 @@
 El hito final de una carrera en la Facultad de Ciencias Físicas y Matemáticas de la
 Universidad de Chile, como lo es Ingeniería Civil en Computación, es el Trabajo de
 Titulación. Este es un proceso que se divide en tres etapas: el curso de Introducción al
-Trabajo de Título, el curso de Trabajo de Título y el Examen de Título. La coordinación 
-de titulación del departamento debe asignar una comisión examinadora a cada estudiante 
-cursando Trabajo de Título y enviarlas a la jefatura de estudios del departamento con 
-plazo máximo la semana número 12 de cada semestre. Esta tiene el rol de evaluar el 
+Trabajo de Título, el curso de Trabajo de Título y el Examen de Título. La coordinación
+de titulación del departamento debe asignar una comisión examinadora a cada estudiante
+cursando Trabajo de Título y enviarlas a la jefatura de estudios del departamento con
+plazo máximo la semana número 12 de cada semestre. Esta tiene el rol de evaluar el
 informe redactado por el estudiante en el curso de Trabajo de Título y la defensa en el
 examen de título. Cada comisión está compuesta por el profesor guía, el profesor coguía,
-en caso de tener, y al menos dos integrantes más. Estos integrantes adicionales pueden 
+en caso de tener, y al menos dos integrantes más. Estos integrantes adicionales pueden
 ser académicos/as de la Facultad de Ciencias Físicas
 y Matemáticas de la Universidad de Chile (FCFM) o profesores expertos externos, con la
 condición de que al menos uno debe ser académico/a de la FCFM con jerarquía de
@@ -30,8 +30,8 @@ registro de estos con hojas de cálculo tipo Excel. Debido al gran aumento de es
 en el DCC en los últimos años, el número de memoristas también ha crecido, haciendo que
 la asignación manual de comisiones sea una tarea tediosa, propensa a errores y poco
 eficiente. A modo de ejemplo del aumento de estudiantes, en el semestre de primavera de
-2024 había un total de 60 inscritos en los cursos de Trabajo de Título y en el semestre 
-de otoño de 2025 aumentó a 103, según el catálogo de cursos de UCampus de la FCFM 
+2024 había un total de 60 inscritos en los cursos de Trabajo de Título y en el semestre
+de otoño de 2025 aumentó a 103, según el catálogo de cursos de UCampus de la FCFM
 \cite{EstudiantesTrabajoTitulo20242,EstudiantesTrabajoTitulo20251}. A esto se le suma que
 no hay una base de datos 100\% correcta de estudiantes que requieran
 comisiones.
@@ -48,64 +48,64 @@ el sistema de titulación.
 El objetivo de esta memoria es desarrollar y desplegar una herramienta que permita que la
 asignación de comisiones examinadoras para las memorias sea una tarea eficiente.
 Esto incluye que la herramienta se comunique con los sistemas existentes relacionados con
-el proceso de titulación, como el sistema de titulación y el sistema de monitoreo de
-memorias.
+el proceso de titulación, como el Sistema de Titulación y el Sistema de Seguimiento de
+Memorias (SSM).
 
 \subsection{Objetivos Específicos}
+Para cumplir con el objetivo, se plantean los siguientes objetivos específicos:
 \begin{itemize}
     \item Desarrollar una herramienta que permita asignar comisiones de forma interactiva.
     \item Integrar la herramienta con los sistemas existentes relacionados con el proceso de
-    titulación, en particular con el sistema de titulación y el sistema de monitoreo de
-    memorias. 
+          titulación, en particular con el sistema de titulación y el Sistema de Seguimiento de
+          Memorias (SSM).
     \item Dejar la herramienta desarrollada en producción.
 \end{itemize}
 
 \section{Solución Propuesta}
-Para poder cumplir los objetivos descritos, se
-propone realizar una extensión del sistema de asignación de comisiones examinadoras 
-desarrollado por un equipo del curso CC5401 Ingeniería de Software II. Como se mencionó
-en la sección \ref{sec:sa:asignacion}, el sistema de asignación de comisiones
-examinadoras es un sistema piloto y una extensión del sistema de titulación del DCC, que
-agrega un módulo para asignar comisiones examinadoras a los memoristas. Dado que el 
-sistema de titulación fue desarrollado en Python con el framework web Django y la base de 
-datos relacional PostgreSQL, la extensión del sistema de asignación se realizará
-utilizando las mismas tecnologías.
+Considerando los objetivos mencionados, se propone realizar una extensión del sistema de
+asignación de comisiones examinadoras desarrollado por un equipo del curso CC5401
+Ingeniería de Software II. Como se mencionó en la sección \ref{sec:sa:asignacion}, el
+sistema de asignación de comisiones examinadoras es un sistema piloto y una extensión del
+sistema de titulación del DCC, que agrega un módulo para asignar comisiones examinadoras
+a los memoristas. Dado que el sistema de titulación fue desarrollado en Python con el
+framework web Django y la base de datos relacional PostgreSQL, la extensión del sistema
+de asignación se realizará utilizando las mismas tecnologías.
 
-A modo general, la solución propuesta consiste en cuatro partes. La primera parte 
+A modo general, la solución propuesta consiste en cuatro partes. La primera parte
 corresponde a la adición de funcionalidades en el módulo de asignación de comisiones
-examinadoras, la segunda es la integración del módulo con el sistema de titulación, la
-tercera es la integración con el Sistema de Monitoreo de Memorias y la cuarta es el 
-despliegue de la solución en los servidores del DCC.
+examinadoras, la segunda es la integración del módulo con el Sistema de Titulación, la
+tercera es la integración con el Sistema de Seguimiento de Memorias (SSM) y la cuarta es
+el despliegue de la solución en los servidores del DCC.
 
 \subsection{Desarrollo del módulo de asignación de comisiones examinadoras}
 La primera funcionalidad que se agregará al módulo de asignación de comisiones
-examinadoras es la validación de las comisiones asignadas. Se debe verificar que las 
+examinadoras es la validación de las comisiones asignadas. Se debe verificar que las
 comisiones tengan al menos dos integrantes además de los guías. De estos integrantes,
 al menos uno debe tener jerarquía de profesor, es decir, que sean académicos de jornada
 completa (AJC) o académicos de jornada parcial (AJP). También se debe verificar que no
-se repitan académicos en la misma comisión. 
+se repitan académicos en la misma comisión.
 
-Luego, se implementará un filtro en la interfaz principal del módulo que permita 
+Luego, se implementará un filtro en la interfaz principal del módulo que permita
 mostrar todas las memorias, solo las memorias con comisión completamente asignada o solo
 las memorias con comisión incompleta. Este filtro permitirá navegar con mayor facilidad
-entre las memorias al momento de asignar comisiones examinadoras. 
+entre las memorias al momento de asignar comisiones examinadoras.
 
-Además, en la misma interfaz se agregará un gráfico que muestre la carga de los 
-académicos. Específicamente, por cada académico se mostrará la cantidad de comisiones 
-que guía y la cantidad de comisiones que integra. El gráfico será de columnas y mostrará 
-a los académicos ordenados por la carga que tienen. De esta forma, se podrá identificar 
-académicos con carga excesiva y, por lo tanto, evitar que se les asigne una comisión 
-examinadora. 
+Además, en la misma interfaz se agregará un gráfico que muestre la carga de los
+académicos. Específicamente, por cada académico se mostrará la cantidad de comisiones
+que guía y la cantidad de comisiones que integra. El gráfico será de columnas y mostrará
+a los académicos ordenados por la carga que tienen. De esta forma, se podrá identificar
+académicos con carga excesiva y, por lo tanto, evitar que se les asigne una comisión
+examinadora.
 
 
 \subsection{Integración en el Sistema de Titulación}
-Actualmente el sistema de titulación solo cuenta con un listado de estudiantes de 
-Introducción al Trabajo de Título, por lo que se debe agregar a los estudiantes de 
+Actualmente el sistema de titulación solo cuenta con un listado de estudiantes de
+Introducción al Trabajo de Título, por lo que se debe agregar a los estudiantes de
 Trabajo de Título para integrar correctamente el módulo de asignación de comisiones
 examinadoras. Para esto, se agregará una pestaña con un listado de integrantes de Trabajo
 de Título en los distintos periodos académicos. Para mantener este listado actualizado,
 se implementará un cronjob que se encargue de obtener periódicamente desde UCampus a los
-estudiantes que están cursando Trabajo de Título. 
+estudiantes que están cursando Trabajo de Título.
 
 Después, se agregará un botón de publicación de comisiones. Este botón confirmará que
 coordinación de titulación terminó de asignar las comisiones examinadoras de un periodo
@@ -121,19 +121,19 @@ Luego, se agregará la comisión examinadora a la ficha de cada estudiante, con 
 de que los estudiantes puedan saber quiénes son los miembros de su comisión examinadora,
 una vez esta sea publicada.
 
-\subsection{Integración con el Sistema de Monitoreo de Memorias}
-Para integrar las comisiones examinadoras en el Sistema de Monitoreo de Memorias, primero
+\subsection{Integración con el Sistema de Seguimiento de Memorias}
+Para integrar las comisiones examinadoras en el Sistema de Seguimiento de Memorias, primero
 se cambiará el archivo CSV generado por el módulo de asignación de comisiones examinadoras
-para que tenga las columnas y el formato solicitados por el SMM.
+para que tenga las columnas y el formato solicitados por el SSM.
 
-Para hacer la exportación de las comisiones examinadoras al Sistema de Monitoreo de 
-Memorias más fácilmente, se implementará un endpoint en el sistema de titulación para 
-obtener las comisiones examinadoras asignadas por una API REST. Además, desde el 
-Sistema de Monitoreo de Memorias se agregará la opción de importar las comisiones 
+Para hacer la exportación de las comisiones examinadoras al Sistema de Seguimiento de
+Memorias más fácilmente, se implementará un endpoint en el sistema de titulación para
+obtener las comisiones examinadoras asignadas por una API REST. Además, desde el
+Sistema de Seguimiento de Memorias se agregará la opción de importar las comisiones
 desde esta API.
 
 \subsection{Despliegue de la solución}
-Por último, la solución desarrollada se desplegará en los servidores del DCC para que 
-pueda ser utilizada por la coordinación de titulación. Para este despliegue, se 
-utilizarán contenedores de Docker, uno para la aplicación de Django y otro para la base 
+Por último, la solución desarrollada se desplegará en los servidores del DCC para que
+pueda ser utilizada por la coordinación de titulación. Para este despliegue, se
+utilizarán contenedores de Docker, uno para la aplicación de Django y otro para la base
 de datos de PostgreSQL.
