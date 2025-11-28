@@ -1,17 +1,10 @@
-\chapter{Análisis y Diseño}
-En este capítulo se abordarán el modelo de datos de la herramienta desarrollada y el
-diseño de esta herramienta. En la sección \ref{sec:modelo_datos} se describirá el modelo
-de datos del sistema de titulación y los cambios por los que este pasó. Mientras que en la
-sección \ref{sec:disenno} se describirá el diseño de la herramienta desarrollada.
-
-
 \section{Modelo de Datos}\label{sec:modelo_datos}
 En esta sección se describirá el modelo de datos del sistema de titulación y cómo
 evolucionó durante este trabajo de título. Primero se describirá el modelo de datos en su
 estado inicial en la subsección \ref{sec:ta:modelo_datos_inicial}, es decir, como estaba
 antes de realizar este trabajo de título. Luego, en la subsección \ref{sec:ta:cambios_iniciales_modelo_datos}
-se describirán los cambios que se planearon realizar inicialmente. Por último, se describirán los cambios
-al modelo de datos que surgieron durante el desarrollo de esta memoria.
+se describirán los cambios que se planificaron inicialmente. Por último, se describirán los cambios
+que surgieron durante el desarrollo de esta memoria.
 
 \subsection{Modelo de Datos Inicial}\label{sec:ta:modelo_datos_inicial}
 El repositorio del sistema de titulación tiene varios módulos y cada uno tiene sus
@@ -30,7 +23,7 @@ entregar los estudiantes, respectivamente.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.77\linewidth]{imagenes/diagramas/titulacion.png}
+    \includegraphics[width=0.54\linewidth]{imagenes/diagramas/titulacion.png}
     \caption{Diagrama del modelo de datos del módulo de titulación.}
     \label{fig:modelo_titulacion}
 \end{figure}
@@ -45,7 +38,7 @@ examinadora.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.73\linewidth]{imagenes/diagramas/comisiones.png}
+    \includegraphics[width=0.6\linewidth]{imagenes/diagramas/comisiones.png}
     \caption{Diagrama del modelo de datos del módulo de comisiones examinadoras.}
     \label{fig:modelo_comisiones}
 \end{figure}
@@ -104,15 +97,15 @@ los datos de la entidad Comision.
 
 \subsection{Cambios al Modelo de Datos Durante el Desarrollo}\label{sec:ta:cambios_modelo_datos_desarrollo}
 
-A continuación se detallará las modificaciones realizadas al modelo de datos que no fueron
-planificadas inicialmente, por cada módulo y la razón por la que se realizaron.
+A continuación se detallará por cada módulo las modificaciones realizadas al modelo de datos que no fueron
+planificadas inicialmente, y la razón por la que se realizaron.
 
 En primer lugar, en el módulo de titulación se agregó el atributo tema a la entidad
 Propuesta, que corresponde al tema de la memoria. Este se agregó, puesto que
 anteriormente solo se podía acceder al tema de una memoria a través de la entidad
 Solicitud. Esto no era práctico y tampoco hace sentido, ya que Propuesta
 representa una memoria en el ramo de Introducción al Trabajo de Título y toda memoria
-debe tener un tema.
+debe tener un tema. Esto se puede ver en la figura \ref{fig:modelo_titulacion_nuevo}.
 
 \begin{figure}[ht]
     \centering
@@ -122,17 +115,16 @@ debe tener un tema.
 \end{figure}
 
 Luego, en el módulo de docencia, se agregó la entidad Curso, que representa una sección
-de un ramo en un periodo académico específico. Esta entidad tiene los atributos periodo,
-número de sección, código del ramo, nombre del ramo, id del ramo e id del curso. Estos
-dos últimos corresponden a identificadores dentro de la API de UCampus, que es de donde
-se obtienen los cursos de un periodo académico. Se agregó esta entidad para identificar
-el curso al que pertenece una memoria y así poder exportar las comisiones examinadoras
-asignadas al Sistema de Seguimiento de Memorias, puesto que en tal sistema se separan las
-memorias por curso.
+de un ramo en un periodo académico específico, lo cual se ve reflejado en la figura
+\ref{fig:modelo_docencia_nuevo}. Esta entidad tiene los atributos periodo, número de
+sección, código del ramo, nombre del ramo, id del ramo e id del curso. Estos dos últimos
+corresponden a identificadores dentro de la API de UCampus. Se agregó esta entidad para
+identificar el curso al que pertenece una memoria y así poder exportar las comisiones
+examinadoras asignadas al SSM que separa las memorias por curso.
 
-\begin{figure}[ht]
+\begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.4\linewidth]{imagenes/diagramas/modelo_docencia_nuevo.png}
+    \includegraphics[width=0.36\linewidth]{imagenes/diagramas/modelo_docencia_nuevo.png}
     \caption{Diagrama del modelo de datos del módulo de docencia.}
     \label{fig:modelo_docencia_nuevo}
 \end{figure}
@@ -153,38 +145,16 @@ al Trabajo de Título y no al estudiante que cursaba la memoria. La entidad fue 
 por la entidad MemoriaEnF, que será descrita a continuación.
 
 Por último, se creó el módulo de Trabajo de Título que contiene la entidad MemoriaEnF.
-Esta entidad representa una memoria en el ramo de Trabajo de Título y tiene los atributos
-estudiante, comision, tema, periodo, curso, tipo de memoria, estado de defensa y
-memoriaEnE. Esta última es una referencia a la entidad Propuesta, que corresponde a
-la misma memoria, pero en el ramo de Introducción al Trabajo de Título.
+Esta entidad representa una memoria en el ramo de Trabajo de Título y tiene como atributos
+al estudiante que realiza la memoria, la comisión examinadora, el tema de la memoria, el periodo
+académico y curso en el que se realiza la memoria, el tipo de memoria, el estado de defensa y una
+referencia a la entidad Propuesta, que corresponde a la misma memoria, pero en el ramo de
+Introducción al Trabajo de Título. Tanto la entidad MemoriaEnF como la entidad Comision
+se pueden ver en la figura \ref{fig:modelo_trabajo_titulo_nuevo}.
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\linewidth]{imagenes/diagramas/modelo_trabajotitulo_comision_nuevo.png}
+    \includegraphics[width=0.9\linewidth]{imagenes/diagramas/modelo_trabajotitulo_comision_nuevo.png}
     \caption{Diagrama del modelo de datos de los módulos de comisiones examinadoras y trabajo de título.}
     \label{fig:modelo_trabajo_titulo_nuevo}
 \end{figure}
-
-\begin{itemize}
-    \item Titulación
-          \begin{itemize}
-              \item Se agrega atributo tema a Propuesta
-          \end{itemize}
-    \item Comisiones
-          \begin{itemize}
-              \item Se elimina AlumnoCursandoMemoria
-              \item Se elimina atributo solicitud de Comision
-              \item No se incluyó la entidad ComisionBorrador
-          \end{itemize}
-    \item Docencia
-          \begin{itemize}
-              \item Se agrega entidad Curso
-          \end{itemize}
-    \item Trabajo de Titulo
-          \begin{itemize}
-              \item Se crea módulo de Trabajo de Titulo
-              \item Se crea entidad MemoriaEnF
-          \end{itemize}
-\end{itemize}
-
-
