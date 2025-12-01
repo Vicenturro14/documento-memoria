@@ -1,10 +1,188 @@
 \chapter{Implementación}
+En este capítulo se describirá la implementación realizada durante la memoria.
+Esta se separa puede separar en tres partes, la primera es la implementación relacionada
+con los estudiantes del ramo Trabajo de Título, también llamado F. La segunda parte
+corresponde a la asignación de comisiones examinadoras. La tercera parte corresponde a la
+exportación de comisiones examinadoras.
 
-\section{Filtro de comisiones}
-Se implementó el filtro de comisiones examinadoras en la interfaz principal del módulo de 
-asignación de comisiones examinadoras. Este filtro permite configurar si se muestran 
-todos los trabajos de título, solo los que tienen comisión incompleta o solo los que 
-tienen comisión completa. En la figura \ref{fig:implementacion_filtro_comisiones} se 
+\section{Estudiantes de Trabajo de Título}
+
+\subsection{Módulo de Trabajo de Título}
+Para implementar funcionalidades relacionadas con el ramo Trabajo de Título y
+separarlas de las funcionalidades del ramo Introducción al Trabajo de Título, se creó el
+módulo de Trabajo de Título. Esta separación también evita que la barra de navegación se
+llene de pestañas. Para acceder al módulo, se creó un selector en la barra de navegación,
+que se ubica en la parte superior de la página, como se puede ver en la figura
+\ref{fig:implementacion_selector}. Como por el momento las únicas funcionalidades asociadas
+al módulo de Trabajo de Título son ver los estudiantes de Trabajo de Título y la asignación
+de comisiones examinadoras, y ambas requieren permisos de coordinación de titulación, el
+selector solo es visible para coordinadores, que está manejado por la variable booleana
+\verb|show_module_selector|, como se muestra en la línea 11 del código \ref{lst:barra_navegacion}.
+Al seleccionar el módulo Introducción al Trabajo de Título, el usuario es redirigido a la
+raíz de la aplicación. Mientras que al seleccionar el módulo Trabajo de Título, el usuario
+es redirigido a la vista principal de Trabajo de Título, que es el listado de estudiantes de
+Trabajo de Título.
+
+Como anteriormente todo el sistema estaba dedicado al ramo Introducción al Trabajo de
+Título, el título de la barra de navegación era el nombre del módulo. Por lo tanto, se
+creó el módulo Trabajo de Título para poder separarlo del módulo de Introducción al
+Trabajo de Título. Además, el título de la barra de navegación se cambió a un título
+configurable mediante la variable \verb|titulo| y si esta variable no se especifica, se
+muestra el nombre del módulo. Se decidió dejar este caso, ya que el header es el mismo para
+todos los módulos y el resto de módulos no requieren un título personalizado.
+
+
+\begin{figure}[ht]
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_cerrado.png}
+        \caption{Captura de pantalla del selector cerrado en la barra de navegación en el módulo de Introducción al Trabajo de Título.}
+        \label{fig:implementacion_selector_cerrado}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_abierto.png}
+        \caption{Captura de pantalla del selector abierto en la barra de navegación en el módulo de Introducción al Trabajo de Título.}
+        \label{fig:implementacion_selector_abierto}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_trabajo_titulo.png}
+        \caption{Captura de pantalla del selector cerrado en la barra de navegación en el módulo de Trabajo de Título.}
+        \label{fig:implementacion_selector_trabajo_titulo}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_trabajo_titulo_abierto.png}
+        \caption{Captura de pantalla del selector abierto en la barra de navegación en el módulo de Trabajo de Título.}
+        \label{fig:implementacion_selector_trabajo_titulo_abierto}
+    \end{subfigure}
+    \caption{Capturas de pantalla del selector en la barra de navegación.}
+    \label{fig:implementacion_selector}
+\end{figure}
+
+\begin{lstlisting}[language=HTML, caption={Código de la parte central de la barra de navegación}, label={lst:barra_navegacion}]
+    <div class="header">
+      <a href="{% url 'servicios:index' %}" class="logo"><span class="dcc">dc<span>c</span></span></a>
+      <div class="d-flex flex-column flex-grow-1 align-items-center pt-2">
+        <h1 class="modulo mb-0">
+          {% if titulo %}
+            {{ titulo }}
+          {% else %}
+            {{ modulo.nombre }}
+          {% endif %}
+        </h1>
+        {% if show_module_selector %}
+          <div class="dropdown-center">
+            <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">
+              {{ modulo.nombre }}
+            </button>
+            <ul class="dropdown-menu">
+              {% for mod in modules %}
+                <li>
+                  <a class="dropdown-item {% if mod.nombre == modulo.nombre %} disabled {% endif %}"
+                     href="{% if mod.nombre == modulo.nombre %} # {% else %} {{ mod.url }} {% endif %}">
+                    {{ mod.nombre }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+\end{lstlisting}
+
+\subsection{Listado de estudiantes de Trabajo de Título}
+
+La asignación de comisiones examinadoras a los estudiantes de Trabajo de Título, requiere
+tener un registro de los estudiantes que están cursando Trabajo de Título junto con sus
+respectivos temas de memoria. Por lo tanto, dentro del módulo de Trabajo de Título se
+creó una vista que lista los estudiantes que están cursando Trabajo de Título, que se
+puede ver en la figura \ref{fig:listado_estudiantes_f}.
+
+En esta vista se muestra una tabla que por cada estudiante muestra su nombre, el título
+de su memoria, su guía, su coguía si tiene y un botón que redirige a su ficha. Sobre la
+tabla al costado derecho se encuentra una barra de búsqueda que permite buscar por nombre
+de estudiante, título de memoria, nombre de guía y nombre de coguía. Sobre esta barra, se
+encuentra un filtro que permite elegir el semestre académico de los estudiantes que se
+mostrarán en la tabla. Por defecto se mostrarán los estudiantes del semestre académico
+activo. Por último, al costado derecho de este filtro está el botón de
+\textit{Sincronizar}, que permite actualizar la tabla con los estudiantes.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/implementaciones/listado_estudiantes_f.png}
+    \caption{Captura de pantalla de la vista del listado de estudiantes de Trabajo de Título.}
+    \label{fig:listado_estudiantes_f}
+\end{figure}
+
+Para la actualización del registro se tomó en cuenta que los estudiantes deben estar
+cursando alguna sección de los ramos de Trabajo de Título, CC6909 y CC6919, por lo
+tanto se puede obtener los nombres de los estudiantes desde la API de UCampus. Además,
+los estudiantes deben haber aprobado Introducción al Trabajo de Título, por lo que se
+asume que los temas de los estudiantes ya se encuentran registrados en el sistema de
+titulación y que también hay una instancia del modelo Propuesta para cada estudiante
+asociada a su tema y con estado aprobado, haciendo posible asociar a los estudiantes que
+cursan Trabajo de Título con sus temas.
+
+Dada la asunción anterior, para actualizar el registro de estudiantes de Trabajo de
+Título dentro del sistema de titulación se creó un comando de administración
+\verb|upd_estudiantes_f|, que es llamado por el botón \textit{Sincronizar}.
+Este obtiene desde la API de UCampus todas las secciones de
+los ramos de Trabajo de Título y para después obtener los integrantes de cada sección.
+Luego, por cada integrante se busca la instancia del modelo Propuesta con estado
+aprobado más reciente asociada al estudiante, pues puede haber varias instancias
+asociadas al mismo estudiante. Si se encuentra una instancia, se obtiene el tema asociado
+y se crea una instancia del modelo MemoriaEnF con el estudiante y su tema. En caso
+contrario, se registra en el log que para ese estudiante no se encontró una instancia,
+se agrega al estudiante a la lista de estudiantes sin una instancia y se continua con el
+siguiente integrante. Al finalizar el proceso se muestra un mensaje indicando cuántos
+estudiantes no tuvieron una instancia, como se ve en la figura \ref{fig:estudiante_sin_tema}.
+Una vez que termina la ejecución del comando, se recarga la página y se muestra la lista
+actualizada de estudiantes de Trabajo de Título.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\linewidth]{imagenes/implementaciones/estudiante_sin_tema.png}
+    \caption{Captura de pantalla de la notificación de que un estudiante no tiene un tema registrado.}
+    \label{fig:estudiante_sin_tema}
+\end{figure}
+
+Como se mencionó en la descripción del comando, puede suceder que haya estudiantes que no
+tengan una instancia de Tema y Propuesta con estado Aprobado. Esto sucede por lo que la
+asunción puede no ser cierta para estudiantes que hayan solicitado la vía rápida, pues
+actualmente ese proceso no se encuentra implementado en el sistema de titulación y se
+realiza directamente con la coordinación de titulación. El caso de la vía rápida no
+se manejará en esta memoria, ya que al momento del desarrollo de este trabajo de título,
+había otro tema de memoría sobre la incorporación de un módulo de vía rápida. Mientras
+que tanto, basta con crear una instancia de Tema y Propuesta con estado Aprobado para
+cada estudiante de vía rápida mediante el administrador de Django o por consola para que
+puedan ser incluidos en la lista de estudiantes de Trabajo de Título.
+
+
+
+
+\begin{itemize}
+    \item Listado de estudiantes del F para académicos
+\end{itemize}
+
+\section{Asignación de Comisiones}
+\begin{itemize}
+    \item Listado de Comisiones (adaptación a modelo MemoriaEnF)
+    \item Gráfico de Carga
+    \item Correcciones: Modal
+    \item Correcciones: Evaluadores
+\end{itemize}
+
+\subsection{Filtro de comisiones}
+Se implementó el filtro de comisiones examinadoras en la interfaz principal del módulo de
+asignación de comisiones examinadoras. Este filtro permite configurar si se muestran
+todos los trabajos de título, solo los que tienen comisión incompleta o solo los que
+tienen comisión completa. En la figura \ref{fig:implementacion_filtro_comisiones} se
 puede ver el filtro mostrando solo las memorias con comisión incompleta.
 
 \begin{figure}[ht]
@@ -13,4 +191,26 @@ puede ver el filtro mostrando solo las memorias con comisión incompleta.
     \caption{Captura de pantalla de la interfaz principal del módulo de asignación de comisiones examinadoras con el filtro de comisiones examinadoras.}
     \label{fig:implementacion_filtro_comisiones}
 \end{figure}
-    
+
+
+\section{Exportación de Comisiones}
+\begin{itemize}
+    \item CSV
+          \begin{itemize}
+              \item Ajuste de columnas para SSM
+          \end{itemize}
+    \item API
+          \begin{itemize}
+              \item Titulación
+                    \begin{itemize}
+                        \item Endpoint y comando
+                        \item Requiere autenticación con Token
+                    \end{itemize}
+              \item SSM
+                    \begin{itemize}
+                        \item Agregar DRF a sistema (Usuario y Token)
+                        \item Endpoint y validaciones
+                        \item Normalizar nombres al buscar y guardar
+                    \end{itemize}
+          \end{itemize}
+\end{itemize}

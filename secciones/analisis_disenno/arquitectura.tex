@@ -9,30 +9,31 @@ base de datos PostgreSQL. Internamente se encuentra formado por varios módulos 
 puede ver en la figura \ref{fig:arquitectura_interna}, cada uno sigue la arquitectura
 Modelo-Vista-Controlador (MVC), puesto que el framework Django ya implementa esta
 arquitectura. Los módulos son los siguientes:
-\begin{multicols}{2}
+\begin{multicols}{3}
     \begin{itemize}
         \item Core
-        \item Módulo de servicios
-        \item Módulo de comisiones examinadoras
-        \item Módulo de titulación
-        \item Módulo de trabajo de título
-        \item Módulo de docencia
-        \item Módulo de evaluación
-        \item Módulo de departamento
-        \item Módulo de investigación
+        \item Servicios
+        \item Comisiones
+        \item Titulación
+        \item Trabajo de Título
+        \item Docencia
+        \item Evaluación
+        \item Departamento
+        \item Investigación
     \end{itemize}
 \end{multicols}
 
-El módulo Core contiene configuración y funcionalidades utilizada por todo el sistema. El
-módulo de servicios se encarga de las notificaciones. El módulo de docencia se encarga de
-gestionar los periodos académicos y los cursos. El módulo de investigación se encarga de
-las áreas de investigación. El módulo de departamento se encarga de gestionar los
-estudiantes, funcionarios y los roles de estos. El módulo de titulación contiene la
-lógica relacionada con el ramo Introducción al Trabajo de Título, como los temas, las
-solicitudes de temas y las memorias durante ese ramo. El módulo de trabajo de título
-contiene la lógica relacionada con el ramo Trabajo de Título. Por último, el módulo de
-comisiones examinadoras contiene la lógica relacionada con las asignación y exportación
-de comisiones examinadoras.
+El módulo Core actúa como base transversal, conteniendo la configuración y
+funcionalidades utilizadas por todo el sistema. Por su parte, el módulo de servicios
+gestiona las notificaciones, mientras que el de docencia se ocupa de los periodos
+académicos y los cursos. Asimismo, el módulo de investigación administra las áreas de
+investigación, y el de departamento es responsable de la gestión de estudiantes,
+funcionarios y sus respectivos roles. De igual manera, el módulo de evaluación se encarga
+de gestionar a los evaluadores de las memorias en ambos ramos de titulación. El módulo de
+titulación abarca la lógica del ramo Introducción al Trabajo de Título, incluyendo temas,
+solicitudes y memorias; a su vez, el módulo de trabajo de título se enfoca en el ramo
+homónimo. Finalmente, el módulo de comisiones examinadoras maneja lo referente a la
+asignación y exportación de dichas comisiones.
 
 \begin{figure}[ht]
     \centering
@@ -41,7 +42,7 @@ de comisiones examinadoras.
     \label{fig:arquitectura_interna}
 \end{figure}
 
-El sistema de titulación se relaciona con otros sistemas, ya sea consumiendo sus APIs o
+El sistema de titulación interactúa con otros sistemas, ya sea consumiendo sus APIs o
 exportando datos, como se puede ver en la figura \ref{fig:arquitectura_externa}. Específicamente,
 el sistema de titulación se relaciona con el Sistema de Seguimiento de Memorias (SSM), la
 API de UCampus llamada Mufasa y el Portal DCC.
@@ -53,10 +54,10 @@ API de UCampus llamada Mufasa y el Portal DCC.
     \label{fig:arquitectura_externa}
 \end{figure}
 
-El sistema depende del Portal DCC para el inicio de sesión de los usuarios y la obtención de
-los datos de estos, como roles y permisos. Por otro lado, el sistema utiliza la API de
-UCampus para obtener datos de los periodos académicos, los ramos relacionados con el
-proceso de titulación, sus respectivas secciones y los estudiantes inscritos en estas
-secciones. Finalmente, el sistema exporta datos sobre las memorias y las comisiones
-examinadoras asignadas al Sistema de Seguimiento de Memorias (SSM). Esta exportación
-se realiza a través de la API de SSM.
+El sistema depende del Portal DCC para el inicio de sesión de los usuarios y la obtención
+de los datos de estos, como roles y permisos. Por otro lado, el sistema utiliza la API de
+UCampus para obtener los periodos académicos, los ramos relacionados con el proceso de
+titulación, sus respectivas secciones y estudiantes inscritos en estas secciones.
+Finalmente, el sistema exporta datos sobre las memorias y las comisiones examinadoras
+asignadas al Sistema de Seguimiento de Memorias (SSM), mediante una petición POST
+autenticada con un token generado por el SSM.

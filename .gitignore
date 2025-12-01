@@ -14,6 +14,7 @@ memoria_latex.zip
 *.fdb_latexmk
 *.gz
 *.fls
+*.lol
 
 # Agent Reports
 *.md

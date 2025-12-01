@@ -33,6 +33,30 @@
 \usepackage{url}
 \usepackage{subcaption}
 \usepackage{multicol}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegray}{rgb}{0.9,0.9,0.9}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+
+\lstset{
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    breaklines=true,
+    breakatwhitespace=false,
+    tabsize=4,
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    stringstyle=\color{codepurple},
+    basicstyle=\tiny,
+    backgroundcolor=\color{codegray}
+}
 
 \begin{document}
 
@@ -61,6 +85,7 @@
 \tableofcontents
 % \listoftables % opcional
 \listoffigures % opcional
+\lstlistoflistings % opcional
 
 \mainmatter
 
@@ -79,7 +104,7 @@
 \bibliography{bibliografia}
 
 % opcional ...
-% \begin{appendices}
-%     \input{secciones/anexoA.tex}
-% \end{appendices}
+\begin{appendices}
+    \input{secciones/7.anexos.tex}
+\end{appendices}
 \end{document}
