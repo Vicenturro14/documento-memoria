@@ -47,7 +47,7 @@ comisiones examinadoras ni de visualizar las comisiones asignadas a cada estudia
 corresponden a Trabajo de Título.
 
 
-\section{Sistema de Seguimiento de Memorias}\label{sec:sa:sistema}
+\section{Sistema de Seguimiento de Memorias}\label{sec:sa:ssm}
 
 El Sistema de Seguimiento de Memorias (SSM), es un sistema desarrollado por Matías Rivas
 Aguilera en 2024 como su memoria para optar al título de Ingeniero Civil en Computación
@@ -196,8 +196,10 @@ El archivo exportado tiene el potencial de ser utilizado para importar comisione
 examinadoras asignadas al SSM, ya que contiene toda la información requerida por este
 sistema e incluso más, sin embargo, las columnas tienen distintos nombres y la
 información se encuentra en otro formato. Por ejemplo, el archivo CSV generado tiene el
-caracter \texttt{;} (punto y coma) como separador, mientras que el SSM requiere que el
-caracter \texttt{,} (coma) sea el separador.
+caracter \texttt{;} (punto y coma) como separador, mientras que el SSM requiere que ese
+caracter sea utilizado para separar los nombres y los correos de los integrantes de la
+comisión examinadora en las columnas \textit{Integrantes} y \textit{Correos Integrantes},
+respectivamente.
 
 Este sistema fue diseñado para ser utilizado por la coordinación de titulación del DCC,
 por lo que al agregar o editar comisiones toma en cuenta elementos como la cantidad de

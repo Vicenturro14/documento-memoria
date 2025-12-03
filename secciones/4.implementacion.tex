@@ -33,35 +33,35 @@ todos los módulos y el resto de módulos no requieren un título personalizado.
 
 
 \begin{figure}[ht]
-    \begin{subfigure}[b]{0.47\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_cerrado.png}
-        \caption{Captura de pantalla del selector cerrado en la barra de navegación en el módulo de Introducción al Trabajo de Título.}
-        \label{fig:implementacion_selector_cerrado}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.47\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_abierto.png}
-        \caption{Captura de pantalla del selector abierto en la barra de navegación en el módulo de Introducción al Trabajo de Título.}
-        \label{fig:implementacion_selector_abierto}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.47\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_trabajo_titulo.png}
-        \caption{Captura de pantalla del selector cerrado en la barra de navegación en el módulo de Trabajo de Título.}
-        \label{fig:implementacion_selector_trabajo_titulo}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.47\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_trabajo_titulo_abierto.png}
-        \caption{Captura de pantalla del selector abierto en la barra de navegación en el módulo de Trabajo de Título.}
-        \label{fig:implementacion_selector_trabajo_titulo_abierto}
-    \end{subfigure}
-    \caption{Capturas de pantalla del selector en la barra de navegación.}
-    \label{fig:implementacion_selector}
+  \begin{subfigure}[b]{0.47\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_cerrado.png}
+    \caption{Captura de pantalla del selector cerrado en la barra de navegación en el módulo de Introducción al Trabajo de Título.}
+    \label{fig:implementacion_selector_cerrado}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.47\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_abierto.png}
+    \caption{Captura de pantalla del selector abierto en la barra de navegación en el módulo de Introducción al Trabajo de Título.}
+    \label{fig:implementacion_selector_abierto}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.47\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_trabajo_titulo.png}
+    \caption{Captura de pantalla del selector cerrado en la barra de navegación en el módulo de Trabajo de Título.}
+    \label{fig:implementacion_selector_trabajo_titulo}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.47\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_trabajo_titulo_abierto.png}
+    \caption{Captura de pantalla del selector abierto en la barra de navegación en el módulo de Trabajo de Título.}
+    \label{fig:implementacion_selector_trabajo_titulo_abierto}
+  \end{subfigure}
+  \caption{Capturas de pantalla del selector en la barra de navegación.}
+  \label{fig:implementacion_selector}
 \end{figure}
 
 \begin{lstlisting}[language=HTML, caption={Código de la parte central de la barra de navegación}, label={lst:barra_navegacion}]
@@ -114,10 +114,10 @@ activo. Por último, al costado derecho de este filtro está el botón de
 \textit{Sincronizar}, que permite actualizar la tabla con los estudiantes.
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{imagenes/implementaciones/listado_estudiantes_f.png}
-    \caption{Captura de pantalla de la vista del listado de estudiantes de Trabajo de Título.}
-    \label{fig:listado_estudiantes_f}
+  \centering
+  \includegraphics[width=\linewidth]{imagenes/implementaciones/listado_estudiantes_f.png}
+  \caption{Captura de pantalla de la vista del listado de estudiantes de Trabajo de Título.}
+  \label{fig:listado_estudiantes_f}
 \end{figure}
 
 Para la actualización del registro se tomó en cuenta que los estudiantes deben estar
@@ -146,10 +146,10 @@ Una vez que termina la ejecución del comando, se recarga la página y se muestr
 actualizada de estudiantes de Trabajo de Título.
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.6\linewidth]{imagenes/implementaciones/estudiante_sin_tema.png}
-    \caption{Captura de pantalla de la notificación de que un estudiante no tiene un tema registrado.}
-    \label{fig:estudiante_sin_tema}
+  \centering
+  \includegraphics[width=0.6\linewidth]{imagenes/implementaciones/estudiante_sin_tema.png}
+  \caption{Captura de pantalla de la notificación de que un estudiante no tiene un tema registrado.}
+  \label{fig:estudiante_sin_tema}
 \end{figure}
 
 Como se mencionó en la descripción del comando, puede suceder que haya estudiantes que no
@@ -163,19 +163,60 @@ que tanto, basta con crear una instancia de Tema y Propuesta con estado Aprobado
 cada estudiante de vía rápida mediante el administrador de Django o por consola para que
 puedan ser incluidos en la lista de estudiantes de Trabajo de Título.
 
+\subsection{Vista de \textit{Mis Memoristas} para académicos}
+Habiendo incorporado a los estudiantes de Trabajo de Título al sistema de titulación,
+se extendió la vista de \textit{Mis Memoristas} que es visible para académicos, para que
+pudieran ver una lista de sus memoristas en Trabajo de Título. Para ello se agregó un
+selector de ramo de titulación que permite elegir entre Introducción al Trabajo de Título
+y Trabajo de Título. Este se encuentra bajo la barra de navegación de la vista, a la
+izquierda del filtro de periodo académico. En la figura
+\ref{subfig:implementacion_mis_memoristas_e} se muestra el selector en la vista con memoristas
+de Introducción al Trabajo de Título, mientras que en la figura
+\ref{subfig:implementacion_mis_memoristas_f} se muestra el selector en la vista con memoristas
+de Trabajo de Título.
+
+Al seleccionar Trabajo de Título, se muestra la lista de los estudiantes de Trabajo de Título
+que son memoristas del usuario. Por cada estudiante se muestra su nombre, su título de memoria,
+su guía, su coguía si tiene y un botón a la ficha del estudiante. El resto de la vista se mantiene
+igual que la vista para Introducción al Trabajo de Título.
+
+\begin{figure}[ht]
+  \centering
+  \begin{subfigure}[t]{\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/implementaciones/mis_memoristas_e.png}
+    \caption{Captura de pantalla de la vista de \textit{Mis Memoristas} para Introducción al Trabajo de Título.}
+    \label{subfig:implementacion_mis_memoristas_e}
+  \end{subfigure}
+  \begin{subfigure}[t]{\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/implementaciones/mis_memoristas_f.png}
+    \caption{Captura de pantalla de la vista de \textit{Mis Memoristas} para Trabajo de Título.}
+    \label{subfig:implementacion_mis_memoristas_f}
+  \end{subfigure}
+  \caption{Vista de \textit{Mis Memoristas} para académicos con selector de ramo de titulación.}
+  \label{fig:implementacion_mis_memoristas}
+\end{figure}
+
+% \begin{lstlisting}[language=HTML]
+% <div class="form-responsive-container">
+%   <select class="filtro form-select"
+%           onchange="window.location = this.options[this.selectedIndex].value;">
+%     {% for m in modules %}
+%       <option value="{{ m.mis_memoristas_url }}" {% if m.nombre == modulo.nombre %}selected{% endif %}>{{ m.nombre }}</option>
+%     {% endfor %}
+%   </select>
+% </div>
+% \end{lstlisting}
 
 
-
-\begin{itemize}
-    \item Listado de estudiantes del F para académicos
-\end{itemize}
 
 \section{Asignación de Comisiones}
 \begin{itemize}
-    \item Listado de Comisiones (adaptación a modelo MemoriaEnF)
-    \item Gráfico de Carga
-    \item Correcciones: Modal
-    \item Correcciones: Evaluadores
+  \item Listado de Comisiones (adaptación a modelo MemoriaEnF)
+  \item Gráfico de Carga
+  \item Correcciones: Modal
+  \item Correcciones: Evaluadores
 \end{itemize}
 
 \subsection{Filtro de comisiones}
@@ -186,31 +227,319 @@ tienen comisión completa. En la figura \ref{fig:implementacion_filtro_comisione
 puede ver el filtro mostrando solo las memorias con comisión incompleta.
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\linewidth]{imagenes/implementaciones/filtro_comisiones.png}
-    \caption{Captura de pantalla de la interfaz principal del módulo de asignación de comisiones examinadoras con el filtro de comisiones examinadoras.}
-    \label{fig:implementacion_filtro_comisiones}
+  \centering
+  \includegraphics[width=0.8\linewidth]{imagenes/implementaciones/filtro_comisiones.png}
+  \caption{Captura de pantalla de la interfaz principal del módulo de asignación de comisiones examinadoras con el filtro de comisiones examinadoras.}
+  \label{fig:implementacion_filtro_comisiones}
 \end{figure}
 
 
 \section{Exportación de Comisiones}
-\begin{itemize}
-    \item CSV
-          \begin{itemize}
-              \item Ajuste de columnas para SSM
-          \end{itemize}
-    \item API
-          \begin{itemize}
-              \item Titulación
-                    \begin{itemize}
-                        \item Endpoint y comando
-                        \item Requiere autenticación con Token
-                    \end{itemize}
-              \item SSM
-                    \begin{itemize}
-                        \item Agregar DRF a sistema (Usuario y Token)
-                        \item Endpoint y validaciones
-                        \item Normalizar nombres al buscar y guardar
-                    \end{itemize}
-          \end{itemize}
-\end{itemize}
+Para exportar las comisiones examinadoras, el sistema ofrece dos opciones: descargar
+un archivo CSV y enviarlas a través de una petición POST la API del SSM.
+
+\subsection{Archivo CSV}
+El piloto desarrollado por el equipo de ingeniería de software II ya contaba con la
+funcionalidad de exportar las comisiones examinadoras a un archivo CSV. Sin embargo,
+el formato del archivo no seguía el formato requerido por el SSM, como se mencionó en las
+secciones \ref{sec:sa:ssm} y \ref{sec:sa:asignacion}. Por lo tanto, se cambiaron las
+columnas del archivo para que cumplan con los requisitos del SSM, se cambió el separador
+al carácter coma y se agregaron las columnas que faltaban. Por último, se agregó la
+condición de que solo las memorias con comisión completa sean exportadas
+
+
+\subsection{Exportación directa al SSM}
+Se implementó una exportación directa al SSM a través de una petición POST al SSM.
+Esta implementación consta de dos partes. La primera es hacer que el SSM sea capaz de
+recibir una petición desde otro sistema y procesarla. Mientras que la segunda es que el
+sistema de titulación envíe una petición POST al SSM con los datos de las comisiones examinadoras.
+
+\subsubsection{Adaptación del SSM}\label{subsubsec:adaptacion_ssm}
+Para adaptar el SSM a recibir una petición POST desde otro sistema, se creó una view
+de Django en el endpoint \texttt{/api/comisiones/} que recibe la petición POST con un
+JSON en el cuerpo de la petición. Debido a que en el SSM las memorias se separan por
+curso, es decir, por ramo y por sección, se decidió que en el JSON recibido, las
+comisiones deben estar separadas por cursos. Además, es necesario que este contenga la
+información necesaria para crear los cursos en la base de datos, en caso de que alguno
+no exista. Esta corresponde al código del ramo, el número de la sección, el año y el
+semestre, siendo ``O'' para el semestre de otoño y ``P'' para el semestre de primavera,
+ya que así lo tiene definido el SSM. Por último, por cada comisión se debe tener el tema
+de la memoria,nombre y correo del estudiante, del guía y del coguía, además de la lista
+de integrantes. El campo coguía puede ser nulo si no hay co-guía. Un ejemplo de JSON
+recibido con un solo curso y una sola comisión se puede ver en el código
+\ref{lst:ssm_json}.
+
+\begin{lstlisting}[label=lst:ssm_json, caption={Ejemplo de JSON recibido con un solo curso y una sola comisión.}]
+{
+  "cursos": [{
+    "codigo": "CC6919",
+    "seccion": 1,
+    "semestre": "P",
+    "anno": 2025,
+    "memorias": [{
+      "estudiante": {
+        "nombre": "Vicente Olivares",
+        "correo": "vicente.olivares@ug.uchile.cl"
+      },
+      "tema": "Tema de ejemplo",
+      "guia": {
+        "nombre": "Nombre de ejemplo",
+        "correo": "guia@example.com"
+      },
+      "coguia": null,
+      "integrantes": [{
+        "nombre": "Integrante de ejemplo 1",
+        "correo": "integrante1@example.com"
+      }, {
+        "nombre": "Integrante de ejemplo 2",
+        "correo": "integrante2@example.com"
+      }]
+    }]
+  }]
+}
+\end{lstlisting}
+
+Al recibir el JSON, primero se valida el formato de este. Se verifica que tenga la clave
+\texttt{cursos} y que su valor no sea nulo, y se valida que las memorias de cada curso
+contengan los campos \texttt{estudiante}, \texttt{tema}, \texttt{guia} y
+\texttt{integrantes}. En segundo lugar, se verifica que el contenido no tenga
+inconsistencias. Para esto se corrobora que no haya dos comisiones con el mismo
+estudiante y que dentro de cada comisión, el guía, coguía e integrantes sean diferentes.
+Si cualquiera de estas validaciones falla, se retorna un error 400 BadRequest con un mensaje
+indicando qué validación falló.
+
+En tercer lugar, se guardan los datos en la base de datos. Para esto, primero por cada
+curso se obtiene la instancia correspondiente del modelo Curso, si no existe se crea.
+Luego, por cada comisión se obtiene al estudiante del modelo Estudiante y al guía, coguía
+e integrantes del modelo Profesor. Al igual que con los cursos, se registran en la base
+de datos si estos no existen. Tanto los estudiantes como los profesores se buscan por su
+nombre completo, pues este se define como único en la base de datos. Es importante mencionar
+que al buscar por el nombre completo, este debe ser normalizado, que en este caso significa que
+todas las palabras del string deben comenzar con mayúscula, ya que los modelos de
+Profesor y Estudiante realizan esta normalización al momento de guardarlos en la base de datos.
+Esto implica que apellidos como "De la Fuente" serán guardados como "De La Fuente". Se
+obtiene o crea la memoria. Si la memoria se crea, se agregan al guía, coguía
+e integrantes como miembros de la comisión con su respectivo rol. Mientras que si la memoria ya existe,
+se eliminan los miembros anteriores y se agregan los nuevos que vienen en el JSON. Este comportamiento
+se implementó así, para que se puedan corregir los miembros de la comisión a través de la API.
+Habiendo terminado lo anterior, se retorna un mensaje de éxito 201 Created.
+
+\newpage
+
+\begin{lstlisting}[language=Python, escapechar=|, label={lst:guardado_comisiones}, caption={Guardado de datos en la base de datos.}]
+    # Guardado de datos
+    for memoria in memorias:
+        try:
+            estudiante, _ = Estudiante.objects.get_or_create(
+                nombre=nombre_normalizado(memoria.get("estudiante").get("nombre")),
+                defaults={
+                    "correo": memoria.get("estudiante").get("correo"),
+                },
+            )
+            memoria_instance, memoria_created = Memoria.objects.get_or_create(curso=curso, estudiante=estudiante, tema=memoria.get("tema"))
+
+            if not memoria_created:
+                Miembro.objects.filter(memoria=memoria_instance).delete()
+
+            if "guia" in memoria and memoria.get("guia") is not None:
+                profesor, _ = Profesor.objects.get_or_create(
+                    nombre=nombre_normalizado(memoria.get("guia").get("nombre")),
+                    defaults={
+                        "correo": memoria.get("guia").get("correo"),
+                    },
+                )
+                Miembro.objects.create(memoria=memoria_instance, profesor=profesor, rol=rol_guia)
+            if "coguia" in memoria and memoria.get("coguia") is not None:
+                profesor, _ = Profesor.objects.get_or_create(
+                    nombre=nombre_normalizado(memoria.get("coguia").get("nombre")),
+                    defaults={
+                        "correo": memoria.get("coguia").get("correo"),
+                    },
+                )
+                Miembro.objects.create(memoria=memoria_instance, profesor=profesor, rol=rol_coguia)
+            for integrante in memoria.get("integrantes"):
+                profesor, _ = Profesor.objects.get_or_create(
+                    nombre=nombre_normalizado(integrante.get("nombre")),
+                    defaults={
+                        "correo": integrante.get("correo"),
+                    },
+                )
+                Miembro.objects.create(memoria=memoria_instance, profesor=profesor, rol=rol_integrante)
+
+        except ValidationError as e:
+            return Response(
+                {"error": f"Error al guardar la memoria de '{memoria.get('estudiante').get('nombre')}': {e}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        except Exception as e:
+            return Response(
+                {"error": f"Error al guardar la memoria de '{memoria.get('estudiante').get('nombre')}': {e}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+return Response({"success": "Comisiones importadas correctamente."}, status=status.HTTP_201_CREATED)
+\end{lstlisting}
+
+Además, de la implementación del procesamiento del JSON, se restringió el acceso a la
+API, para que no cualquier persona que haga un POST pueda enviar datos al SSM. Con este
+objetivo, se agregó autenticación con tokens al endpoint de la API y para ello, se agregó
+la extensión de Django llamada Django Rest Framework (DRF) al proyecto, que proporciona
+herramientas para crear APIs Restful y extiende las posibilidades de autenticación para
+endpoints. Entonces, se creó un usuario para el sistema de titulación, de nombre
+\verb|sistema_titulacion|, al cual se le generó un token de autenticación. Con este token
+el sistema de titulación podrá autenticarse y hacer peticiones POST al endpoint de la
+API. Para la autenticación es necesario enviar en el header \texttt{Authorization} de la
+petición el token con el prefijo ``Token ''. Cómo se puede ver en el código
+\ref{lst:decorators}, para proteger el endpoint como se mencionó anteriormente, se
+utilizaron decoradores de DRF sobre la view de Django que define el endpoint. El
+decorador \verb|@permission_classes| es para restringir el acceso al endpoint y el
+decorador \verb|@authentication_classes| se utiliza para especificar el tipo de
+autenticación que se utilizará.
+
+\newpage
+
+\begin{lstlisting}[language=Python, escapechar=|, label={lst:decorators}, caption={Decoradores utilizados en la API.}]
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def import_comisiones(request):
+    data = request.data
+    if not data or data.get("cursos") is None:
+      return Response({"error": "No se encontraron datos para importar."}, status=status.HTTP_400_BAD_REQUEST)
+\end{lstlisting}
+
+
+Es relevante señalar que el modelo Curso del SSM incluye dentro de sus atributos la fecha
+límite para la entrega del informe final de Trabajo de Título \verb|fecha_entrega_informe_final|
+y cuando se crea un curso mediante la importación de comisiones por la API, este campo se
+inicializa en \verb|None|, dado que dicha información no la maneja el sistema de titulación.
+El modelo permite crear cursos sin fecha de entrega y es posible asignarle una fecha a cada
+curso en el SSM más tarde a través de la interfaz gráfica. Sin embargo, la aplicación no
+estaba diseñada para manejar cursos sin fecha de entrega, ya que varías veces se intentaba
+calcular una diferencia entre fechas, causando que el sistema arrojara errores. Entonces,
+se adaptó el SSM para que los casos en los que la fecha de entrega sea \verb|None| no cause
+errores y en la interfaz aparezca \verb|SIN DEFINIR| en rojo y negrita que sea notorio que
+se requiere asignar una fecha de entrega, como se puede ver en la figura
+\ref{subfig:listado_memorias_ssm}. Además, se aprovechó el sistema de notificaciones del SSM
+para enviar una notificación al usuario por cada curso sin fecha de entrega definida,
+como se puede ver en la figura \ref{subfig:notificacion_ssm}.
+
+\begin{figure}[ht]
+  \centering
+  \begin{subfigure}[b]{0.9\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{imagenes/implementaciones/ssm/listado_memorias_ssm.png}
+    \caption{Comisiones de un curso sin fecha de entrega definida}
+    \label{subfig:listado_memorias_ssm}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{imagenes/implementaciones/ssm/notificacion_ssm.png}
+    \caption{Notificación de fecha de entrega}
+    \label{subfig:notificacion_ssm}
+  \end{subfigure}
+  \caption{Cambios en la interfaz del SSM para manejar cursos sin fecha de entrega}
+\end{figure}
+
+
+\subsubsection{Exportación de Comisiones desde el Sistema de Titulación}
+La exportación de comisiones desde el Sistema de Titulación ejecuta al presionar el botón
+\verb|Exportar| en la vista del listado de comisiones. Este botón realiza una llamada al
+endpoint \verb|/comisiones/exportar/<periodo_id>|, donde \verb|<periodo_id>| es el id del periodo
+académico que se desea exportar. El controlador de este endpoint se puede apreciar en el código
+\ref{lst:export_comisiones_view}, y se encarga de llamar al comando \verb|export_comisiones_ssm|,
+que tiene la tarea de realizar la exportación de comisiones, y luego redirigir al usuario al
+listado de comisiones. Si el comando arroja un error, se envía un mensaje de error al usuario.
+Por otro lado, si todo sale bien, se envía un mensaje de éxito al usuario. Cabe destacar que es
+necesario redirigir al usuario para que el mensaje de éxito o error se muestre en la interfaz
+gráfica, puesto que así está diseñado el sistema de mensajes en el sistema de titulación.
+
+\begin{lstlisting}[language=Python, escapechar=|, label={lst:export_comisiones_view}, caption={Código del controlador que llama al comando de exportación de comisiones.}]
+def get(self, request, *args, **kwargs):
+  periodo = self.get_periodo()
+
+  try:
+    resultado_comando = call_command("export_comisiones_ssm", "--periodo_id", str(periodo.id))
+    if resultado_comando == settings.FALLO_EN_COMANDO:
+      self.msg_error("Se ha producido un error al exportar la lista de comisiones.")
+      return HttpResponseRedirect(reverse_lazy("comisiones:comisiones_list", kwargs={"periodo_id": periodo.id}))
+    else:
+      self.msg_success("Listado de comisiones exportado correctamente.")
+      return HttpResponseRedirect(reverse_lazy("comisiones:comisiones_list", kwargs={"periodo_id": periodo.id}))
+  except CommandError as e:
+    self.msg_error(str(e))
+    return HttpResponseRedirect(reverse_lazy("comisiones:comisiones_list", kwargs={"periodo_id": periodo.id}))
+  except Exception:
+    self.msg_error("Se ha producido un error al exportar la lista de comisiones.")
+    return HttpResponseRedirect(reverse_lazy("comisiones:comisiones_list", kwargs={"periodo_id": periodo.id}))
+\end{lstlisting}
+
+El comando \verb|export_comisiones_ssm|, que se puede apreciar en el código
+\ref{lst:export_comisiones}, recibe como parámetro el periodo académico de las comisiones
+que se debe exportar y en caso de no recibir ninguno, se toma el periodo académico
+activo. Luego, se envían las memorias y comisiones de los estudiantes separadas por curso
+en un JSON a la API del SSM. El formato del JSON es el indicado en la sección
+\ref{subsubsec:adaptacion_ssm}. Solo se envían las comisiones que tengan al menos dos
+evaluadores asignados. En caso de que la respuesta de la API no sea 200 ok o 201 created,
+se registra el mensaje de error en el log y se arroja un \verb|CommandError| con el mensaje
+de error. Por último, para incorporar las credenciales de la API del SSM, se agregaron
+las variables de entorno \verb|SSM_URL| y \verb|SSM_TOKEN| que corresponden a la URL y el
+token de la API del SSM, respectivamente.
+
+\newpage
+\begin{lstlisting}[language=Python, escapechar=|, label={lst:export_comisiones}, caption={Comando de exportación de comisiones.}]
+def handle(self, *args, **options):
+  periodo_id = options.get("periodo_id")
+  if periodo_id is None:
+    periodo = Periodo.objects.filter(is_activo=True).first()
+  else:
+    try:
+      periodo = Periodo.objects.get(id=periodo_id)
+    except Periodo.DoesNotExist:
+      self.stdout.write(self.style.ERROR("Periodo no encontrado."))
+      return settings.FALLO_EN_COMANDO
+
+  cursos = Curso.objects.select_related("periodo").filter(periodo=periodo)
+  memorias = MemoriaEnF.objects.select_related(
+    "estudiante__persona",
+    "tema__guia__persona",
+    "tema__coguia__persona"
+  ).prefetch_related(
+    "comision__evaluadores__persona"
+  ).filter(periodo=periodo)
+
+  comisiones_por_curso = {
+    "cursos": [
+      {
+        "codigo": curso.codigo,
+        "seccion": curso.seccion,
+        "semestre": "O" if curso.periodo.periodo == 1 else "P",
+        "anno": curso.periodo.ano,
+        "memorias": [
+          memoria.to_ssm_dict() for memoria in memorias.filter(curso=curso) if memoria.comision.evaluadores.count() >= 2
+        ]
+      } for curso in cursos
+    ]
+
+  }
+
+  response = requests.post(
+    settings.SSM_URL + "/api/comisiones/",
+    json=comisiones_por_curso,
+    headers={"Authorization": f"Token {settings.SSM_TOKEN}"},
+  )
+
+  if response.status_code not in (requests.codes.ok, requests.codes.created):
+    self.stdout.write(self.style.ERROR(f"Error al exportar comisiones: {response.text}"))
+    raise CommandError(response.json()["error"])
+
+  # Establece la |comisi\'on| de un estudiante como publicada y se podr\'a ver en la ficha del estudiante
+  for memoria in memorias:
+    memoria.comision.publicada = True
+    memoria.comision.save()
+
+  self.stdout.write(self.style.SUCCESS("Comisiones exportadas correctamente"))
+
+  return 0
+\end{lstlisting}
