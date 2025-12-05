@@ -212,26 +212,268 @@ igual que la vista para Introducción al Trabajo de Título.
 
 
 \section{Asignación de Comisiones}
-\begin{itemize}
-  \item Listado de Comisiones (adaptación a modelo MemoriaEnF)
-  \item Gráfico de Carga
-  \item Correcciones: Modal
-  \item Correcciones: Evaluadores
-\end{itemize}
+En esta sección se describe la implementación de funcionalidades relacionadas con la
+asignación de comisiones examinadoras. Primero se mencionarán las funcionalidades que se
+implementaron para la evaluación de la herramienta, y luego se describirán las
+modificaciones que se surgieron a partir de la retroalimentación recibida en la
+evaluación.
 
-\subsection{Filtro de comisiones}
-Se implementó el filtro de comisiones examinadoras en la interfaz principal del módulo de
-asignación de comisiones examinadoras. Este filtro permite configurar si se muestran
-todos los trabajos de título, solo los que tienen comisión incompleta o solo los que
-tienen comisión completa. En la figura \ref{fig:implementacion_filtro_comisiones} se
-puede ver el filtro mostrando solo las memorias con comisión incompleta.
+El sistema piloto desarrollado por el equipo de ingeniería de software II ya contaba con
+la funcionalidad de asignación de comisiones examinadoras, tal como se menciona en la
+sección \ref{sec:sa:asignacion}. Sin embargo, esta funcionaba con el modelo
+AlumnoCursandoMemoria, por lo que se adaptó para que funcione con el nuevo modelo
+MemoriaEnF, manteniendo la tabla de comisiones examinadoras que muestra una lista de
+memorias con sus respectivos estudiantes, temas, guías, coguías e integrantes de la comisión.
+Al final de cada fila se encuentra un botón que permite asignar evaluadores a la comisión. La figura
+\ref{fig:comisiones_asignacion} muestra la lista de memorias con sus comisiones examinadoras .
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.8\linewidth]{imagenes/implementaciones/filtro_comisiones.png}
-  \caption{Captura de pantalla de la interfaz principal del módulo de asignación de comisiones examinadoras con el filtro de comisiones examinadoras.}
-  \label{fig:implementacion_filtro_comisiones}
+  \includegraphics[width=0.8\linewidth]{imagenes/implementaciones/lista_comisiones.png}
+  \caption{Captura de pantalla de la lista de memorias con sus comisiones examinadoras.}
+  \label{fig:comisiones_asignacion}
 \end{figure}
+
+\subsection{Filtro de Comisiones Examinadoras}
+Una vez adaptada la implementación al nuevo modelo, se le agregaron funcionalidades.
+En primer lugar, se agregó un filtro de comisiones examinadoras en la interfaz
+principal del módulo de comisiones examinadoras. Este filtro permite configurar los
+trabajos de título que se muestran dependiendo de la cantidad de evaluadores asignados a
+la comisión examinadora. Si se selecciona ``Todas las memorias'', se muestran todos los
+trabajos de título, si se selecciona ``Con comisión completa'', se muestran solo aquellas
+que tengan dos o más evaluadores asignados, y si se selecciona ``Con comisión
+incompleta'', se muestran aquellas que tengan un evaluador o ninguno. En la figura
+\ref{fig:comisiones_filtradas} se muestra el filtro configurado para mostrar solo las
+memorias con comisión completa. Internamente, el filtro refresca la página y agrega un
+query parameter a la URL que indica el filtro seleccionado. Desde el backend se filtran
+las comisiones según el query parameter, como se muestra en el código \ref{lst:filtro_comisiones}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.8\linewidth]{imagenes/implementaciones/comisiones_filtradas.png}
+  \caption{Captura de pantalla de la lista de comisiones examinadoras filtrada por comisiones completas.}
+  \label{fig:comisiones_filtradas}
+\end{figure}
+
+\begin{lstlisting}[language=Python, caption={Filtrado de comisiones examinadoras.}, label={lst:filtro_comisiones}]
+  memorias = MemoriaEnF.objects.filter(periodo=periodo).select_related(
+    "tema__guia__persona",
+    "tema__coguia__persona",
+    "estudiante__persona",
+  ).prefetch_related(
+    "comision__evaluadores"
+  ).annotate(
+    Count("comision__evaluadores")
+  )
+  # Filtrado por comision completa, incompleta o todas
+  if comision_filter == "completas":
+    memorias_filtradas = memorias.filter(comision__evaluadores__count__gte=2)
+  elif comision_filter == "incompletas":
+    memorias_filtradas = memorias.filter(comision__evaluadores__count__lt=2)
+  else:
+    memorias_filtradas = memorias
+
+  # Ordenar: primero con tema (True > False)
+  memorias_filtradas = sorted(
+    memorias_filtradas,
+    key= lambda memoria: (
+      memoria.tema is None, # False (tienen tema) va antes
+      memoria.estudiante.persona.apellido1.lower() if memoria.estudiante.persona.apellido1 else "",
+      memoria.estudiante.persona.nombre1.lower() if memoria.estudiante.persona.nombre1 else "",
+    )
+  )
+  context["memorias"] = memorias_filtradas
+\end{lstlisting}
+
+
+\subsection{Gráfico de Carga de Evaluadores}
+El mayor cambio visual en la interfaz del módulo de comisiones proviene de la
+incorporación del gráfico que muestra la carga de evaluadores. Este se ubica sobre la
+lista de comisiones examinadoras, como se muestra en la figura
+\ref{fig:grafico_carga_evaluadores}. Cada columna representa la carga de un evaluador,
+que está dividida entre la carga proveniente de las memorias guíadas o coguiadas y la carga
+proveniente de las comisiones examinadoras que integra. Es importante destacar que integrar
+una comisión examinadora equivale a un punto de carga, mientras que guiar o coguir una memoria
+equivale a dos puntos de carga. Esta ponderación fue recomendada por la coordinadora de titulación.
+Al posicionar el cursor sobre una columna, se muestra un tooltip que indica la cantidad de comisiones
+y la cantidad de memorias.
+
+El gráfico está ordenado de mayor a menor función de la carga total de cada evaluador, es
+decir, por la siguiente fórmula: $carga\_total = 2*memorias\_guiadas + comisiones\_integradas$.
+Este orden ayuda a que sea fácil identificar a los evaluadores con mayor y menor carga.
+Además, el gráfico se actualiza cada vez que se asignan integrantes a una comisión examinadora y
+no se ve afectado por el filtro de comisiones. Por último, el gráfico puede ocultarse y mostrarse
+mediante un botón que se encuentra bajo la barra de navegación, entre el filtro de comisiones
+y el botón de sincronización.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\linewidth]{imagenes/implementaciones/grafico_evaluadores.png}
+  \caption{Captura de pantalla del gráfico de carga de evaluadores.}
+  \label{fig:grafico_carga_evaluadores}
+\end{figure}
+
+
+\subsection{Modal de asignación de comisiones}
+Al presionar el botón para asignar integrantes a una comisión examinadora, se abre un modal
+para realizar la asignación. Este modal también se encontraba en la versión piloto del sistema,
+pero al igual que la tabla de comisiones examinadoras, se adaptó para que use el modelo
+MemoriaEnF en vez de AlumnoCursandoMemoria. Además, en el modal se agregó el nombre del estudiante.
+En la figura \ref{fig:modal_asignacion_comisiones} se muestra el modal con los cambios realizados.
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.5\linewidth]{imagenes/implementaciones/modal.png}
+  \caption{Captura de pantalla del modal de asignación de comisiones.}
+  \label{fig:modal_asignacion_comisiones}
+\end{figure}
+
+Un cambio importante es que se agregaron validaciones en la asignación de comisiones. En
+particular, se valida que al guardar una comisión examinadora, esta tenga al menos dos
+integrantes, que ninguno de los integrantes sea guía o coguía de la memoria y que al
+menos uno de los integrantes tenga jerarquía de Académico de Jornada Completa (AJC) o
+Académico de Jornada Parcial (AJP). Si se intenta guardar una comisión examinadora que
+no cumpla con estas validaciones, se muestra un mensaje de error. En la figura
+En el código \ref{lst:validacion_comision} se muestra la implementación de las
+validaciones, mientras que en la figura \ref{fig:validaciones_comision} se muestran los
+mensajes de error por validación.
+
+\begin{lstlisting}[language=Python, caption={Validación de comisión examinadora.}, label={lst:validacion_comision}, escapechar=|]
+# Validaci|\'o|n de comisi|\'o|n
+if len(evaluadores) < 2:
+    return JsonResponse({"success": False, "message": "Debe agregar al menos dos evaluadores."})
+
+rut_guia = comision.get_guia.persona.rut if comision.memoria.tema.guia else None
+rut_coguia = comision.get_coguia.persona.rut if comision.memoria.tema.coguia else None
+
+has_non_pex = False
+for evaluador in evaluadores:
+  if evaluador.persona.rut in (rut_guia, rut_coguia):
+    return JsonResponse({"success": False, "message": "No puede seleccionar a los gu|\'i|as como evaluadores."})
+
+  if evaluador.tipo.nombre != "PEX":
+    has_non_pex = True
+
+if not has_non_pex:
+  return JsonResponse({"success": False, "message": "Debe elegir al menos un integrante AJC o AJP."})
+
+comision.evaluadores.add(*evaluadores)
+\end{lstlisting}
+
+\newpage
+
+\begin{figure}[ht!]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/implementaciones/validacion_minimo_2.png}
+    \caption{Mensaje de error indicando que se debe agregar al menos dos evaluadores.}
+    \label{subfig:validacion_minimo_2}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/implementaciones/validacion_guia_evaluador.png}
+    \caption{Mensaje de error indicando que un integrante de la comisión es guía o coguía.}
+    \label{subfig:validacion_guia_evaluador}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \vspace{0.5cm}
+    \includegraphics[width=\linewidth]{imagenes/implementaciones/validacion_ajc_ajp.png}
+    \caption{Mensaje de error indicando que al menos un integrante debe ser ajc o ajp.}
+    \label{subfig:validacion_ajc_ajp}
+  \end{subfigure}
+  \caption{Mensajes de error por validaciones de comisión examinadora.}
+  \label{fig:validaciones_comision}
+\end{figure}
+
+
+\subsection{Cambios por Retroalimentación}
+Luego de realizar la evaluación de la herramienta (capítulo \ref{cap:validacion}),
+se recibió una retroalimentación que indicaba que se debían hacer ciertos cambios en el
+sistema. El punto de mayor importancia en la retroalimentación era que al presionar el
+botón para asignar la comisión examinadora de una memoria demoraba mucho tiempo en aparecer
+el modal, pues podía demorar hasta 15 segundos. Esta cantidad de tiempo es inaceptable para
+la experiencia del usuario, en especial porque es un botón que se debe presionar por cada memoria.
+Por lo tanto, se revisó el código del modal para ver posibles problemas y optimizaciones.
+
+El problema se encontraba en el controlador del modal, que es llamado cada vez que se
+presiona el botón para abrir el modal y responde con el HTML del modal. Que se llame
+cada vez no es un problema, pero el trabajo que realizaba el controlador en cada llamada
+era innecesariamente excesivo, ya que por cada llamada se obtenían todos los evaluadores
+habílitados y a cada uno se le generaba un string con sus áreas de conocimiento con sus
+respectivas subareas. Este proceso se realizaba para poblar el selector de evaluadores en
+el modal. Para optimizar el proceso de poblar el selector de evaluadores, se tomaron dos
+medidas: Precalcular el string con las áreas de conocimiento y obtener una única vez los
+evaluadores.
+
+Para realizar la primera medida, se agregó el atributo \verb|areas_string| al modelo Evaluador,
+que almacena el string con las áreas de conocimiento de un evaluador. Además, se agregó
+un método para calcular el string con las áreas de conocimiento de un evaluador y se
+añadió una señal que se llama al método cada vez que haya un cambio en las áreas
+del evaluador. Esto permite que el string solo se calcule cuando es necesario y no cada
+vez que se llama el controlador del modal. En los códigos \ref{lst:senal_evaluador} y
+\ref{lst:metodo_generate_areas_string} se muestra el código de la señal y el método
+respectivamente.
+
+\begin{lstlisting}[language=Python, caption={Código de la señal que actualiza el string con las áreas de conocimiento de un evaluador}, label={lst:senal_evaluador}, escapechar=|]
+@receiver(m2m_changed, sender=Evaluador.areas.through)
+def update_areas_string(sender, instance, action, **kwargs):
+    """
+    Actualiza el campo areas_string de un evaluador cada vez que cambian sus |\'a|reas.
+    """
+    if action in {"post_add", "post_remove", "post_clear"}:
+        instance.generate_areas_string()
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption={Código del método para generar el string con las áreas de conocimiento de un evaluador}, label={lst:metodo_generate_areas_string}, escapechar=|]
+    def generate_areas_string(self):
+        """
+        Genera un string con las |\'a|reas del evaluador y lo guarda en el atributo areas_string.
+        El string tiene el siguiente formato: Padre - Hijo - Hijo - Hijo, Padre, Padre - Hijo
+        """
+        areas_by_parent = {}
+        for area in self.areas.all():
+            # Obtenemos el |\'a|rea padre (puede ser None)
+            parent = area.padre
+            parent_name = parent.nombre if parent else None
+            child_name = area.nombre
+
+            if parent_name:
+                areas_by_parent.setdefault(parent_name, set()).add(child_name)
+            else:
+                if child_name not in areas_by_parent:
+                    areas_by_parent[child_name] = set()
+
+            # Construimos el string final
+        result = []
+        for parent, children in sorted(areas_by_parent.items()):
+            if children:
+                hijos_ordenados = sorted(children)
+                result.append(f"{parent} - " + " - ".join(hijos_ordenados))
+            else:
+                result.append(parent)
+
+        # Unimos todas las areas padre separadas por comas
+        # Padre - Hijo - Hijo - Hijo, Padre, Padre - Hijo
+        self.areas_string = ", ".join(result)
+        self.save()
+\end{lstlisting}
+
+Para la segunda medida, se dejó de obtener a los evaluadores en el controlador del modal
+y pasaron a obtenerse una vez al cargar la página del módulo de comisiones. Esto no significa
+un mayor costo, ya que los evaluadores ya eran obtenidos al cargar la página, dado que el
+gráfico de carga de evaluadores ya los obtenía. Estos evaluadores se almacenan en un
+arreglo de objeto, almacenando su id, nombre, áreas de conocimiento, memorias guíadas,
+comisiones integradas y jerarquía, para que puedan ser utilizados en el modal y el gráfico..
+
+Un segundo punto a mejorar indicado en la retroalimentación fue al guardar una comisión,
+se refrescaba la página, lo cual hacía que el usuario tuviera que bajar nuevamente hasta
+la memoria que estaba viendo, lo cual es trabajo innecesario. Para resolver este problema,
+se evitó refrescar la página y que al guardar una comisión el listado de integrantes se actualice
+mediante JavaScript, se actualice el contenido del arreglo que se utiliza para poblar el listado de integrantes
+y se actualice el gráfico de carga de integrantes.
 
 
 \section{Exportación de Comisiones}
@@ -253,6 +495,7 @@ Se implementó una exportación directa al SSM a través de una petición POST a
 Esta implementación consta de dos partes. La primera es hacer que el SSM sea capaz de
 recibir una petición desde otro sistema y procesarla. Mientras que la segunda es que el
 sistema de titulación envíe una petición POST al SSM con los datos de las comisiones examinadoras.
+Esta funcionalidad fue implementada luego de la evaluación por falta de tiempo.
 
 \subsubsection{Adaptación del SSM}\label{subsubsec:adaptacion_ssm}
 Para adaptar el SSM a recibir una petición POST desde otro sistema, se creó una view
@@ -268,7 +511,7 @@ de la memoria,nombre y correo del estudiante, del guía y del coguía, además d
 de integrantes. El campo coguía puede ser nulo si no hay co-guía. Un ejemplo de JSON
 recibido con un solo curso y una sola comisión se puede ver en el código
 \ref{lst:ssm_json}.
-
+\newpage
 \begin{lstlisting}[label=lst:ssm_json, caption={Ejemplo de JSON recibido con un solo curso y una sola comisión.}]
 {
   "cursos": [{
@@ -310,21 +553,17 @@ indicando qué validación falló.
 
 En tercer lugar, se guardan los datos en la base de datos. Para esto, primero por cada
 curso se obtiene la instancia correspondiente del modelo Curso, si no existe se crea.
-Luego, por cada comisión se obtiene al estudiante del modelo Estudiante y al guía, coguía
+Luego, por cada comisión se obtiene o crea al estudiante del modelo Estudiante y al guía, coguía
 e integrantes del modelo Profesor. Al igual que con los cursos, se registran en la base
-de datos si estos no existen. Tanto los estudiantes como los profesores se buscan por su
-nombre completo, pues este se define como único en la base de datos. Es importante mencionar
-que al buscar por el nombre completo, este debe ser normalizado, que en este caso significa que
-todas las palabras del string deben comenzar con mayúscula, ya que los modelos de
-Profesor y Estudiante realizan esta normalización al momento de guardarlos en la base de datos.
-Esto implica que apellidos como "De la Fuente" serán guardados como "De La Fuente". Se
-obtiene o crea la memoria. Si la memoria se crea, se agregan al guía, coguía
-e integrantes como miembros de la comisión con su respectivo rol. Mientras que si la memoria ya existe,
-se eliminan los miembros anteriores y se agregan los nuevos que vienen en el JSON. Este comportamiento
-se implementó así, para que se puedan corregir los miembros de la comisión a través de la API.
+de datos si estos no existían previamente. Después, se obtiene o se crea la instancia de
+la memoria en el modelo Memoria. Si esta se crea, se agregan al guía, coguía
+e integrantes como miembros de la comisión con su respectivo rol a través del Modelo
+Miembro. Mientras que si ya existía, primero se eliminan los miembros anteriores y luego
+se agregan los miembros que vienen en el JSON. Este comportamiento se implementó así,
+para que se puedan corregir los miembros de la comisión a través de la API.
 Habiendo terminado lo anterior, se retorna un mensaje de éxito 201 Created.
-
-\newpage
+El código \ref{lst:guardado_comisiones} muestra el código del guardado de las comisiones
+sin las validaciones.
 
 \begin{lstlisting}[language=Python, escapechar=|, label={lst:guardado_comisiones}, caption={Guardado de datos en la base de datos.}]
     # Guardado de datos
@@ -380,7 +619,29 @@ Habiendo terminado lo anterior, se retorna un mensaje de éxito 201 Created.
 return Response({"success": "Comisiones importadas correctamente."}, status=status.HTTP_201_CREATED)
 \end{lstlisting}
 
-Además, de la implementación del procesamiento del JSON, se restringió el acceso a la
+Es importante mencionar que tanto en el modelo Estudiante como el modelo Profesor, se
+debe buscar por nombre, pues este se define como único. Además, al guardar una instancia
+de Profesor o Estudiante, se normalizan sus nombres, es decir, que todas las
+palabras del string se transforman para que comiencen con mayúscula y el resto de
+caracteres estén en minúscula, como se muestra en el código \ref{lst:estudiante}. Este
+comportamiento estaba definido previamente en el SSM. Debido a lo anterior, al realizar
+la búsqueda por nombre, se debe buscar con el nombre normalizado, ya que de lo contrario
+puede que no se encuentren nombres con apellidos como ``De la Fuente'' o nombres como
+``Juan-Bastián'', pues al normalizarlos se convierten en ``De La Fuente'' (la pasa a mayúscula)
+y ``Juan-bastián'' (Bastián pasa a minúscula) respectivamente.
+
+\begin{lstlisting}[language=Python, escapechar=|, label={lst:estudiante}, caption={Modelo Estudiante en el SSM.}]
+  class Estudiante(models.Model):
+    nombre = models.CharField(max_length=300, unique=True)
+    correo = models.EmailField(max_length=200, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+      self.nombre = " ".join(word.capitalize() for word in self.nombre.split())
+      super().save(*args, **kwargs)
+\end{lstlisting}
+
+
+Además de la implementación del procesamiento del JSON, se restringió el acceso a la
 API, para que no cualquier persona que haga un POST pueda enviar datos al SSM. Con este
 objetivo, se agregó autenticación con tokens al endpoint de la API y para ello, se agregó
 la extensión de Django llamada Django Rest Framework (DRF) al proyecto, que proporciona
@@ -396,8 +657,6 @@ decorador \verb|@permission_classes| es para restringir el acceso al endpoint y 
 decorador \verb|@authentication_classes| se utiliza para especificar el tipo de
 autenticación que se utilizará.
 
-\newpage
-
 \begin{lstlisting}[language=Python, escapechar=|, label={lst:decorators}, caption={Decoradores utilizados en la API.}]
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
@@ -407,7 +666,6 @@ def import_comisiones(request):
     if not data or data.get("cursos") is None:
       return Response({"error": "No se encontraron datos para importar."}, status=status.HTTP_400_BAD_REQUEST)
 \end{lstlisting}
-
 
 Es relevante señalar que el modelo Curso del SSM incluye dentro de sus atributos la fecha
 límite para la entrega del informe final de Trabajo de Título \verb|fecha_entrega_informe_final|
