@@ -490,7 +490,7 @@ al carácter coma y se agregaron las columnas que faltaban. Por último, se agre
 condición de que solo las memorias con comisión completa sean exportadas
 
 
-\subsection{Exportación directa al SSM}
+\subsection{Exportación directa al SSM}\label{subsec:exportacion:ssm_directa}
 Se implementó una exportación directa al SSM a través de una petición POST al SSM.
 Esta implementación consta de dos partes. La primera es hacer que el SSM sea capaz de
 recibir una petición desde otro sistema y procesarla. Mientras que la segunda es que el
@@ -565,6 +565,8 @@ Habiendo terminado lo anterior, se retorna un mensaje de éxito 201 Created.
 El código \ref{lst:guardado_comisiones} muestra el código del guardado de las comisiones
 sin las validaciones.
 
+\newpage
+
 \begin{lstlisting}[language=Python, escapechar=|, label={lst:guardado_comisiones}, caption={Guardado de datos en la base de datos.}]
     # Guardado de datos
     for memoria in memorias:
@@ -628,7 +630,15 @@ comportamiento estaba definido previamente en el SSM. Debido a lo anterior, al r
 la búsqueda por nombre, se debe buscar con el nombre normalizado, ya que de lo contrario
 puede que no se encuentren nombres con apellidos como ``De la Fuente'' o nombres como
 ``Juan-Bastián'', pues al normalizarlos se convierten en ``De La Fuente'' (la pasa a mayúscula)
-y ``Juan-bastián'' (Bastián pasa a minúscula) respectivamente.
+y ``Juan-bastián'' (Bastián pasa a minúscula) respectivamente. Por lo tanto, se implementó la
+función \verb|nombre_normalizado|, visible en el código \ref{lst:nombre_normalizado}, para normalizar
+los nombres. Se hizo una función a parte para realizar la normalización, ya que este comportamiento
+era requerido en más de una parte del código, en particular en el controlador de importación de
+comisiones por API y en el procesamiento de archivos CSV subidos por el usuario. Se implementó
+esta función a modo de parche en vez de modificar los modelos Profesor y Estudiante, ya que
+no se conocía el impacto que podría tener la modificación en el SSM, pues al no ser el
+sistema principal de esta memoria, no se conocía en profundidad y se prefirió cambiar lo menos posible.
+\newpage
 
 \begin{lstlisting}[language=Python, escapechar=|, label={lst:estudiante}, caption={Modelo Estudiante en el SSM.}]
   class Estudiante(models.Model):
@@ -640,6 +650,13 @@ y ``Juan-bastián'' (Bastián pasa a minúscula) respectivamente.
       super().save(*args, **kwargs)
 \end{lstlisting}
 
+\begin{lstlisting}[language=Python, escapechar=|, label={lst:nombre_normalizado}, caption={Función para normalizar nombres.}]
+def nombre_normalizado(nombre: str):
+    """
+    Retorna un nombre normalizado, es decir, con la primera letra de cada palabra en may|\'u|scula.
+    """
+    return " ".join(word.capitalize() for word in nombre.strip().split())
+\end{lstlisting}
 
 Además de la implementación del procesamiento del JSON, se restringió el acceso a la
 API, para que no cualquier persona que haga un POST pueda enviar datos al SSM. Con este
@@ -745,7 +762,6 @@ de error. Por último, para incorporar las credenciales de la API del SSM, se ag
 las variables de entorno \verb|SSM_URL| y \verb|SSM_TOKEN| que corresponden a la URL y el
 token de la API del SSM, respectivamente.
 
-\newpage
 \begin{lstlisting}[language=Python, escapechar=|, label={lst:export_comisiones}, caption={Comando de exportación de comisiones.}]
 def handle(self, *args, **options):
   periodo_id = options.get("periodo_id")
@@ -801,3 +817,30 @@ def handle(self, *args, **options):
 
   return 0
 \end{lstlisting}
+
+
+\section{Despliegue}
+El último de los objetivos específicos definidos en la sección \ref{sec:intro:objetivos}
+es el despliegue del sistema en el servidor de producción y en esta sección se describen
+los pasos que se siguieron para llevar a cabo el despliegue tanto del sistema de titulación
+como del SSM con los cambios realizados.
+
+Como se mencionó en la sección \ref{sec:intro:despliegue}, el despliegue se realizará en
+los servidores del DCC para que pueda ser utilizada por la coordinación de titulación.
+Para ello, durante todo el desarrollo del sistema se utilizaron contenedores de Docker
+con Docker Compose para coordinar la creación de los contenedores de la base de datos
+Postgres y el servidor web Django, facilitando el despliegue. El uso de Docker Compose
+no es algo incorporado por esta memoria en el sistema de titulación y el SSM, ambos sistemas
+ya lo utilizaban.
+
+El primer despliegue del sistema de titulación se realizó en un servidor de test del DCC,
+con el objetivo de realizar la evaluación. En esa instancia no se desplegó el SSM, ya que
+no se habían realizado cambios en el SSM hasta ese momento. Luego de la evaluación, se
+aplicaron los cambios sugeridos en la retroalimentación dada por la coordinadora de titulación
+y se implementó la exportación directa de comisiones al SSM descrita en la sección
+\ref{subsec:exportacion:ssm_directa}. Con estos cambios, se procedió a realizar un segundo
+despliegue en los servidores de test. Esta vez, se incluyó tanto el sistema de titulación
+como el SSM con los cambios realizados. Se utilizó este despliegue para mostrarle los cambios
+del SSM a la jefa docente Jocelyn Simmonds, quien está a cargo de este sistema. Luego de
+probarlo, ella pidió que se subieran los cambios al servidor de producción para utilizarlo en
+la gestión de memorias del semestre de primavera 2025.
