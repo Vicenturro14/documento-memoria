@@ -1,0 +1,35 @@
+\begin{resumen}
+    La asignación de comisiones examinadoras para los trabajos de título es un proceso
+    con importancia, pues son las comisiones examinadoras las que evalúan los trabajos de título y
+    las defensas de los mismos, siendo un factor clave en el éxito de la titulación de un estudiante.
+    Además, al realizar la asignación se debe tener en cuenta que los integrantes de las comisiones
+    examinadoras cumplan con tener conocimiento en el área del tema del trabajo de título y que tengan
+    tiempo disponible para evaluarlo. Por lo tanto, la elección de integrantes de las comisiones
+    examinadoras es una tarea de complejidad no menor. Actualmente, esta tarea es realizada con
+    una planilla Excel, lo que resulta en un proceso tedioso, propenso a errores y poco eficiente,
+    más aún con el constante aumento de estudiantes en el Departamento de Ciencias de la Computación
+    (DCC).
+
+    En este contexto, se propone desarrollar y desplegar una herramienta que permita asignar las
+    comisiones examinadoras de manera interactiva y eficiente, y que sea capaz de integrarse con
+    los sistemas existentes relacionados con el proceso de titulación del DCC, como el Sistema de
+    Titulación y el Sistema de Seguimiento de Memorias (SSM). La solución fue implementada usando
+    Django como framework web y PostgreSQL como base de datos. Esta corresponde a una extensión del
+    sistema de titulación del DCC, que agrega un módulo para asignar comisiones examinadoras a los
+    trabajos de título, tomando como base un sistema piloto desarrollado por un equipo del curso
+    CC5401 Ingeniería de Software II. Al piloto se le agregaron funcionalidades como
+    validaciones al momento de asignar una comisión, un gráfico de carga de los evaluadores para distribuir
+    a los evaluadores de manera equitativa y que pueda exportar las comisiones asignadas en formato CSV y
+    también de forma directa al SSM. Para que el SSM pueda recibir las comisiones asignadas de forma directa,
+    se implementó una API que permite recibir las comisiones asignadas en formato JSON.
+    Tanto la extensión del sistema de titulación como la adaptación del SSM fueron desplagadas primero
+    en un servidor de test para evaluar su funcionalidad, para luego ser desplegadas en el servidor de
+    producción del DCC.
+
+    Para evaluar la solucion implentada, se utilizó el módulo de comisiones examinadoras
+    para asignar las comisiones examinadoras a los trabajos de título del semestre de primavera 2025
+    del DCC. La evaluación mostró que aunque la herramienta requería de algunas mejoras, como optimizaciones en controladores,
+    asignar las comisiones con ella significó menos trabajo y tomó menos tiempo que con la planilla Excel.
+    El proyecto fue desplegado en el servidor de producción del DCC y permitirá que la asignación de comisiones examinadoras
+    no signifique un gasto de tiempo y esfuerzo innecesario para la coordinación de titulación.
+\end{resumen}
