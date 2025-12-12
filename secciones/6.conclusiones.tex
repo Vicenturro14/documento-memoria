@@ -1,1 +1,52 @@
 \chapter{Conclusiones}
+El desarrollo del módulo de asignación de comisiones examinadoras en el sistema de
+titulación del DCC tuvo como objetivo general desarrollar y desplegar una herramienta que
+permita asignar comisiones examinadoras a los estudiantes de Trabajo de Título de forma
+eficiente y que se comunique con los sistemas existentes relacionados con el proceso de
+titulación. Este objetivo fue logrado con éxito, ya que se implementó una extensión del
+sistema de titulación del DCC que permite a la coordinadora de titulación asignar
+comisiones examinadoras a los estudiantes de Trabajo de Título en menor tiempo que el
+método anterior de planillas Excel y que es capaz de exportar las comisiones asignadas
+al Sistema de Seguimiento de Memorias por dos métodos: la descarga de un archivo CSV y
+mediante una consulta POST a la API del Sistema de Seguimiento de Memorias. Además, se
+desplegó la herramienta en el servidor de producción del DCC, dejándola lista para su uso.
+
+Dentro de los aprendizajes obtenidos, se destaca la importancia de tener reuniones periódicas
+con la profesora guía para mantener la constancia en el trabajo, ya que inicialmente no
+se tenían y en cuanto se fijó un horario para tener reuniones semanales, el ritmo de trabajo
+aumentó. Las reuniones, tanto con la profesora guía como con el equipo de desarrollo del DCC,
+requirieron de saber expresar lo que se estaba haciendo y los problemas que surgían, para así
+obtener ayuda o sugerencias que permitieran resolver las dificultades que se tuvieron.
+
+Uno de los principales desafíos de la memoria fue trabajar sobre código desarrollado por
+otras personas, en particular trabajar sobre el código del piloto de asignación de
+comisiones examinadoras, ya que no se tenía una documentación detallada del código y al
+ser una versión piloto, funcionaba pero tenía errores que se debían corregir y
+optimizar. Gran parte del tiempo dedicado al desarrollo se centró en corregir errores que
+surgían de casos borde no considerados en el piloto u optimizar el código para que fuera
+más eficiente.
+
+En cuanto a aspectos a mejorar y trabajos futuros en la asignación de comisiones examinadoras,
+primero se deben realizar mejoras en la usabilidad de la herramienta, por ejemplo,
+mientras se obtienen los estudiantes de Trabajo de Título o mientras se exportan las
+comisiones al SSM no se muestra ningún indicador que permita al usuario saber que la
+operación está en curso. Otro aspecto a mejorar son dos comportamientos no deseados
+presentes en el sistema que no hacen que la herramienta se caiga. El primero aparece cuando
+se obtienen los estudiantes de Trabajo de Título con el botón Sincronizar en el listado de
+comisiones. Al completar la operación, se redirige al usuario al listado de estudiantes de
+Trabajo de Título en vez de simplemente actualizar la página. El segundo aparece al
+guardar una comisión examinadora y se tiene algún error de validación. En este caso puede
+que la alerta de error se muestre más de una vez. Un último trabajo futuro sería incorporar
+el procesamiento de solicitudes de vía rápida a través del sistema de titulación. Esto afecta
+al módulo de Trabajo de Título, ya que se deben haber ingresado al sistema de titulación los
+temas de los estudiantes que desean solicitar vía rápida, para así poder identificarlos correctamente
+como estudiantes de Trabajo de Título y poder asignarles comisiones examinadoras.
+
+A modo de resumen, el desarrollo del módulo de asignación de comisiones examinadoras en el
+sistema de titulación del DCC tuvo éxito en cumplir su objetivo general. Este trabajo aporta
+a que el Departamento de Ciencias de la Computación tenga herramientas más adecuadas
+ante el aumento de estudiantes que ingresan a la carrera de Ingeniería Civil en Computación,
+como lo son el sistema de titulación y el sistema de seguimiento de memorias.
+Además, permite que el sistema de titulación del DCC no solo cubra el ramo de Introducción al
+Trabajo de Título, sino que también cubra parte del ramo Trabajo de Título. Esto abre puertas para
+agregar más funcionalidades al sistema de titulación relacionadas con Trabajo de Título.
