@@ -1,8 +1,8 @@
 \chapter{Situación Actual}
-
-Actualmente existen varios proyectos y sistemas relacionados con el proceso de titulación
-en el DCC. Dentro de estos se encuentran el sistema de titulación del DCC, el Sistema de
-Monitoreo de Memorias \cite{SistemaMonitoreoMemorias}, un sistema de recomendación de
+Antes de comenzar este trabajo existían varios proyectos y sistemas relacionados con el
+proceso de titulación en el DCC. Algunos de estos proyectos sirvieron para el desarrollo
+de esta memoria, ya sea como insumo o como inspiración, mientras que otros no fueron
+utilizados. Dentro de estos se encuentran el sistema de titulación del DCC, el Sistema de Seguimiento de Memorias \cite{SistemaMonitoreoMemorias}, un sistema de recomendación de
 comisiones \cite{SistemaRecomendacion} y un sistema de asignación de comisiones
 desarrollado por un grupo del curso CC5401 Ingeniería de Software II. A continuación se
 describen las características y las limitaciones de estos sistemas, relacionadas con la
@@ -13,11 +13,12 @@ asignación de comisiones examinadoras.
 
 El sistema de titulación del DCC es un sistema web en producción que ofrece distintas
 funcionalidades dependiendo de si se es estudiante, profesor o coordinador de titulación.
-Como estudiante, se pueden ver un listado de temas para trabajos de título, solicitar
-la inscripción en un tema, subir propuestas su memoria y su informe final del curso
-Introducción al Trabajo de Título. Además se puede ver su ficha personal, que incluye
-la etapa actual del trabajo de título, el tema del trabajo de título junto a su guía.
-Además, se puede descargar la propuesta de memoria y el informe final de Introducción al
+Como estudiante, se pueden ver un listado de temas para trabajos de título como se muestra
+en la figura \ref{fig:titulacion_temas}, solicitar la inscripción en un tema, subir
+propuestas su memoria y su informe final del curso Introducción al Trabajo de Título.
+Además, tal como se puede ver en la figura \ref{fig:titulacion_ficha}, se puede ver su ficha personal, que incluye la etapa actual del trabajo de título,
+el tema del trabajo de título junto a su guía. Además, se puede descargar la propuesta de
+memoria y el informe final de Introducción al
 Trabajo de Título, en caso de haber subido.
 
 \begin{figure}[ht]
@@ -55,13 +56,13 @@ Aguilera en 2024 \cite{SistemaMonitoreoMemorias} y extendido por Diego Orellana 
 \cite{SMM_2025}. En la figura \ref{fig:smm_principal} se puede apreciar
 la vista principal del SSM. Este sistema se encuentra en producción desde julio de 2025
 pero no ha tenido uso hasta la fecha de redacción de esta memoria. Este sistema permite
-a la jefatura de estudios monitorear los plazos de entrega de los informes finales de
+a la coordinación de estudios monitorear los plazos de entrega de los informes finales de
 Trabajo de Título y gestionar la corrección de los mismos. Para realizar esta tarea, el
-sistema requiere saber cuales son las comisiones examinadoras asignadas a cada trabajo de
-título y el método que se utiliza para obtenerlos es que el usuario los ingrese, por lo
-que el sistema permite agregar, eliminar y modificar memorias, estudiantes, profesores
-y miembros de comisiones examinadoras. El ingreso de esta información es realizado por la
-jefatura de estudios, una vez la coordinación de titulación realice la asignación de las
+sistema requiere saber cuáles son las comisiones examinadoras asignadas a cada trabajo de
+título y el método que se utiliza para obtener estos datos es que la coordinadora de estudios
+los ingrese, por lo que el sistema permite agregar, eliminar y modificar memorias, estudiantes,
+profesores y miembros de comisiones examinadoras. El ingreso de esta información es realizado por la
+coordinación de estudios, una vez la coordinación de titulación realice la asignación de las
 comisiones. Esto sucede a más tardar en la semana académica número 12 de cada semestre.
 
 \begin{figure}[ht]
@@ -99,7 +100,7 @@ las siguientes columnas:
 \end{figure}
 
 La principal limitación del SSM respecto a la asignación de comisiones examinadoras es
-que fue desarrollado para que sea utilizado por la jefatura de estudios
+que fue desarrollado para que sea utilizado por la coordinación de estudios
 \cite[p.~3]{SistemaMonitoreoMemorias}. Como la coordinación de titulación es la encargada
 de asignar las comisiones, el sistema fue diseñado para facilitar el registro de
 comisiones ya definidas y no la asignación de estas.
@@ -115,8 +116,9 @@ tener al menos un/a profesor/a con jerarquía de profesor/a.
 En el caso de la asignación de integrantes a una comisión mediante un formulario, también
 se puede notar que el SSM no está diseñado para asignar integrantes a comisiones
 examinadoras, ya que el formulario no permite asignar varios integrantes a una comisión a
-la vez como se puede apreciar en la figura \ref{fig:smm_form}. Como por cada comisión se
-requieren al menos 2 integrantes además de los guías, se debe llenar al menos tres veces
+la vez como se puede apreciar en la figura \ref{fig:smm_form}, se debe ingresar un miembro de
+la comisión a la vez, ingresando el profesor y el rol que tendrá, es decir, si es guía,
+coguía o integrante de la comisión. Como por cada comisión se requieren al menos 2 integrantes además de los guías, se debe llenar al menos tres veces
 el formulario por cada comisión, lo que resulta ineficiente y tedioso.
 
 \begin{figure}[ht]
@@ -208,7 +210,8 @@ respectivamente.
 Este sistema fue diseñado para ser utilizado por la coordinación de titulación del DCC,
 por lo que al agregar o editar comisiones toma en cuenta elementos como la cantidad de
 comisiones a las que ha sido asignada cada profesor/a y que se puedan agregar varios
-miembros a una comisión en un mismo formulario. Además, en el formulario se permite
+miembros a una comisión en un mismo formulario, como se aprecia en la figura
+\ref{subfig:ingsoft_agregar}. Además, en el formulario se permite
 buscar profesores por nombre y área de conocimiento, como se puede ver en la figura
 \ref{subfig:ingsoft_buscar}.
 
