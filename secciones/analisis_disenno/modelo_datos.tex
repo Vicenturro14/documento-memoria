@@ -1,8 +1,9 @@
 \section{Modelo de Datos}\label{sec:modelo_datos}
-En esta sección se describirá el modelo de datos del sistema de titulación y cómo
+En esta sección se describirá el modelo de datos del Sistema de Titulación y cómo
 evolucionó durante este trabajo de título. Primero se describirá el modelo de datos en su
-estado inicial en la subsección \ref{sec:ta:modelo_datos_inicial}, es decir, como estaba
-antes de realizar este trabajo de título. Luego, en la subsección \ref{sec:ta:cambios_iniciales_modelo_datos}
+estado inicial en la subsección \ref{sec:ta:modelo_datos_inicial}, es decir, cómo estaba
+en producción antes de realizar este trabajo de título. Luego, en la subsección
+\ref{sec:ta:cambios_iniciales_modelo_datos}
 se describirán los cambios que se planificaron inicialmente. Por último, se describirán los cambios
 que surgieron durante el desarrollo de esta memoria.
 
@@ -10,41 +11,103 @@ que surgieron durante el desarrollo de esta memoria.
 El repositorio del sistema de titulación tiene varios módulos y cada uno tiene sus
 propias entidades que pueden relacionarse con las de otros módulos. No todas las
 entidades son relevantes para la asignación de comisiones examinadoras, por lo
-que solo se describirán las entidades que se relacionan con el módulo de comisiones
-examinadoras y el módulo de titulación. Es importante mencionar que el modelo de datos
+que solo se describirán las entidades que se relacionan con el módulo de Comisiones
+Examinadoras y el módulo de Titulación. Es importante mencionar que el modelo de datos
 que se describirá a continuación es el modelo en su estado previo a este trabajo de título.
 
-El módulo principal es el módulo de titulación, que se puede ver en la figura
+El módulo principal es el módulo de Titulación, que se puede ver en la figura
 \ref{fig:modelo_titulacion}. Este módulo contiene las entidades Tema, Solicitud,
-Propuesta y Documento. Estas representan el tema de un trabajo de título, una solicitud
-de un estudiante a un tema, un trabajo de título de un estudiante en el contexto del
-ramo de Introducción al Trabajo de Título y los documentos con los informes que deben
-entregar los estudiantes, respectivamente.
+Propuesta y Documento. Tema representa el tema de un trabajo de título y Solicitud
+corresponde a la solicitud de un estudiante a un tema. Por su parte, Propuesta representa
+el trabajo de título de un estudiante en el contexto del ramo de Introducción al Trabajo
+de Título, mientras que Documento corresponde a los documentos con los informes que deben entregar los
+estudiantes durante el proceso de titulación.
+
 
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.6\linewidth]{imagenes/diagramas/titulacion.png}
-    \caption{Diagrama del modelo de datos del módulo de titulación.}
+    \caption{Diagrama del modelo de datos del módulo de Titulación.}
     \label{fig:modelo_titulacion}
 \end{figure}
 
-El módulo de comisiones examinadoras contiene a las entidades Comision y
-AlumnoCursandoMemoria, como muestra la figura \ref{fig:modelo_comisiones}. Comisión
-representa una comisión examinadora de un trabajo de título. Contiene una relación con la
-entidad Tema, que representa el tema del trabajo de título, y una relación con la entidad
-Solicitud, que representa la solicitud del tema. Además, tiene una relación de n a n con la
-entidad Evaluador del módulo de evaluación, que representa los integrantes de la comisión
+El módulo de Departamento proporciona las entidades Funcionario y Estudiante. Funcionario
+representa a funcionarios del departamento, que en el caso del proceso de titulación,
+corresponden a académicos que proponen temas para trabajos de título y son guías o
+coguías de estos. Estudiantes representa a estudiantes del DCC, que en el contexto del
+proceso de titulación, son quienes solicitan un tema de trabajo de título y lo llevan a
+cabo. Las entidades de este módulo se pueden ver en la figura
+\ref{fig:modelo_departamento}.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.6\linewidth]{imagenes/diagramas/departamento.png}
+    \caption{Diagrama del modelo de datos del módulo Departamento.}
+    \label{fig:modelo_departamento}
+\end{figure}
+
+
+El módulo de Docencia proporciona los periodos académicos y el
+módulo de Investigación proporciona Area, que representa áreas de conocimiento dentro de
+computación y permite asignar áreas de conocimiento tanto a los académicos como a los
+temas de trabajo de título. Por último, el módulo Kernel proporciona la entidad
+Persona, que representa a cualquier usuario de la plataforma. La figura
+\ref{fig:modelo_docencia_investigacion_kernel} muestra los modelos de datos recién descritos.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/diagramas/investigacion.png}
+    \caption{Diagrama del modelo de datos de los módulos Docencia, Investigación y Kernel.}
+    \label{fig:modelo_docencia_investigacion_kernel}
+\end{figure}
+
+
+\subsection{Cambios Iniciales al Modelo de Datos}\label{sec:ta:cambios_iniciales_modelo_datos}
+En esta subsección se describirán los cambios que se tuvieron en cuenta inicialmente para
+agregar el proceso de asignación de comisiones examinadoras al Sistema de Titulación.
+Se usaron algunas entidades del modelo de datos del piloto implementado por el equipo de
+Ingeniería de Software II mencionado en la sección \ref{sec:sa:asignacion}. Estas fueron
+las entidades los modelos del módulo de Evaluación y el módulo de Comisiones Examinadoras.
+En un comienzo se planeaba usar estas entidades tal cual como se encontraban en el piloto
+y se describen a continuación, sin embargo, durante el desarrollo de esta memoria fueron
+adaptadas, como se describe en la sección \ref{sec:ta:cambios_modelo_datos_desarrollo}.
+
+El módulo de Evaluación contiene a la entidad Evaluador y
+Jerarquía, como se muestra en la figura \ref{fig:modelo_evaluacion}. Evaluador representa
+a una persona que tiene la tarea de evaluar, que en el contexto de Trabajo de Título,
+corresponde a los integrantes de una comisión examinadora.
+Esta entidad tiene como atributos datos personales como el primer nombre, el apellido
+paterno, y el email del evaluador. Además, tiene un atributo
+que indica si está habilitado para evaluar o no, una referencia a
+la entidad Persona que representa al evaluador, una referencia a la entidad Jerarquía que
+representa la jerarquía de un evaluador y por último una relación de n a n con la entidad
+Area, que representa las áreas de conocimiento de cada evaluador. Por su parte, la entidad Jerarquía representa
+la jerarquía de un evaluador y tiene un nombre y una descripción. Actualmente las jerarquías pueden ser
+AJC (Académico Jornada Completa), AJP (Académico Jornada Parcial) o PEX (Profesor Experto Externo).
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.6\linewidth]{imagenes/diagramas/evaluacion.png}
+    \caption{Diagrama del modelo de datos del módulo de Evaluación.}
+    \label{fig:modelo_evaluacion}
+\end{figure}
+
+El módulo de Comisiones Examinadoras, que contiene a las entidades
+Comision y AlumnoCursandoMemoria, como muestra la figura \ref{fig:modelo_comisiones}.
+Comisión representa una comisión examinadora de un trabajo de título. Contiene una relación
+con la entidad Solicitud, que representa la solicitud del tema. Además, tiene una relación de n a n con la
+entidad Evaluador del módulo de Evaluación, que representa los integrantes de la comisión
 examinadora.
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.7\linewidth]{imagenes/diagramas/comisiones.png}
-    \caption{Diagrama del modelo de datos del módulo de comisiones examinadoras.}
+    \includegraphics[width=0.8\linewidth]{imagenes/diagramas/comisiones.png}
+    \caption{Diagrama del modelo de datos del módulo de Comisiones Examinadoras.}
     \label{fig:modelo_comisiones}
 \end{figure}
 
 AlumnoCursandoMemoria representa a un estudiante que está cursando Trabajo de título.
-Contiene al estudiante a través de una relación con la entidad Persona del módulo kernel
+Contiene al estudiante a través de una relación con la entidad Persona del módulo Kernel
 y se asocia a una memoria a través de la solicitud del tema. Además, contiene el periodo
 académico en el que el estudiante cursa el ramo Trabajo de título y tiene una relación con
 la entidad Comision, que representa la comisión examinadora que se le asigna al estudiante.
@@ -52,109 +115,70 @@ Por último, tiene el estado de la defensa, que indica si la defensa ha sido apr
 la defensa aún no ha sido realizada. Los posibles estados son \textit{pendiente},
 \textit{aprobado} y \textit{reprobado}.
 
-
-El módulo de evaluación contiene a las entidades Evaluador, que corresponden a personas
-que evalúan, como los integrantes de una comisión examinadora. El módulo de departamento
-proporciona las entidades Funcionario y Estudiante. Funcionario representa a
-funcionarios del departamento y en el caso de titulación, representa a académicos del
-departamento que son guías o coguías de trabajos de título. Estudiantes representa a
-estudiantes del DCC. Las entidades de ambos módulos se pueden ver en la figura
-\ref{fig:modelo_departamento}.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.89\linewidth]{imagenes/diagramas/departamento_evaluacion.png}
-    \caption{Diagrama del modelo de datos de los módulos departamento y evaluación.}
-    \label{fig:modelo_departamento}
-\end{figure}
-
-
-El módulo de docencia proporciona los periodos académicos y el
-módulo de investigación proporciona Area, que representa áreas de conocimiento dentro de
-computación y permite asignar áreas de conocimiento tanto a los académicos como a los
-temas de trabajo de título. Por último, el módulo kernel proporciona la entidad
-Persona, que representa a cualquier usuario de la plataforma.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{imagenes/diagramas/investigacion.png}
-    \caption{Diagrama del modelo de datos de los módulos docencia, investigación y kernel.}
-    \label{fig:modelo_docencia_investigacion_kernel}
-\end{figure}
-
-
-\subsection{Cambios Iniciales al Modelo de Datos}\label{sec:ta:cambios_iniciales_modelo_datos}
-
-Tomando en cuenta el modelo de datos actual y las funcionalidades que se desea agregar a
-la herramienta, el modelo de datos no sufrirá muchos cambios, ya que la mayoría de las
-funcionalidades trabajan con datos que ya se encuentran en el modelo. La única
-funcionalidad que requiere un cambio es la de publicar las comisiones examinadoras, puesto
-que se necesita diferenciar entre comisiones que han sido publicadas y aquellas que no lo
-han sido. Para lograr esto, se agregará la entidad ComisionBorrador que tendrá los mismos
-atributos que Comision, pero que se diferenciará por el hecho de que no ha sido
-publicada. De esta forma, la publicación de comisiones examinadoras por API se realizará con
-los datos de la entidad Comision.
+Por último, se agregó la entidad ComisionBorrador, para representar a las comisiones examinadoras
+que han sido creadas por el coordinador de titulación, pero que aún no han sido publicadas y no
+deben ser vistas por los académicos o estudiantes. Por lo tanto, esta entidad tiene los mismos
+atributos que la entidad Comision.
 
 \subsection{Cambios al Modelo de Datos Durante el Desarrollo}\label{sec:ta:cambios_modelo_datos_desarrollo}
 
-A continuación se detallará por cada módulo las modificaciones realizadas al modelo de datos que no fueron
-planificadas inicialmente, y la razón por la que se realizaron.
+A continuación se detallará por cada módulo las modificaciones realizadas al modelo de
+datos que no fueron planificadas inicialmente, y la razón por la que se realizaron.
 
-En primer lugar, en el módulo de titulación se agregó el atributo tema a la entidad
-Propuesta, que corresponde al tema de la memoria. Este se agregó, puesto que
-anteriormente solo se podía acceder al tema de una memoria a través de la entidad
-Solicitud. Esto no era práctico y tampoco hace sentido, ya que Propuesta
-representa una memoria en el ramo de Introducción al Trabajo de Título y toda memoria
-debe tener un tema. Esto se puede ver en la figura \ref{fig:modelo_titulacion_nuevo}.
+En primer lugar, en el módulo de Titulación a la entidad Propuesta se agregó el atributo
+tema, que corresponde al tema de la memoria. Este se agregó, puesto que anteriormente
+solo se podía acceder al tema de una memoria a través de la entidad Solicitud. Esto no
+era práctico y tampoco hace sentido, ya que Propuesta representa una memoria en el ramo
+de Introducción al Trabajo de Título y toda memoria debe tener un tema. Esto se puede ver
+en la figura \ref{fig:modelo_titulacion_nuevo}.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.7\linewidth]{imagenes/diagramas/modelo_titulacion_nuevo.png}
-    \caption{Diagrama del modelo de datos del módulo de titulación.}
+    \caption{Diagrama del modelo de datos del módulo de Titulación.}
     \label{fig:modelo_titulacion_nuevo}
 \end{figure}
 
-Luego, en el módulo de docencia, se agregó la entidad Curso, que representa una sección
+Luego, en el módulo de Docencia, se agregó la entidad Curso, que representa una sección
 de un ramo en un periodo académico específico, lo cual se ve reflejado en la figura
-\ref{fig:modelo_docencia_nuevo}. Esta entidad tiene los atributos periodo, número de
-sección, código del ramo, nombre del ramo, id del ramo e id del curso. Estos dos últimos
-corresponden a identificadores dentro de la API de UCampus. Se agregó esta entidad para
-identificar el curso al que pertenece una memoria y así poder exportar las comisiones
-examinadoras asignadas al SSM que separa las memorias por curso.
+\ref{fig:modelo_docencia_nuevo}. Esta entidad tiene como atributos el periodo académico,
+el número de sección, el código del ramo, el nombre del ramo, el id del ramo y el id del
+curso. Estos dos últimos son atributos que vienen desde UCampus. Se agregó esta entidad
+para identificar el curso de Trabajo de Título al que pertenece una memoria, ya que el SSM
+requiere de esta información.
 
 \begin{figure}[ht!]
     \centering
     \includegraphics[width=0.32\linewidth]{imagenes/diagramas/modelo_docencia_nuevo.png}
-    \caption{Diagrama del modelo de datos del módulo de docencia.}
+    \caption{Diagrama del modelo de datos del módulo de Docencia.}
     \label{fig:modelo_docencia_nuevo}
 \end{figure}
 
-En el módulo de comisiones examinadoras se eliminó el atributo solicitud de la entidad
-Comision, puesto que no es necesario que desde una comisión se acceda a la solicitud al
-tema de la memoria, ya que la solicitud solo es relevante al comienzo del ramo
-Introducción al Trabajo de Título y las comisiones examinadoras aparecen recién en el
-ramo Trabajo de Título. También se eliminó la entidad ComisionBorrador, puesto que no
-es necesario tener una entidad para comisiones examinadoras que no han sido publicadas,
-en su lugar, se agregó el atributo booleano publicada a la entidad Comision, que indica
-si la comisión ha sido exportada al SSM. Además, se eliminó la entidad
-AlumnoCursandoMemoria, ya que la entidad representaba a un estudiante que cursaba una
-memoria en el ramo Trabajo de Título, lo cual no era consistente con el modelo de datos,
-pues ya existe la entidad Estudiante y su equivalente en el ramo de Introducción al
-Trabajo de Título, es decir Propuesta, representa a la memoria en el ramo de Introducción
-al Trabajo de Título y no al estudiante que cursaba la memoria. La entidad fue reemplazada
-por la entidad MemoriaEnF, que será descrita a continuación.
+En el módulo de Comisiones Examinadoras se eliminó el atributo solicitud de la entidad
+Comision, puesto que no estaba siendo utilizado. También se eliminó la entidad
+ComisionBorrador, puesto que no es necesario tener una entidad para comisiones examinadoras
+que no han sido publicadas, en su lugar, se agregó el atributo booleano \verb|publicada|
+en la entidad Comision, que indica si la comisión ha sido publicada al SSM. Además, se eliminó
+la entidad AlumnoCursandoMemoria, ya que no era consistente con el resto del modelo de datos,
+porque esta representaba a un estudiante que cursaba una memoria en el ramo Trabajo de Título.
+Sin embargo, ya existe la entidad Estudiante para representar a un estudiante. Además, su
+equivalente en el ramo de Introducción al Trabajo de Título es la entidad Propuesta, que
+representa a una memoria en el ramo de Introducción al Trabajo de Título y no al estudiante que
+cursaba la memoria. Es por esto que AlumnoCursandoMemoria fue reemplazada por la entidad
+MemoriaEnF, que será descrita a continuación.
 
 Por último, se creó el módulo de Trabajo de Título que contiene la entidad MemoriaEnF.
 Esta entidad representa una memoria en el ramo de Trabajo de Título y tiene como atributos
 al estudiante que realiza la memoria, la comisión examinadora, el tema de la memoria, el periodo
-académico y curso en el que se realiza la memoria, el tipo de memoria, el estado de defensa y una
-referencia a la entidad Propuesta, que corresponde a la misma memoria, pero en el ramo de
-Introducción al Trabajo de Título. Tanto la entidad MemoriaEnF como la entidad Comision
+académico y curso en el que se realiza la memoria, el tipo de memoria y una referencia a la
+entidad Propuesta, que corresponde a la misma memoria, pero en el ramo de Introducción al
+Trabajo de Título. Tanto la entidad MemoriaEnF como la entidad Comision
 se pueden ver en la figura \ref{fig:modelo_trabajo_titulo_nuevo}.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.9\linewidth]{imagenes/diagramas/modelo_trabajotitulo_comision_nuevo.png}
-    \caption{Diagrama del modelo de datos de los módulos de comisiones examinadoras y trabajo de título.}
+    \caption{Diagrama del modelo de datos de los módulos de Comisiones Examinadoras y Trabajo de Título.}
     \label{fig:modelo_trabajo_titulo_nuevo}
 \end{figure}
+\newpage

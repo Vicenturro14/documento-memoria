@@ -24,40 +24,56 @@ arquitectura. Los módulos son los siguientes:
 \end{multicols}
 
 El módulo Core actúa como base transversal, conteniendo la configuración y
-funcionalidades utilizadas por todo el sistema. Por su parte, el módulo de servicios
-gestiona las notificaciones, mientras que el de docencia se ocupa de los periodos
-académicos y los cursos. Asimismo, el módulo de investigación administra las áreas de
-investigación, y el de departamento es responsable de la gestión de estudiantes,
-funcionarios y sus respectivos roles. De igual manera, el módulo de evaluación se encarga
+funcionalidades utilizadas por todo el sistema. Por su parte, el módulo de Servicios
+gestiona las notificaciones, mientras que el de Docencia se ocupa de los periodos
+académicos y los cursos. Asimismo, el módulo de Investigación administra las áreas de
+investigación, y el de Departamento es responsable de la gestión de estudiantes,
+funcionarios y sus respectivos roles. De igual manera, el módulo de Evaluación se encarga
 de gestionar a los evaluadores de las memorias en ambos ramos de titulación. El módulo de
-titulación abarca la lógica del ramo Introducción al Trabajo de Título, incluyendo temas,
-solicitudes y memorias; a su vez, el módulo de trabajo de título se enfoca en el ramo
-homónimo. Finalmente, el módulo de comisiones examinadoras maneja lo referente a la
+Titulación abarca la lógica del ramo Introducción al Trabajo de Título, incluyendo temas,
+solicitudes y memorias; a su vez, el módulo de Trabajo de Título se enfoca en el ramo
+homónimo. Finalmente, el módulo de Comisiones Examinadoras maneja lo referente a la
 asignación y exportación de dichas comisiones.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.6\linewidth]{imagenes/arquitectura/arquitectura_interna_titulacion.png}
-    \caption{Arquitectura interna del sistema de titulación.}
+    \caption{Arquitectura interna del Sistema de Titulación.}
     \label{fig:arquitectura_interna}
 \end{figure}
 
-El sistema de titulación interactúa con otros sistemas, ya sea consumiendo sus APIs o
-exportando datos, como se puede ver en la figura \ref{fig:arquitectura_externa}. Específicamente,
-el sistema de titulación se relaciona con el Sistema de Seguimiento de Memorias (SSM), la
-API de UCampus llamada Mufasa y el Portal DCC.
+El Sistema de Titulación interactúa con otros sistemas, ya sea consumiendo sus APIs o
+exportando datos. Específicamente, el Sistema de Titulación se relaciona con el Sistema
+de Seguimiento de Memorias (SSM), la API de UCampus llamada Mufasa y el Portal DCC.
+
+El Portal DCC es una plataforma que permite acceder a varias aplicaciones del DCC, como el
+Sistema de Titulación y el Sistema de Seguimiento de Memorias (SSM). Además, provee un
+servicio de inicio de sesión único para los sistemas del DCC, es decir, un Single Sign-On (SSO),
+permitiendo a los usuarios iniciar sesión con su cuenta Upasaporte de UCampus \cite{SSO_DCC}, y
+entregando datos del usuario al sistema una vez que este se ha autenticado. En la figura
+\ref{fig:sso_dcc} se muestra el flujo de autenticación al utilizar el SSO del Portal DCC.
+En particular, el Sistema de Titulación depende del Portal DCC para el inicio de sesión de los
+usuarios y la obtención de sus datos, como nombre, rut, roles y permisos dentro del DCC..
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.5\linewidth]{imagenes/arquitectura/arquitectura_macro_titulacion.png}
-    \caption{Arquitectura externa del sistema de titulación.}
-    \label{fig:arquitectura_externa}
+    \includegraphics[width=0.7\linewidth]{imagenes/arquitectura/sso_dcc.png}
+    \caption{Flujo de autenticación con el SSO del Portal DCC.}
+    \label{fig:sso_dcc}
 \end{figure}
 
-El sistema depende del Portal DCC para el inicio de sesión de los usuarios y la obtención
-de los datos de estos, como roles y permisos. Por otro lado, el sistema utiliza la API de
-UCampus para obtener los periodos académicos, los ramos relacionados con el proceso de
-titulación, sus respectivas secciones y estudiantes inscritos en estas secciones.
-Finalmente, el sistema exporta datos sobre las memorias y las comisiones examinadoras
-asignadas al Sistema de Seguimiento de Memorias (SSM), mediante una petición POST
-autenticada con un token generado por el SSM.
+Por otro lado, el sistema utiliza la API de UCampus para obtener los periodos académicos,
+los ramos relacionados con el proceso de titulación, sus respectivas secciones y estudiantes
+inscritos en estas secciones. Finalmente, el sistema exporta datos sobre las memorias y las
+comisiones examinadoras asignadas al Sistema de Seguimiento de Memorias (SSM), mediante una
+petición POST autenticada con un token generado por el SSM. Un resumen de las interacciones
+entre el Sistema de Titulación y los otros sistemas puede verse en la figura
+\ref{fig:arquitectura_externa}.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{imagenes/arquitectura/arquitectura_macro_titulacion.png}
+    \caption{Arquitectura externa del Sistema de Titulación.}
+    \label{fig:arquitectura_externa}
+\end{figure}
+\newpage
