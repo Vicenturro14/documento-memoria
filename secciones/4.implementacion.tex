@@ -42,7 +42,7 @@ evaluador. La implementación actual se puede ver en la figura
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.4\textwidth]{imagenes/implementaciones/grafico_evaluadores.png}
+  \includegraphics[width=\textwidth]{imagenes/implementaciones/grafico_evaluadores.png}
   \caption{Captura de pantalla del gráfico de carga de evaluadores.}
   \label{fig:cambios_grafico_carga_evaluadores}
 \end{figure}
@@ -53,7 +53,7 @@ la segunda es la incorporación de la comisión asignada a la ficha de un estudi
 La primera no se implementó, pues no se priorizó ante otras características de la
 memoria, ya que más que una funcionalidad, es un aspecto de usabilidad que se puede
 mejorar en el futuro. Por otra parte, las comisiones no fueron incorporadas a la ficha
-de un estudiante, ya que que se decidió que esto sería parte de otra memoria que incorpora
+de un estudiante, ya que que esto sería parte de otra memoria que incorpora
 cambios a la ficha de los estudiantes.
 
 
@@ -181,7 +181,7 @@ Titulación y que también hay una instancia del modelo Propuesta para cada estu
 asociada a su tema y con estado aprobado, haciendo posible asociar a los estudiantes que
 cursan Trabajo de Título con sus temas.
 
-Dada la asunción anterior, para actualizar el registro de estudiantes de Trabajo de
+Dado el supuesto anterior, para actualizar el registro de estudiantes de Trabajo de
 Título dentro del Sistema de Titulación se creó un comando de administración
 \verb|upd_estudiantes_f|, que es llamado por el botón \textit{Sincronizar}.
 Este obtiene desde la API de UCampus todas las secciones de
@@ -277,7 +277,7 @@ AlumnoCursandoMemoria, por lo que se adaptó para que funcione con el nuevo mode
 MemoriaEnF, manteniendo la tabla de comisiones examinadoras que muestra una lista de
 memorias con sus respectivos estudiantes, temas, guías, coguías e integrantes de la comisión.
 Al final de cada fila se encuentra un botón que permite asignar evaluadores a la comisión. La figura
-\ref{fig:comisiones_asignacion} muestra la lista de memorias con sus comisiones examinadoras .
+\ref{fig:comisiones_asignacion} muestra la lista de memorias con sus comisiones examinadoras.
 
 \begin{figure}[ht]
   \centering
@@ -446,14 +446,14 @@ Luego de realizar la evaluación de la herramienta (capítulo \ref{cap:validacio
 se recibió una retroalimentación que indicaba que se debían hacer ciertos cambios en el
 sistema. El punto de mayor importancia en la retroalimentación era que al presionar el
 botón para asignar la comisión examinadora de una memoria demoraba mucho tiempo en aparecer
-el modal, pues podía demorar hasta 15 segundos. Esta cantidad de tiempo es inaceptable para
+el modal, pues podía demorar hasta 13 segundos. Esta cantidad de tiempo es inaceptable para
 la experiencia del usuario, en especial porque es un botón que se debe presionar por cada memoria.
 Por lo tanto, se revisó el código del modal para ver posibles problemas y optimizaciones.
 
 El problema se encontraba en el controlador del modal, que es llamado cada vez que se
 presiona el botón para abrir el modal y responde con el HTML del modal. Que se llame
 cada vez no es un problema, pero el trabajo que realizaba el controlador en cada llamada
-era innecesariamente excesivo, ya que por cada llamada se obtenían todos los evaluadores
+era excesivo, ya que por cada llamada se obtenían todos los evaluadores
 habílitados y a cada uno se le generaba un string con sus áreas de conocimiento con sus
 respectivas subáreas. Este proceso se realizaba para poblar el selector de evaluadores en
 el modal. Para optimizar el proceso de poblar el selector de evaluadores, se tomaron dos
@@ -530,7 +530,7 @@ y se actualice el gráfico de carga de integrantes.
 
 \section{Exportación de Comisiones}
 Para exportar las comisiones examinadoras, el sistema ofrece dos opciones: descargar
-un archivo CSV y enviarlas a través de una petición POST la API del SSM.
+un archivo CSV y enviarlas a través de una petición POST a la API del SSM.
 
 \subsection{Archivo CSV}
 El piloto desarrollado por el equipo de ingeniería de software II ya contaba con la
@@ -600,7 +600,7 @@ recibido con un solo curso y una sola comisión se puede ver en el código
 
 Al recibir el JSON, primero se valida el formato de este. Se verifica que tenga la clave
 \texttt{cursos} y que su valor no sea nulo, y se valida que las memorias de cada curso
-contengan los campos \texttt{estudiante}, \texttt{tema}, \texttt{guia} y
+contengan los campos \texttt{estudiante}, \texttt{tema}, \texttt{guia} e
 \texttt{integrantes}. En segundo lugar, se verifica que el contenido no tenga
 inconsistencias. Para esto se corrobora que no hayan dos comisiones con el mismo
 estudiante y que dentro de cada comisión, el guía, coguía e integrantes sean personas
@@ -608,7 +608,7 @@ diferentes. Si cualquiera de estas validaciones falla, se retorna un error
 \verb|400 BadRequest| con un mensaje indicando qué validación falló.
 
 En tercer lugar, se registran las memorias y comisiones en la base de datos. Para esto,
-se parte guardan los cursos en el modelo Curso, los estudiantes en el modelo Estudiante,
+se guardan los cursos en el modelo Curso, los estudiantes en el modelo Estudiante,
 las memorias en el modelo Memoria y los guías, coguías e integrantes de comisiones en el
 modelo Profesor. La inserción de cada uno en la base de datos solo se hace si es que no
 existía previamente en esta. Por último, se registran las comisiones en el modelo Miembro,
@@ -902,7 +902,7 @@ los servidores del DCC para que pueda ser utilizada por la coordinación de titu
 Para ello, durante todo el desarrollo del sistema se utilizaron contenedores de Docker
 con Docker Compose para coordinar la creación de los contenedores de la base de datos
 Postgres y el servidor web Django, facilitando el despliegue. El uso de Docker Compose
-no es algo incorporado por esta memoria en el Sistema de Titulación y el SSM, ambos sistemas
+no es algo novedoso incorporado por esta memoria en el Sistema de Titulación y el SSM, ambos sistemas
 ya lo utilizaban.
 
 El primer despliegue del Sistema de Titulación se realizó en un servidor de test del DCC,

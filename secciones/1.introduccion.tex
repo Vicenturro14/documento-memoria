@@ -25,7 +25,7 @@ la elección de integrantes de las comisiones examinadoras es una tarea de compl
 no menor.
 
 En el Departamento de Ciencias de la Computación de la Universidad de Chile (DCC), la
-selección de integrantes de las comisiones examinadoras es realizada de forma manual y el
+selección de integrantes de las comisiones examinadoras era realizada de forma manual y el
 registro de estos con hojas de cálculo tipo Excel por el coordinador de titulación. Debido al
 gran aumento de estudiantes en el DCC en los últimos años, el número de memoristas también
 ha crecido, haciendo que la asignación manual de comisiones sea una tarea tediosa,
@@ -34,7 +34,7 @@ semestre de primavera de 2024 había un total de 60 inscritos en los cursos de T
 Título y en el semestre de otoño de 2025 aumentó a 103, según el catálogo de cursos de
 UCampus de la FCFM \cite{EstudiantesTrabajoTitulo20242,EstudiantesTrabajoTitulo20251}.
 
-Es por lo anterior que aparece la necesidad de una herramienta que apoye la
+Es por lo anterior que apareció la necesidad de una herramienta que apoye la
 asignación de comisiones examinadoras, aportando información sobre las áreas de
 conocimiento de los/as profesores/as y la cantidad de comisiones que han sido asignadas
 a cada profesor/a, y que se encuentre integrada con las herramientas ya existentes, como
@@ -43,14 +43,14 @@ el Sistema de Titulación.
 \section{Objetivos}\label{sec:intro:objetivos}
 
 \subsection{Objetivo General}
-El objetivo de esta memoria es desarrollar y desplegar una herramienta que permita que la
+El objetivo de esta memoria fue desarrollar y desplegar una herramienta que permita que la
 asignación de comisiones examinadoras para las memorias sea una tarea eficiente.
 Esto incluye que la herramienta se comunique con los sistemas existentes relacionados con
 el proceso de titulación, como el Sistema de Titulación y el Sistema de Seguimiento de
 Memorias (SSM).
 
 \subsection{Objetivos Específicos}
-Para cumplir con el objetivo, se plantean los siguientes objetivos específicos:
+Para cumplir con el objetivo, se plantearon los siguientes objetivos específicos:
 \begin{itemize}
   \item Desarrollar una herramienta que permita asignar comisiones de forma interactiva.
   \item Integrar la herramienta con los sistemas existentes relacionados con el proceso de
@@ -67,39 +67,38 @@ tercera es la integración con el Sistema de Seguimiento de Memorias (SSM) y la 
 el despliegue de la solución en los servidores del DCC.
 
 \subsection{Desarrollo del módulo de asignación de comisiones examinadoras}
-La primera funcionalidad que se agregará al módulo de asignación de comisiones
-examinadoras es la validación de las comisiones asignadas. Se debe verificar que las
+La primera funcionalidad que se agregó al módulo de asignación de comisiones
+examinadoras es la validación de las comisiones asignadas. Se verifica que las
 comisiones tengan al menos dos integrantes además de los guías. De estos integrantes,
 al menos uno debe tener jerarquía de profesor, es decir, que sean académicos de jornada
-completa (AJC) o académicos de jornada parcial (AJP). También se debe verificar que no
+completa (AJC) o académicos de jornada parcial (AJP). También se verifica que no
 se repitan académicos en la misma comisión.
 
-Luego, se implementará un filtro en la interfaz principal del módulo que permita
+Luego, se implementó un filtro en la interfaz principal del módulo que permite
 mostrar todas las memorias, solo las memorias con comisión completamente asignada o solo
-las memorias con comisión incompleta. Este filtro permitirá navegar con mayor facilidad
+las memorias con comisión incompleta. Este filtro permite navegar con mayor facilidad
 entre las memorias al momento de asignar comisiones examinadoras.
 
-Además, en la misma interfaz se agregará un gráfico que muestre la carga de los
-académicos. Específicamente, por cada académico se mostrará la cantidad de comisiones
-que guía y la cantidad de comisiones que integra. El gráfico será de barras y mostrará
-a los académicos ordenados de forma decreciente  por la carga que tienen. De esta forma,
+Además, en la misma interfaz se agregó un gráfico que muestra la carga de los
+académicos. Específicamente, por cada académico se muestra la cantidad de trabajos de título
+que guía y la cantidad de comisiones que integra. El gráfico es de barras y ordena
+a los académicos de forma decreciente por la carga que tienen. De esta forma,
 se podrá identificar académicos con carga excesiva y, por lo tanto, evitar que se les
-asigne a más comisiones.
+siga sobrecargando con comisiones adicionales.
 
 
 \subsection{Integración en el Sistema de Titulación}
-Actualmente el Sistema de Titulación solo cuenta con un listado de estudiantes de
-Introducción al Trabajo de Título, por lo que se debe agregar a los estudiantes de
+Previo a este trabajo, el Sistema de Titulación solo contaba con un listado de estudiantes de
+Introducción al Trabajo de Título, por lo que se agregó a los estudiantes de
 Trabajo de Título para integrar correctamente el módulo de asignación de comisiones
-examinadoras. Para esto, se agregará una pestaña con un listado de integrantes de Trabajo
+examinadoras. Para esto, se agregó una pestaña con un listado de integrantes de Trabajo
 de Título en los distintos periodos académicos. Para mantener este listado actualizado,
-se implementará un cronjob que se encargue de obtener periódicamente desde UCampus a los
-estudiantes que están cursando Trabajo de Título.
+se implementó la posibilidad de actualizar el listado con datos de UCampus.
 
-Luego, se agregará la posibilidad de exportar las comisiones examinadoras asignadas, que
-se podrá realizar de dos formas. Por un lado, se podrá descargar un archivo CSV con las
-comisiones, y por otro lado, estas podrán ser exportadas directamente hacia el Sistema de
-Seguimiento de Memorias, mediante su API.
+Luego, se agregó la posibilidad de exportar las comisiones examinadoras asignadas, que
+se puede realizar de dos formas. Por un lado, se puede descargar un archivo CSV con las
+comisiones, y por otro lado, estas pueden ser exportadas directamente hacia el Sistema de
+Seguimiento de Memorias, mediante su API REST.
 
 
 \subsection{Integración con el Sistema de Seguimiento de Memorias}
@@ -110,13 +109,13 @@ respectiva. Antes de esta memoria, para que el SSM pudiera obtener las memorias 
 comisiones asignadas a cada una, se debía subir manualmente un archivo CSV.
 
 Para hacer la exportación de las comisiones examinadoras al Sistema de Seguimiento de
-Memorias más fácilmente, se implementará un endpoint en el Sistema de Titulación para
-obtener las comisiones examinadoras asignadas por una API REST. Además, desde el
-Sistema de Seguimiento de Memorias se agregará la opción de importar las comisiones
-desde esta API.
+Memorias con mayor facilidad, se implementó en el Sistema de Titulación la opción de exportar
+las comisiones examinadoras asignadas usando el protocolo HTTP. Además, se le creó al Sistema de
+Seguimiento de Memorias una API REST de un solo endpoint para importar las comisiones examinadoras
+asignadas desde el Sistema de Titulación.
 
 \subsection{Despliegue de la solución}\label{sec:intro:despliegue}
-Por último, la solución desarrollada se desplegará en los servidores del DCC para que
+Por último, la solución desarrollada fue desplegada en los servidores del DCC para que
 pueda ser utilizada por la coordinación de titulación. Para este despliegue, se
-utilizarán contenedores de Docker, uno para la aplicación de Django y otro para la base
+utilizaron contenedores de Docker, uno para la aplicación de Django y otro para la base
 de datos de PostgreSQL.

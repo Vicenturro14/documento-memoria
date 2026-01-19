@@ -66,8 +66,8 @@ Persona, que representa a cualquier usuario de la plataforma. La figura
 En esta subsección se describirán los cambios que se tuvieron en cuenta inicialmente para
 agregar el proceso de asignación de comisiones examinadoras al Sistema de Titulación.
 Se usaron algunas entidades del modelo de datos del piloto implementado por el equipo de
-Ingeniería de Software II mencionado en la sección \ref{sec:sa:asignacion}. Estas fueron
-las entidades los modelos del módulo de Evaluación y el módulo de Comisiones Examinadoras.
+Ingeniería de Software II mencionado en la sección \ref{sec:sa:asignacion}. Específicamente,
+las entidades del módulo de Evaluación y el módulo de Comisiones Examinadoras.
 En un comienzo se planeaba usar estas entidades tal cual como se encontraban en el piloto
 y se describen a continuación, sin embargo, durante el desarrollo de esta memoria fueron
 adaptadas, como se describe en la sección \ref{sec:ta:cambios_modelo_datos_desarrollo}.
@@ -92,7 +92,7 @@ AJC (Académico Jornada Completa), AJP (Académico Jornada Parcial) o PEX (Profe
   \label{fig:modelo_evaluacion}
 \end{figure}
 
-El módulo de Comisiones Examinadoras, que contiene a las entidades
+El módulo de Comisiones Examinadoras, contiene a las entidades
 Comision y AlumnoCursandoMemoria, como muestra la figura \ref{fig:modelo_comisiones}.
 Comisión representa una comisión examinadora de un trabajo de título. Contiene una relación
 con la entidad Solicitud, que representa la solicitud del tema. Además, tiene una relación de n a n con la
