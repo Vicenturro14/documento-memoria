@@ -23,7 +23,7 @@ de test del DCC, en vez de uno de producción. Los datos utilizados de estudiant
 Trabajo de Título en el semestre primavera 2025 fueron obtenidos desde la API de UCampus al
 momento de la evaluación, mientras que el resto de datos, como los profesores, las memorias
 de Introducción al Trabajo de Título y los temas, fueron obtenidos desde un backup al
-sistema de titulación realizado una semana antes de la evaluación.
+Sistema de Titulación realizado una semana antes de la evaluación.
 Respecto a las personas que participarán de la evaluación, se consideró solo a la
 coordinadora de titulación, ya que al ser la única encargada de asignar comisiones
 examinadoras y única usuaria del módulo de asignación de comisiones examinadoras,
@@ -42,7 +42,7 @@ de la fecha límite de asignación, para que la coordinadora de titulación tuvi
 para realizar la asignación de comisiones examinadoras con el método anterior, en caso de
 que hubiera sido inviable asignar las comisiones con el software implementado. Segundo,
 al momento de la evaluación, no se había implementado la exportación de comisiones al SSM
-por medio de la API, por lo que esto no se evaluó.
+por medio de la API, por lo que esto no se evaluó en esa instancia.
 
 
 \section{Resultados}
@@ -64,8 +64,11 @@ También mencionó que después de asignar una comisión, la página se recarga 
 estudiantes se muestra desde el principio, por lo que cada vez tuvo que hacer scroll para
 proceder con la siguiente asignación. Otra observación fue que al seleccionar un alumno
 para asignarle una comisión, el modal tarda alrededor de 13 segundos en desplegarse.
-Por último, indicó que el gráfico de carga tiene mucho margen superior, perdiendo espacio
-que podría usarse para ampliar el gráfico.
+Además, indicó que el gráfico de carga tiene mucho margen superior, perdiendo espacio
+que podría usarse para ampliar el gráfico. Por último, el SSM recibe un archivo CSV
+con la asignación de comisiones examinadoras por cada sección de Trabajo de Título,
+pero el Sistema de Titulación genera un único archivo CSV con las comisiones examinadoras
+para todos los estudiantes de Trabajo de Título de un periodo.
 
 
 \section{Discusión de resultados}
@@ -77,7 +80,9 @@ dan acceso rápido al usuario a información relevante para la asignación de co
 Por otro lado, a excepción de la falta de coguía y coguía externo, los aspectos que se deben
 mejorar no son problemas graves que impidan la utilización de la herramienta, sino aspectos
 que pueden mejorar la experiencia del usuario y la eficiencia de la asignación de comisiones
-examinadoras.
+examinadoras. Además, al momento de la evaluación, el SSM no estaba siendo utilizado por la
+coordinación de estudios, por lo que el archivo CSV generado sí pudo ser utilizado para comunicar
+las comisiones examinadoras.
 
 En general, la evaluación del módulo de asignación de comisiones examinadoras se puede considerar
 exitosa, ya que cumple con el objetivo de implementar una herramienta que permita asignar
@@ -103,4 +108,31 @@ el scroll que se debe hacer para proceder con la siguiente asignación. El razon
 de la corrección de los últimos dos aspectos puede encontrarse en la sección \ref{subsec:cambios_retroalimentacion}.
 
 
+\section{Desarrollo y Pruebas Posteriores a la Validación}
+Luego de la validación y la optimización mencionada en la sección anterior, se procedió
+a agregar la exportación de comisiones examinadoras al SSM por consulta POST, realizando
+cambios tanto en el Sistema de Titulación como en el SSM. La implementación de esta
+funcionalidad se describe en la sección \ref{subsec:exportacion:ssm_directa}.
+Al tener la exportación desarrollada, se desplegaron ambos sistemas en el servidor de test,
+para probar la funcionalidad. Se obtuvo como resultado que la exportación se realizó correctamente,
+mostrándose las memorias junto a sus respectivas comisiones en la interfaz principal del SSM.
 
+Otra prueba realizada al SSM fue la de utilizar el archivo CSV generado en la evaluación por el
+Sistema de Titulación, para verificar que la exportación se realizaba correctamente. Para esto,
+se utilizó un script de Python para separar el archivo por secciones del ramo Trabajo de Título,
+puesto que el SSM requiere que se envíe la información de cada sección por separado. Como resultado,
+se pudo verificar que el SSM recibía la información correctamente y la mostraba en la interfaz
+principal. En la figura \ref{fig:ssm_exportacion} se muestra la captura de pantalla del SSM luego
+de subir las comisiones examinadoras por CSV.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{imagenes/validacion/resultado_ssm.png}
+    \caption{Captura de pantalla del SSM mostrando las comisiones examinadoras subidas por CSV}
+    \label{fig:ssm_exportacion}
+\end{figure}
+
+Los resultados obtenidos son positivos, ya que a pesar de que fue necesario separar el archivo CSV
+con un script de Python, el SSM recibía la información correctamente y la mostraba en la interfaz
+principal. Por lo tanto, el formato del archivo CSV generado por el Sistema de Titulación funciona
+correctamente para la exportación de comisiones examinadoras al SSM.

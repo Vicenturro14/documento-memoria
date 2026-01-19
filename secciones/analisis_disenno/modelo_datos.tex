@@ -8,7 +8,7 @@ se describirán los cambios que se planificaron inicialmente. Por último, se de
 que surgieron durante el desarrollo de esta memoria.
 
 \subsection{Modelo de Datos Inicial}\label{sec:ta:modelo_datos_inicial}
-El repositorio del sistema de titulación tiene varios módulos y cada uno tiene sus
+El repositorio del Sistema de Titulación tiene varios módulos y cada uno tiene sus
 propias entidades que pueden relacionarse con las de otros módulos. No todas las
 entidades son relevantes para la asignación de comisiones examinadoras, por lo
 que solo se describirán las entidades que se relacionan con el módulo de Comisiones
@@ -25,10 +25,10 @@ estudiantes durante el proceso de titulación.
 
 
 \begin{figure}[ht!]
-    \centering
-    \includegraphics[width=0.6\linewidth]{imagenes/diagramas/titulacion.png}
-    \caption{Diagrama del modelo de datos del módulo de Titulación.}
-    \label{fig:modelo_titulacion}
+  \centering
+  \includegraphics[width=0.6\linewidth]{imagenes/diagramas/titulacion.png}
+  \caption{Diagrama del modelo de datos del módulo de Titulación.}
+  \label{fig:modelo_titulacion}
 \end{figure}
 
 El módulo de Departamento proporciona las entidades Funcionario y Estudiante. Funcionario
@@ -40,10 +40,10 @@ cabo. Las entidades de este módulo se pueden ver en la figura
 \ref{fig:modelo_departamento}.
 
 \begin{figure}[ht!]
-    \centering
-    \includegraphics[width=0.6\linewidth]{imagenes/diagramas/departamento.png}
-    \caption{Diagrama del modelo de datos del módulo Departamento.}
-    \label{fig:modelo_departamento}
+  \centering
+  \includegraphics[width=0.6\linewidth]{imagenes/diagramas/departamento.png}
+  \caption{Diagrama del modelo de datos del módulo Departamento.}
+  \label{fig:modelo_departamento}
 \end{figure}
 
 
@@ -55,10 +55,10 @@ Persona, que representa a cualquier usuario de la plataforma. La figura
 \ref{fig:modelo_docencia_investigacion_kernel} muestra los modelos de datos recién descritos.
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=\linewidth]{imagenes/diagramas/investigacion.png}
-    \caption{Diagrama del modelo de datos de los módulos Docencia, Investigación y Kernel.}
-    \label{fig:modelo_docencia_investigacion_kernel}
+  \centering
+  \includegraphics[width=\linewidth]{imagenes/diagramas/investigacion.png}
+  \caption{Diagrama del modelo de datos de los módulos Docencia, Investigación y Kernel.}
+  \label{fig:modelo_docencia_investigacion_kernel}
 \end{figure}
 
 
@@ -86,10 +86,10 @@ la jerarquía de un evaluador y tiene un nombre y una descripción. Actualmente 
 AJC (Académico Jornada Completa), AJP (Académico Jornada Parcial) o PEX (Profesor Experto Externo).
 
 \begin{figure}[ht!]
-    \centering
-    \includegraphics[width=0.6\linewidth]{imagenes/diagramas/evaluacion.png}
-    \caption{Diagrama del modelo de datos del módulo de Evaluación.}
-    \label{fig:modelo_evaluacion}
+  \centering
+  \includegraphics[width=0.6\linewidth]{imagenes/diagramas/evaluacion.png}
+  \caption{Diagrama del modelo de datos del módulo de Evaluación.}
+  \label{fig:modelo_evaluacion}
 \end{figure}
 
 El módulo de Comisiones Examinadoras, que contiene a las entidades
@@ -100,10 +100,10 @@ entidad Evaluador del módulo de Evaluación, que representa los integrantes de 
 examinadora.
 
 \begin{figure}[ht!]
-    \centering
-    \includegraphics[width=0.8\linewidth]{imagenes/diagramas/comisiones.png}
-    \caption{Diagrama del modelo de datos del módulo de Comisiones Examinadoras.}
-    \label{fig:modelo_comisiones}
+  \centering
+  \includegraphics[width=0.8\linewidth]{imagenes/diagramas/comisiones.png}
+  \caption{Diagrama del modelo de datos del módulo de Comisiones Examinadoras.}
+  \label{fig:modelo_comisiones}
 \end{figure}
 
 AlumnoCursandoMemoria representa a un estudiante que está cursando Trabajo de título.
@@ -133,10 +133,10 @@ de Introducción al Trabajo de Título y toda memoria debe tener un tema. Esto s
 en la figura \ref{fig:modelo_titulacion_nuevo}.
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.7\linewidth]{imagenes/diagramas/modelo_titulacion_nuevo.png}
-    \caption{Diagrama del modelo de datos del módulo de Titulación.}
-    \label{fig:modelo_titulacion_nuevo}
+  \centering
+  \includegraphics[width=0.7\linewidth]{imagenes/diagramas/modelo_titulacion_nuevo.png}
+  \caption{Diagrama del modelo de datos del módulo de Titulación.}
+  \label{fig:modelo_titulacion_nuevo}
 \end{figure}
 
 Luego, en el módulo de Docencia, se agregó la entidad Curso, que representa una sección
@@ -148,10 +148,10 @@ para identificar el curso de Trabajo de Título al que pertenece una memoria, ya
 requiere de esta información.
 
 \begin{figure}[ht!]
-    \centering
-    \includegraphics[width=0.32\linewidth]{imagenes/diagramas/modelo_docencia_nuevo.png}
-    \caption{Diagrama del modelo de datos del módulo de Docencia.}
-    \label{fig:modelo_docencia_nuevo}
+  \centering
+  \includegraphics[width=0.32\linewidth]{imagenes/diagramas/modelo_docencia_nuevo.png}
+  \caption{Diagrama del modelo de datos del módulo de Docencia.}
+  \label{fig:modelo_docencia_nuevo}
 \end{figure}
 
 En el módulo de Comisiones Examinadoras se eliminó el atributo solicitud de la entidad
@@ -176,9 +176,9 @@ Trabajo de Título. Tanto la entidad MemoriaEnF como la entidad Comision
 se pueden ver en la figura \ref{fig:modelo_trabajo_titulo_nuevo}.
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.9\linewidth]{imagenes/diagramas/modelo_trabajotitulo_comision_nuevo.png}
-    \caption{Diagrama del modelo de datos de los módulos de Comisiones Examinadoras y Trabajo de Título.}
-    \label{fig:modelo_trabajo_titulo_nuevo}
+  \centering
+  \includegraphics[width=0.9\linewidth]{imagenes/diagramas/modelo_trabajotitulo_comision_nuevo.png}
+  \caption{Diagrama del modelo de datos de los módulos de Comisiones Examinadoras y Trabajo de Título.}
+  \label{fig:modelo_trabajo_titulo_nuevo}
 \end{figure}
 \newpage

@@ -1,13 +1,65 @@
 \chapter{Implementación}
 En este capítulo se describirá la implementación realizada durante la memoria.
-Esta se separa puede separar en tres partes, la primera es la implementación relacionada
-con los estudiantes del ramo Trabajo de Título, también llamado F. La segunda parte
-corresponde a la asignación de comisiones examinadoras. La tercera parte corresponde a la
-exportación de comisiones examinadoras.
+Esta se separa en cinco partes, la primera corresponde a los cambios de las interfaces
+respecto a los mockups propuestos en la sección \ref{sec:mockups}. La segunda parte es sobre
+la implementación relacionada con los estudiantes del ramo Trabajo de Título, también llamado F.
+La tercera parte corresponde a la asignación de comisiones examinadoras. La cuarta parte corresponde a la
+exportación de comisiones examinadoras. Por último, la quinta parte corresponde al despliegue a producción.
+
+\section{Cambios en interfaces}
+En esta sección se mencionarán los cambios de las interfaces respecto a las interfaces
+diseñadas en la sección \ref{sec:mockups} junto con su justificación.
+
+La primera diferencia que se puede ver entre los diseños y la implementación de
+interfaces es que en la barra de navegación de los diseños se muestran las pestañas
+relacionadas con Trabajo de Título junto al resto de pestañas del módulo Introducción al Trabajo de Título,
+mientras que en la implementación actual estas pestañas se encuentran separadas, puesto
+que se creó el módulo Trabajo de Título para diferenciar las funcionalidades del ramo Trabajo de Título
+y evitar que la barra de navegación se llene de pestañas, como se muestra en la figura
+\ref{fig:barra_navegacion_trabajo_titulo}. En la sección \ref{sec:modulo_trabajo_titulo} se explica
+la implementación de esta separación con más detalle.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.4\textwidth]{imagenes/implementaciones/selector_seccion_trabajo_titulo.png}
+  \caption{Captura de pantalla de la barra de navegación con pestañas de Trabajo de Título.}
+  \label{fig:barra_navegacion_trabajo_titulo}
+\end{figure}
+
+Una segunda diferencia está en el botón para exportar las comisiones asignadas al SSM,
+que en los mockups se muestra con el texto \textit{Publicar}, mientras que en la
+implementación se muestra con el texto \textit{Exportar}. Este cambio se hizo, ya que
+exportar es la acción que se lleva a cabo al presionarlo. Otra diferencia se encuentra
+en el gráfico de carga de evaluadores, puesto en los los mockups se muestra una leyenda
+y no se muestran etiquetas en el eje X. En cambio, en la implementación no se muestra la
+leyenda y sí se muestran las etiquetas en el eje X. Esto se debe a que la cantidad de
+evaluadores es grande, por lo que se priorizó utilizar el espacio horizontal disponible
+para que el gráfico sea más legible. Además, en el tooltip que se muestra al posicionar
+el cursor sobre una barra del gráfico se muestra qué representa cada color. Respecto a
+las etiquetas en el eje X, estas se muestran para que sea más fácil identificar a cada
+evaluador. La implementación actual se puede ver en la figura
+\ref{fig:cambios_grafico_carga_evaluadores}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.4\textwidth]{imagenes/implementaciones/grafico_evaluadores.png}
+  \caption{Captura de pantalla del gráfico de carga de evaluadores.}
+  \label{fig:cambios_grafico_carga_evaluadores}
+\end{figure}
+
+Por último, dos de las interfaces diseñadas en los mockups no se implementaron,
+la primera es la confirmación de la exportación de comisiones examinadoras y
+la segunda es la incorporación de la comisión asignada a la ficha de un estudiante.
+La primera no se implementó, pues no se priorizó ante otras características de la
+memoria, ya que más que una funcionalidad, es un aspecto de usabilidad que se puede
+mejorar en el futuro. Por otra parte, las comisiones no fueron incorporadas a la ficha
+de un estudiante, ya que que se decidió que esto sería parte de otra memoria que incorpora
+cambios a la ficha de los estudiantes.
+
 
 \section{Estudiantes de Trabajo de Título}
 
-\subsection{Módulo de Trabajo de Título}
+\subsection{Módulo de Trabajo de Título}\label{sec:modulo_trabajo_titulo}
 Para implementar funcionalidades relacionadas con el ramo Trabajo de Título y
 separarlas de las funcionalidades del ramo Introducción al Trabajo de Título, se creó el
 módulo de Trabajo de Título. Esta separación también evita que la barra de navegación se
@@ -19,7 +71,7 @@ de comisiones examinadoras, y ambas requieren permisos de coordinación de titul
 selector solo es visible para coordinadores, que está manejado por la variable booleana
 \verb|show_module_selector|, como se muestra en la línea 11 del código \ref{lst:barra_navegacion}.
 Al seleccionar el módulo Introducción al Trabajo de Título, el usuario es redirigido a la
-raíz de la aplicación. Mientras que al seleccionar el módulo Trabajo de Título, el usuario
+raíz de la aplicación, mientras que al seleccionar el módulo Trabajo de Título, el usuario
 es redirigido a la vista principal de Trabajo de Título, que es el listado de estudiantes de
 Trabajo de Título.
 
@@ -124,13 +176,13 @@ Para la actualización del registro se tomó en cuenta que los estudiantes deben
 cursando alguna sección de los ramos de Trabajo de Título, CC6909 y CC6919, por lo
 tanto se puede obtener los nombres de los estudiantes desde la API de UCampus. Además,
 los estudiantes deben haber aprobado Introducción al Trabajo de Título, por lo que se
-asume que los temas de los estudiantes ya se encuentran registrados en el sistema de
-titulación y que también hay una instancia del modelo Propuesta para cada estudiante
+asume que los temas de memoria de los estudiantes ya se encuentran registrados en el Sistema de
+Titulación y que también hay una instancia del modelo Propuesta para cada estudiante
 asociada a su tema y con estado aprobado, haciendo posible asociar a los estudiantes que
 cursan Trabajo de Título con sus temas.
 
 Dada la asunción anterior, para actualizar el registro de estudiantes de Trabajo de
-Título dentro del sistema de titulación se creó un comando de administración
+Título dentro del Sistema de Titulación se creó un comando de administración
 \verb|upd_estudiantes_f|, que es llamado por el botón \textit{Sincronizar}.
 Este obtiene desde la API de UCampus todas las secciones de
 los ramos de Trabajo de Título y para después obtener los integrantes de cada sección.
@@ -139,7 +191,7 @@ aprobado más reciente asociada al estudiante, pues puede haber varias instancia
 asociadas al mismo estudiante. Si se encuentra una instancia, se obtiene el tema asociado
 y se crea una instancia del modelo MemoriaEnF con el estudiante y su tema. En caso
 contrario, se registra en el log que para ese estudiante no se encontró una instancia,
-se agrega al estudiante a la lista de estudiantes sin una instancia y se continua con el
+se agrega al estudiante a la lista de estudiantes sin una instancia y se continúa con el
 siguiente integrante. Al finalizar el proceso se muestra un mensaje indicando cuántos
 estudiantes no tuvieron una instancia, como se ve en la figura \ref{fig:estudiante_sin_tema}.
 Una vez que termina la ejecución del comando, se recarga la página y se muestra la lista
@@ -155,16 +207,16 @@ actualizada de estudiantes de Trabajo de Título.
 Como se mencionó en la descripción del comando, puede suceder que haya estudiantes que no
 tengan una instancia de Tema y Propuesta con estado Aprobado. Esto sucede por lo que la
 asunción puede no ser cierta para estudiantes que hayan solicitado la vía rápida, pues
-actualmente ese proceso no se encuentra implementado en el sistema de titulación y se
+actualmente ese proceso no se encuentra implementado en el Sistema de Titulación y se
 realiza directamente con la coordinación de titulación. El caso de la vía rápida no
 se manejará en esta memoria, ya que al momento del desarrollo de este trabajo de título,
-había otro tema de memoría sobre la incorporación de un módulo de vía rápida. Mientras
+había otro tema de memoria sobre la incorporación de un módulo de vía rápida. Mientras
 que tanto, basta con crear una instancia de Tema y Propuesta con estado Aprobado para
 cada estudiante de vía rápida mediante el administrador de Django o por consola para que
 puedan ser incluidos en la lista de estudiantes de Trabajo de Título.
 
 \subsection{Vista de \textit{Mis Memoristas} para académicos}
-Habiendo incorporado a los estudiantes de Trabajo de Título al sistema de titulación,
+Habiendo incorporado a los estudiantes de Trabajo de Título al Sistema de Titulación,
 se extendió la vista de \textit{Mis Memoristas} que es visible para académicos, para que
 pudieran ver una lista de sus memoristas en Trabajo de Título. Para ello se agregó un
 selector de ramo de titulación que permite elegir entre Introducción al Trabajo de Título
@@ -291,9 +343,9 @@ El mayor cambio visual en la interfaz del módulo de comisiones proviene de la
 incorporación del gráfico que muestra la carga de evaluadores. Este se ubica sobre la
 lista de comisiones examinadoras, como se muestra en la figura
 \ref{fig:grafico_carga_evaluadores}. Cada columna representa la carga de un evaluador,
-que está dividida entre la carga proveniente de las memorias guíadas o coguiadas y la carga
+que está dividida entre la carga proveniente de las memorias guiadas o coguiadas y la carga
 proveniente de las comisiones examinadoras que integra. Es importante destacar que integrar
-una comisión examinadora equivale a un punto de carga, mientras que guiar o coguir una memoria
+una comisión examinadora equivale a un punto de carga, mientras que guiar o coguiar una memoria
 equivale a dos puntos de carga. Esta ponderación fue recomendada por la coordinadora de titulación.
 Al posicionar el cursor sobre una columna, se muestra un tooltip que indica la cantidad de comisiones
 y la cantidad de memorias.
@@ -306,9 +358,9 @@ no se ve afectado por el filtro de comisiones. Por último, el gráfico puede oc
 mediante un botón que se encuentra bajo la barra de navegación, entre el filtro de comisiones
 y el botón de sincronización.
 
-\begin{figure}[ht]
+\begin{figure}[ht!]
   \centering
-  \includegraphics[width=\linewidth]{imagenes/implementaciones/grafico_evaluadores.png}
+  \includegraphics[width=0.95\linewidth]{imagenes/implementaciones/grafico_evaluadores.png}
   \caption{Captura de pantalla del gráfico de carga de evaluadores.}
   \label{fig:grafico_carga_evaluadores}
 \end{figure}
@@ -403,7 +455,7 @@ presiona el botón para abrir el modal y responde con el HTML del modal. Que se 
 cada vez no es un problema, pero el trabajo que realizaba el controlador en cada llamada
 era innecesariamente excesivo, ya que por cada llamada se obtenían todos los evaluadores
 habílitados y a cada uno se le generaba un string con sus áreas de conocimiento con sus
-respectivas subareas. Este proceso se realizaba para poblar el selector de evaluadores en
+respectivas subáreas. Este proceso se realizaba para poblar el selector de evaluadores en
 el modal. Para optimizar el proceso de poblar el selector de evaluadores, se tomaron dos
 medidas: Precalcular el string con las áreas de conocimiento y obtener una única vez los
 evaluadores.
@@ -465,8 +517,8 @@ Para la segunda medida, se dejó de obtener a los evaluadores en el controlador 
 y pasaron a obtenerse una vez al cargar la página del módulo de comisiones. Esto no significa
 un mayor costo, ya que los evaluadores ya eran obtenidos al cargar la página, dado que el
 gráfico de carga de evaluadores ya los obtenía. Estos evaluadores se almacenan en un
-arreglo de objeto, almacenando su id, nombre, áreas de conocimiento, memorias guíadas,
-comisiones integradas y jerarquía, para que puedan ser utilizados en el modal y el gráfico..
+arreglo de objeto, almacenando su id, nombre, áreas de conocimiento, memorias guiadas,
+comisiones integradas y jerarquía, para que puedan ser utilizados en el modal y el gráfico.
 
 Un segundo punto a mejorar indicado en la retroalimentación fue al guardar una comisión,
 se refrescaba la página, lo cual hacía que el usuario tuviera que bajar nuevamente hasta
@@ -484,18 +536,22 @@ un archivo CSV y enviarlas a través de una petición POST la API del SSM.
 El piloto desarrollado por el equipo de ingeniería de software II ya contaba con la
 funcionalidad de exportar las comisiones examinadoras a un archivo CSV. Sin embargo,
 el formato del archivo no seguía el formato requerido por el SSM, como se mencionó en las
-secciones \ref{sec:sa:ssm} y \ref{sec:sa:asignacion}. Por lo tanto, se cambiaron las
+secciones \ref{sec:sa:ssm} y \ref{sec:sa:asignacion}, además, la descarga fallaba si una
+memoria tenía un coguía externo. Por lo tanto, se cambiaron las
 columnas del archivo para que cumplan con los requisitos del SSM, se cambió el separador
-al carácter coma y se agregaron las columnas que faltaban. Por último, se agregó la
-condición de que solo las memorias con comisión completa sean exportadas
+al carácter coma y se agregaron las columnas que faltaban, y se cubrió el caso de que una
+memoria tuviera un coguía externo. Por último, se agregó la condición de que solo las
+memorias con comisión completa sean exportadas. Cabe mencionar que el archivo CSV
+que se descarga no puede ser subido directamente al SSM, ya que este solo permite subir
+un archivo CSV separados por cursos y desde el Sistema de Titulación se descarga un único
+archivo CSV que contiene todas las memorias.
 
 
 \subsection{Exportación directa al SSM}\label{subsec:exportacion:ssm_directa}
 Se implementó una exportación directa al SSM a través de una petición POST al SSM.
 Esta implementación consta de dos partes. La primera es hacer que el SSM sea capaz de
 recibir una petición desde otro sistema y procesarla. Mientras que la segunda es que el
-sistema de titulación envíe una petición POST al SSM con los datos de las comisiones examinadoras.
-Esta funcionalidad fue implementada luego de la evaluación por falta de tiempo.
+Sistema de Titulación envíe una petición POST al SSM con los datos de las comisiones examinadoras.
 
 \subsubsection{Adaptación del SSM}\label{subsubsec:adaptacion_ssm}
 Para adaptar el SSM a recibir una petición POST desde otro sistema, se creó una view
@@ -507,8 +563,8 @@ información necesaria para crear los cursos en la base de datos, en caso de que
 no exista. Esta corresponde al código del ramo, el número de la sección, el año y el
 semestre, siendo ``O'' para el semestre de otoño y ``P'' para el semestre de primavera,
 ya que así lo tiene definido el SSM. Por último, por cada comisión se debe tener el tema
-de la memoria,nombre y correo del estudiante, del guía y del coguía, además de la lista
-de integrantes. El campo coguía puede ser nulo si no hay co-guía. Un ejemplo de JSON
+de la memoria, nombre y correo del estudiante, del guía y del coguía, además de la lista
+de integrantes. El campo coguía puede ser nulo si no hay coguía. Un ejemplo de JSON
 recibido con un solo curso y una sola comisión se puede ver en el código
 \ref{lst:ssm_json}.
 \newpage
@@ -546,24 +602,23 @@ Al recibir el JSON, primero se valida el formato de este. Se verifica que tenga 
 \texttt{cursos} y que su valor no sea nulo, y se valida que las memorias de cada curso
 contengan los campos \texttt{estudiante}, \texttt{tema}, \texttt{guia} y
 \texttt{integrantes}. En segundo lugar, se verifica que el contenido no tenga
-inconsistencias. Para esto se corrobora que no haya dos comisiones con el mismo
-estudiante y que dentro de cada comisión, el guía, coguía e integrantes sean diferentes.
-Si cualquiera de estas validaciones falla, se retorna un error 400 BadRequest con un mensaje
-indicando qué validación falló.
+inconsistencias. Para esto se corrobora que no hayan dos comisiones con el mismo
+estudiante y que dentro de cada comisión, el guía, coguía e integrantes sean personas
+diferentes. Si cualquiera de estas validaciones falla, se retorna un error
+\verb|400 BadRequest| con un mensaje indicando qué validación falló.
 
-En tercer lugar, se guardan los datos en la base de datos. Para esto, primero por cada
-curso se obtiene la instancia correspondiente del modelo Curso, si no existe se crea.
-Luego, por cada comisión se obtiene o crea al estudiante del modelo Estudiante y al guía, coguía
-e integrantes del modelo Profesor. Al igual que con los cursos, se registran en la base
-de datos si estos no existían previamente. Después, se obtiene o se crea la instancia de
-la memoria en el modelo Memoria. Si esta se crea, se agregan al guía, coguía
-e integrantes como miembros de la comisión con su respectivo rol a través del Modelo
-Miembro. Mientras que si ya existía, primero se eliminan los miembros anteriores y luego
-se agregan los miembros que vienen en el JSON. Este comportamiento se implementó así,
-para que se puedan corregir los miembros de la comisión a través de la API.
-Habiendo terminado lo anterior, se retorna un mensaje de éxito 201 Created.
-El código \ref{lst:guardado_comisiones} muestra el código del guardado de las comisiones
-sin las validaciones.
+En tercer lugar, se registran las memorias y comisiones en la base de datos. Para esto,
+se parte guardan los cursos en el modelo Curso, los estudiantes en el modelo Estudiante,
+las memorias en el modelo Memoria y los guías, coguías e integrantes de comisiones en el
+modelo Profesor. La inserción de cada uno en la base de datos solo se hace si es que no
+existía previamente en esta. Por último, se registran las comisiones en el modelo Miembro,
+que relaciona una memoria con un profesor indicando el rol que tiene este en la comisión,
+es decir, si es guía, coguía o integrante. En caso de que ya hubieran miembros
+previamente definidos, estos se reemplazan por los nuevos. Habiendo terminado el guardado
+de datos, se retorna un mensaje de éxito \verb|201 Created|. El código
+\ref{lst:guardado_comisiones} muestra el código del guardado de las comisiones sin las
+validaciones.
+
 
 \newpage
 
@@ -622,23 +677,25 @@ return Response({"success": "Comisiones importadas correctamente."}, status=stat
 \end{lstlisting}
 
 Es importante mencionar que tanto en el modelo Estudiante como el modelo Profesor, se
-debe buscar por nombre, pues este se define como único. Además, al guardar una instancia
-de Profesor o Estudiante, se normalizan sus nombres, es decir, que todas las
+debe buscar por nombre, pues solo este atributo se define como único. Además, al guardar un
+profesor o estudiante, se normalizan sus nombres, es decir, que todas las
 palabras del string se transforman para que comiencen con mayúscula y el resto de
 caracteres estén en minúscula, como se muestra en el código \ref{lst:estudiante}. Este
 comportamiento estaba definido previamente en el SSM. Debido a lo anterior, al realizar
 la búsqueda por nombre, se debe buscar con el nombre normalizado, ya que de lo contrario
 puede que no se encuentren nombres con apellidos como ``De la Fuente'' o nombres como
 ``Juan-Bastián'', pues al normalizarlos se convierten en ``De La Fuente'' (la pasa a mayúscula)
-y ``Juan-bastián'' (Bastián pasa a minúscula) respectivamente. Por lo tanto, se implementó la
+y ``Juan-bastián'' (Bastián pasa a minúscula) respectivamente, lo cual puede llevar a estudiantes o
+profesores duplicados en la base de datos.
+
+Para solucionar este problema, se implementó la
 función \verb|nombre_normalizado|, visible en el código \ref{lst:nombre_normalizado}, para normalizar
 los nombres. Se hizo una función a parte para realizar la normalización, ya que este comportamiento
-era requerido en más de una parte del código, en particular en el controlador de importación de
+es requerido en más de una parte del código, en particular en el controlador de importación de
 comisiones por API y en el procesamiento de archivos CSV subidos por el usuario. Se implementó
 esta función a modo de parche en vez de modificar los modelos Profesor y Estudiante, ya que
 no se conocía el impacto que podría tener la modificación en el SSM, pues al no ser el
 sistema principal de esta memoria, no se conocía en profundidad y se prefirió cambiar lo menos posible.
-\newpage
 
 \begin{lstlisting}[language=Python, escapechar=|, label={lst:estudiante}, caption={Modelo Estudiante en el SSM.}]
   class Estudiante(models.Model):
@@ -659,13 +716,13 @@ def nombre_normalizado(nombre: str):
 \end{lstlisting}
 
 Además de la implementación del procesamiento del JSON, se restringió el acceso a la
-API, para que no cualquier persona que haga un POST pueda enviar datos al SSM. Con este
+API, para que no cualquier persona pueda enviar datos al SSM. Con este
 objetivo, se agregó autenticación con tokens al endpoint de la API y para ello, se agregó
 la extensión de Django llamada Django Rest Framework (DRF) al proyecto, que proporciona
 herramientas para crear APIs Restful y extiende las posibilidades de autenticación para
-endpoints. Entonces, se creó un usuario para el sistema de titulación, de nombre
+endpoints. Entonces, se creó un usuario para el Sistema de Titulación, de nombre
 \verb|sistema_titulacion|, al cual se le generó un token de autenticación. Con este token
-el sistema de titulación podrá autenticarse y hacer peticiones POST al endpoint de la
+el Sistema de Titulación podrá autenticarse y hacer peticiones POST al endpoint de la
 API. Para la autenticación es necesario enviar en el header \texttt{Authorization} de la
 petición el token con el prefijo ``Token ''. Cómo se puede ver en el código
 \ref{lst:decorators}, para proteger el endpoint como se mencionó anteriormente, se
@@ -687,14 +744,14 @@ def import_comisiones(request):
 Es relevante señalar que el modelo Curso del SSM incluye dentro de sus atributos la fecha
 límite para la entrega del informe final de Trabajo de Título \verb|fecha_entrega_informe_final|
 y cuando se crea un curso mediante la importación de comisiones por la API, este campo se
-inicializa en \verb|None|, dado que dicha información no la maneja el sistema de titulación.
+inicializa en \verb|None|, dado que dicha información no la maneja el Sistema de Titulación.
 El modelo permite crear cursos sin fecha de entrega y es posible asignarle una fecha a cada
 curso en el SSM más tarde a través de la interfaz gráfica. Sin embargo, la aplicación no
 estaba diseñada para manejar cursos sin fecha de entrega, ya que varías veces se intentaba
 calcular una diferencia entre fechas, causando que el sistema arrojara errores. Entonces,
-se adaptó el SSM para que los casos en los que la fecha de entrega sea \verb|None| no cause
-errores y en la interfaz aparezca \verb|SIN DEFINIR| en rojo y negrita que sea notorio que
-se requiere asignar una fecha de entrega, como se puede ver en la figura
+se adaptó el SSM para que los casos en los que la fecha de entrega sea \verb|None|, esto
+no cause errores y que en la interfaz aparezca \verb|SIN DEFINIR| en rojo y negrita, para
+que sea notorio que se requiere asignar una fecha de entrega, como se puede ver en la figura
 \ref{subfig:listado_memorias_ssm}. Además, se aprovechó el sistema de notificaciones del SSM
 para enviar una notificación al usuario por cada curso sin fecha de entrega definida,
 como se puede ver en la figura \ref{subfig:notificacion_ssm}.
@@ -708,10 +765,10 @@ como se puede ver en la figura \ref{subfig:notificacion_ssm}.
     \label{subfig:listado_memorias_ssm}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[b]{0.45\textwidth}
+  \begin{subfigure}[b]{0.5\textwidth}
     \centering
     \includegraphics[width=\textwidth]{imagenes/implementaciones/ssm/notificacion_ssm.png}
-    \caption{Notificación de fecha de entrega}
+    \caption{Notificación de cursos sin fecha de entrega}
     \label{subfig:notificacion_ssm}
   \end{subfigure}
   \caption{Cambios en la interfaz del SSM para manejar cursos sin fecha de entrega}
@@ -719,16 +776,31 @@ como se puede ver en la figura \ref{subfig:notificacion_ssm}.
 
 
 \subsubsection{Exportación de Comisiones desde el Sistema de Titulación}
-La exportación de comisiones desde el Sistema de Titulación ejecuta al presionar el botón
-\verb|Exportar| en la vista del listado de comisiones. Este botón realiza una llamada al
-endpoint \verb|/comisiones/exportar/<periodo_id>|, donde \verb|<periodo_id>| es el id del periodo
-académico que se desea exportar. El controlador de este endpoint se puede apreciar en el código
-\ref{lst:export_comisiones_view}, y se encarga de llamar al comando \verb|export_comisiones_ssm|,
-que tiene la tarea de realizar la exportación de comisiones, y luego redirigir al usuario al
-listado de comisiones. Si el comando arroja un error, se envía un mensaje de error al usuario.
-Por otro lado, si todo sale bien, se envía un mensaje de éxito al usuario. Cabe destacar que es
-necesario redirigir al usuario para que el mensaje de éxito o error se muestre en la interfaz
-gráfica, puesto que así está diseñado el sistema de mensajes en el sistema de titulación.
+Como el SSM guarda las memorias distinguiéndolas por el curso de Trabajo de Título en
+que se encuentra inscrito el estudiante de cada memoria y no solo por periodo académico,
+como se hacía en el Sistema de Titulación, se tuvo que agregar esta información a este
+último sistema. Para esto se creó el modelo Curso que representa a una sección de un ramo
+en un periodo académico específico y al modelo MemoriaEnF se le agregó un atributo de curso,
+indicando el curso al que pertenece la memoria.
+
+La incorporación del modelo Curso al Sistema de Titulación implicó que se tuviera que
+reimplementar el comando \verb|upd_estudiantes_f|, que es el encargado de obtener los
+estudiantes cursando Trabajo de Título junto a sus memorias. Esta reimplementación
+agrega la lógica para obtener los cursos de Trabajo de Título en los que se encuentra
+inscrito cada estudiante. Con estos cambios, el Sistema de Titulación tiene la
+información necesaria para exportar las comisiones examinadoras al SSM
+
+La exportación de comisiones desde el Sistema de Titulación se ejecuta al presionar el
+botón \verb|Exportar| en la vista del listado de comisiones. Este botón realiza una
+llamada al endpoint \verb|/comisiones/exportar/<periodo_id>|, donde \verb|<periodo_id>|
+es el id del periodo académico que se desea exportar. El controlador de este endpoint se
+puede apreciar en el código \ref{lst:export_comisiones_view}, y se encarga de llamar al
+comando \verb|export_comisiones_ssm|, que tiene la tarea de realizar la exportación de
+comisiones, y luego redirigir al usuario al listado de comisiones. Si el comando arroja
+un error, se envía un mensaje de error al usuario. Por otro lado, si todo sale bien, se
+envía un mensaje de éxito al usuario. Cabe destacar que es necesario redirigir al usuario
+para que el mensaje de éxito o error se muestre en la interfaz gráfica, puesto que así
+está diseñado el sistema de mensajes en el Sistema de Titulación.
 
 \begin{lstlisting}[language=Python, escapechar=|, label={lst:export_comisiones_view}, caption={Código del controlador que llama al comando de exportación de comisiones.}]
 def get(self, request, *args, **kwargs):
@@ -822,7 +894,7 @@ def handle(self, *args, **options):
 \section{Despliegue}
 El último de los objetivos específicos definidos en la sección \ref{sec:intro:objetivos}
 es el despliegue del sistema en el servidor de producción y en esta sección se describen
-los pasos que se siguieron para llevar a cabo el despliegue tanto del sistema de titulación
+los pasos que se siguieron para llevar a cabo el despliegue tanto del Sistema de Titulación
 como del SSM con los cambios realizados.
 
 Como se mencionó en la sección \ref{sec:intro:despliegue}, el despliegue se realizará en
@@ -830,17 +902,22 @@ los servidores del DCC para que pueda ser utilizada por la coordinación de titu
 Para ello, durante todo el desarrollo del sistema se utilizaron contenedores de Docker
 con Docker Compose para coordinar la creación de los contenedores de la base de datos
 Postgres y el servidor web Django, facilitando el despliegue. El uso de Docker Compose
-no es algo incorporado por esta memoria en el sistema de titulación y el SSM, ambos sistemas
+no es algo incorporado por esta memoria en el Sistema de Titulación y el SSM, ambos sistemas
 ya lo utilizaban.
 
-El primer despliegue del sistema de titulación se realizó en un servidor de test del DCC,
+El primer despliegue del Sistema de Titulación se realizó en un servidor de test del DCC,
 con el objetivo de realizar la evaluación. En esa instancia no se desplegó el SSM, ya que
 no se habían realizado cambios en el SSM hasta ese momento. Luego de la evaluación, se
 aplicaron los cambios sugeridos en la retroalimentación dada por la coordinadora de titulación
 y se implementó la exportación directa de comisiones al SSM descrita en la sección
 \ref{subsec:exportacion:ssm_directa}. Con estos cambios, se procedió a realizar un segundo
-despliegue en los servidores de test. Esta vez, se incluyó tanto el sistema de titulación
-como el SSM con los cambios realizados. Se utilizó este despliegue para mostrarle los cambios
-del SSM a la jefa docente Jocelyn Simmonds, quien está a cargo de este sistema. Luego de
-probarlo, ella pidió que se subieran los cambios al servidor de producción para utilizarlo en
-la gestión de memorias del semestre de primavera 2025.
+despliegue en los servidores de test. Esta vez, se incluyó tanto el Sistema de Titulación
+como el SSM con los cambios realizados. Se utilizó este despliegue para probar las optimizaciones
+realizadas al módulo de Comisiones Examinadoras, la exportación directa de comisiones al
+SSM y los cambios realizados en el SSM. Luego de probar junto a Luis Herrera, Ingeniero
+del área de TI del DCC, se desplegó el Sistema de Titulación en el servidor de producción.
+Por último, se mostró el despliegue del SSM en el servidor de test a la jefa docente
+Jocelyn Simmonds, quien está a cargo de este sistema. Luego de probarlo, ella pidió que
+se subieran los cambios al servidor de producción para utilizarlo en la gestión de
+memorias del semestre de primavera 2025. Por lo tanto, los cambios realizados en el
+Sistema de Titulación y el SSM se encuentran desplegados en el servidor de producción.

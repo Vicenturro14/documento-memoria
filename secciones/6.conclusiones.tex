@@ -4,12 +4,13 @@ titulación del DCC tuvo como objetivo general desarrollar y desplegar una herra
 permita asignar comisiones examinadoras a los estudiantes de Trabajo de Título de forma
 eficiente y que se comunique con los sistemas existentes relacionados con el proceso de
 titulación. Este objetivo fue logrado con éxito, ya que se implementó una extensión del
-sistema de titulación del DCC que permite a la coordinadora de titulación asignar
+Sistema de Titulación del DCC que permite a la coordinadora de titulación asignar
 comisiones examinadoras a los estudiantes de Trabajo de Título en menor tiempo que el
 método anterior de planillas Excel y que es capaz de exportar las comisiones asignadas
 al Sistema de Seguimiento de Memorias por dos métodos: la descarga de un archivo CSV y
-mediante una consulta POST a la API del Sistema de Seguimiento de Memorias. Además, se
-desplegó la herramienta en el servidor de producción del DCC, dejándola lista para su uso.
+mediante una consulta POST a la API del Sistema de Seguimiento de Memorias. Además, las
+implementaciones realizadas al Sistema de Titulación y al Sistema de Seguimiento de Memorias
+fueron desplegadas en el servidor de producción del DCC, dejándolas listas para su uso.
 
 Dentro de los aprendizajes obtenidos, se destaca la importancia de tener reuniones periódicas
 con la profesora guía para mantener la constancia en el trabajo, ya que inicialmente no
@@ -26,27 +27,21 @@ optimizar. Gran parte del tiempo dedicado al desarrollo se centró en corregir e
 surgían de casos borde no considerados en el piloto u optimizar el código para que fuera
 más eficiente.
 
-En cuanto a aspectos a mejorar y trabajos futuros en la asignación de comisiones examinadoras,
-primero se deben realizar mejoras en la usabilidad de la herramienta, por ejemplo,
-mientras se obtienen los estudiantes de Trabajo de Título o mientras se exportan las
-comisiones al SSM no se muestra ningún indicador que permita al usuario saber que la
-operación está en curso. Otro aspecto a mejorar son dos comportamientos no deseados
-presentes en el sistema que no hacen que la herramienta se caiga. El primero aparece cuando
-se obtienen los estudiantes de Trabajo de Título con el botón Sincronizar en el listado de
-comisiones. Al completar la operación, se redirige al usuario al listado de estudiantes de
-Trabajo de Título en vez de simplemente actualizar la página. El segundo aparece al
-guardar una comisión examinadora y se tiene algún error de validación. En este caso puede
-que la alerta de error se muestre más de una vez. Un último trabajo futuro sería incorporar
-el procesamiento de solicitudes de vía rápida a través del sistema de titulación. Esto afecta
-al módulo de Trabajo de Título, ya que se deben haber ingresado al sistema de titulación los
-temas de los estudiantes que desean solicitar vía rápida, para así poder identificarlos correctamente
+En cuanto a trabajos futuros en la asignación de comisiones examinadoras,
+primero se puede implementar la descarga de comisiones examinadoras asignadas en varios
+archivos CSV separados por curso. Otro trabajo futuro sería incorporar el procesamiento
+de solicitudes de vía rápida a través del Sistema de Titulación. Esto afecta al módulo de
+Trabajo de Título, ya que se deben haber ingresado al Sistema de Titulación los temas de
+los estudiantes que desean solicitar vía rápida, para así poder identificarlos correctamente
 como estudiantes de Trabajo de Título y poder asignarles comisiones examinadoras.
 
 A modo de resumen, el desarrollo del módulo de asignación de comisiones examinadoras en el
-sistema de titulación del DCC tuvo éxito en cumplir su objetivo general. Este trabajo aporta
-a que el Departamento de Ciencias de la Computación tenga herramientas más adecuadas
-ante el aumento de estudiantes que ingresan a la carrera de Ingeniería Civil en Computación,
-como lo son el sistema de titulación y el sistema de seguimiento de memorias.
-Además, permite que el sistema de titulación del DCC no solo cubra el ramo de Introducción al
-Trabajo de Título, sino que también cubra parte del ramo Trabajo de Título. Esto abre puertas para
-agregar más funcionalidades al sistema de titulación relacionadas con Trabajo de Título.
+Sistema de Titulación del DCC tuvo éxito en cumplir su objetivo general, implementando y
+desplegando una solución para apoyar la labor de la coordinadora de titulación en la
+asignación de comisiones examinadoras. Este trabajo ayuda a que el Departamento de
+Ciencias de la Computación tenga herramientas más adecuadas ante el aumento de
+estudiantes que ingresan a la carrera de Ingeniería Civil en Computación, como lo son el
+Sistema de Titulación y el Sistema de Seguimiento de Memorias. Además, permite que el
+Sistema de Titulación del DCC no solo cubra el ramo de Introducción al Trabajo de Título,
+sino que también cubra parte del ramo Trabajo de Título. Esto abre puertas para agregar
+más funcionalidades al Sistema de Titulación relacionadas con Trabajo de Título.

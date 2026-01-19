@@ -34,11 +34,11 @@ semestre de primavera de 2024 había un total de 60 inscritos en los cursos de T
 Título y en el semestre de otoño de 2025 aumentó a 103, según el catálogo de cursos de
 UCampus de la FCFM \cite{EstudiantesTrabajoTitulo20242,EstudiantesTrabajoTitulo20251}.
 
-Es por lo anterior que aparece la necesidad de una herramienta que permita facilitar la
+Es por lo anterior que aparece la necesidad de una herramienta que apoye la
 asignación de comisiones examinadoras, aportando información sobre las áreas de
 conocimiento de los/as profesores/as y la cantidad de comisiones que han sido asignadas
 a cada profesor/a, y que se encuentre integrada con las herramientas ya existentes, como
-el sistema de titulación.
+el Sistema de Titulación.
 
 \section{Objetivos}\label{sec:intro:objetivos}
 
@@ -52,11 +52,11 @@ Memorias (SSM).
 \subsection{Objetivos Específicos}
 Para cumplir con el objetivo, se plantean los siguientes objetivos específicos:
 \begin{itemize}
-    \item Desarrollar una herramienta que permita asignar comisiones de forma interactiva.
-    \item Integrar la herramienta con los sistemas existentes relacionados con el proceso de
-          titulación, en particular con el Sistema de Titulación y el Sistema de Seguimiento
-          de Memorias (SSM).
-    \item Dejar la herramienta desarrollada en producción.
+  \item Desarrollar una herramienta que permita asignar comisiones de forma interactiva.
+  \item Integrar la herramienta con los sistemas existentes relacionados con el proceso de
+        titulación, en particular con el Sistema de Titulación y el Sistema de Seguimiento
+        de Memorias (SSM).
+  \item Dejar la herramienta desarrollada en producción.
 \end{itemize}
 
 \section{Solución Propuesta}
@@ -88,7 +88,7 @@ asigne a más comisiones.
 
 
 \subsection{Integración en el Sistema de Titulación}
-Actualmente el sistema de titulación solo cuenta con un listado de estudiantes de
+Actualmente el Sistema de Titulación solo cuenta con un listado de estudiantes de
 Introducción al Trabajo de Título, por lo que se debe agregar a los estudiantes de
 Trabajo de Título para integrar correctamente el módulo de asignación de comisiones
 examinadoras. Para esto, se agregará una pestaña con un listado de integrantes de Trabajo
@@ -99,7 +99,7 @@ estudiantes que están cursando Trabajo de Título.
 Luego, se agregará la posibilidad de exportar las comisiones examinadoras asignadas, que
 se podrá realizar de dos formas. Por un lado, se podrá descargar un archivo CSV con las
 comisiones, y por otro lado, estas podrán ser exportadas directamente hacia el Sistema de
-Seguimiento de Memorias, mediante a través de su API.
+Seguimiento de Memorias, mediante su API.
 
 
 \subsection{Integración con el Sistema de Seguimiento de Memorias}
@@ -110,7 +110,7 @@ respectiva. Antes de esta memoria, para que el SSM pudiera obtener las memorias 
 comisiones asignadas a cada una, se debía subir manualmente un archivo CSV.
 
 Para hacer la exportación de las comisiones examinadoras al Sistema de Seguimiento de
-Memorias más fácilmente, se implementará un endpoint en el sistema de titulación para
+Memorias más fácilmente, se implementará un endpoint en el Sistema de Titulación para
 obtener las comisiones examinadoras asignadas por una API REST. Además, desde el
 Sistema de Seguimiento de Memorias se agregará la opción de importar las comisiones
 desde esta API.

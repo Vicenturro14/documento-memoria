@@ -1,26 +1,26 @@
 \section{Arquitectura}\label{sec:arquitectura}
-A continuación se describirá la arquitectura del sistema de titulación. Primero se
+A continuación se describirá la arquitectura del Sistema de Titulación. Primero se
 describirá la arquitectura interna del sistema, es decir, los módulos que componen el
 sistema. Luego, se describirá la arquitectura externa del sistema, es decir, cómo se
 relaciona con otros sistemas.
 
-El sistema de titulación es un sistema web hecho con el framework Django y utiliza una
+El Sistema de Titulación es un sistema web hecho con el framework Django y utiliza una
 base de datos PostgreSQL. Internamente se encuentra formado por varios módulos como se
 puede ver en la figura \ref{fig:arquitectura_interna}, cada uno sigue la arquitectura
 Modelo-Vista-Controlador (MVC), puesto que el framework Django ya implementa esta
 arquitectura. Los módulos son los siguientes:
 \begin{multicols}{3}
-    \begin{itemize}
-        \item Core
-        \item Servicios
-        \item Comisiones
-        \item Titulación
-        \item Trabajo de Título
-        \item Docencia
-        \item Evaluación
-        \item Departamento
-        \item Investigación
-    \end{itemize}
+  \begin{itemize}
+    \item Core
+    \item Servicios
+    \item Comisiones
+    \item Titulación
+    \item Trabajo de Título
+    \item Docencia
+    \item Evaluación
+    \item Departamento
+    \item Investigación
+  \end{itemize}
 \end{multicols}
 
 El módulo Core actúa como base transversal, conteniendo la configuración y
@@ -36,10 +36,10 @@ homónimo. Finalmente, el módulo de Comisiones Examinadoras maneja lo referente
 asignación y exportación de dichas comisiones.
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.6\linewidth]{imagenes/arquitectura/arquitectura_interna_titulacion.png}
-    \caption{Arquitectura interna del Sistema de Titulación.}
-    \label{fig:arquitectura_interna}
+  \centering
+  \includegraphics[width=0.6\linewidth]{imagenes/arquitectura/arquitectura_interna_titulacion.png}
+  \caption{Arquitectura interna del Sistema de Titulación.}
+  \label{fig:arquitectura_interna}
 \end{figure}
 
 El Sistema de Titulación interactúa con otros sistemas, ya sea consumiendo sus APIs o
@@ -56,10 +56,10 @@ En particular, el Sistema de Titulación depende del Portal DCC para el inicio d
 usuarios y la obtención de sus datos, como nombre, rut, roles y permisos dentro del DCC..
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.7\linewidth]{imagenes/arquitectura/sso_dcc.png}
-    \caption{Flujo de autenticación con el SSO del Portal DCC.}
-    \label{fig:sso_dcc}
+  \centering
+  \includegraphics[width=0.7\linewidth]{imagenes/arquitectura/sso_dcc.png}
+  \caption{Flujo de autenticación con el SSO del Portal DCC obtenido del repositorio del proyecto Django Utils \cite{SSO_DCC}.}
+  \label{fig:sso_dcc}
 \end{figure}
 
 Por otro lado, el sistema utiliza la API de UCampus para obtener los periodos académicos,
@@ -71,9 +71,9 @@ entre el Sistema de Titulación y los otros sistemas puede verse en la figura
 \ref{fig:arquitectura_externa}.
 
 \begin{figure}[ht!]
-    \centering
-    \includegraphics[width=0.5\linewidth]{imagenes/arquitectura/arquitectura_macro_titulacion.png}
-    \caption{Arquitectura externa del Sistema de Titulación.}
-    \label{fig:arquitectura_externa}
+  \centering
+  \includegraphics[width=0.5\linewidth]{imagenes/arquitectura/arquitectura_macro_titulacion.png}
+  \caption{Arquitectura externa del Sistema de Titulación.}
+  \label{fig:arquitectura_externa}
 \end{figure}
 \newpage

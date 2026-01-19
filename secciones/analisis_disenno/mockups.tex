@@ -1,7 +1,9 @@
 
 \section{Diseño de Mockups}\label{sec:mockups}
 En esta sección se presentan los mockups de las interfaces principales del módulo de
-comisiones examinadoras.
+comisiones examinadoras. Los diseños fueron realizados intentando asemejarse lo más posible
+a las interfaces del Sistema de Titulación en producción antes de la implementación de
+este módulo.
 
 \subsection{Interfaz principal del módulo de comisiones examinadoras}
 \label{subsec:mockups:comisiones}
@@ -10,11 +12,11 @@ asignación de comisiones examinadoras. La interfaz original se puede ver en la 
 \ref{fig:ingsoft_comisiones} y mientras que la propuesta se puede ver en la figura
 \ref{fig:mockup_listado_comisiones}.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.77\linewidth]{imagenes/mockups/listado_comisiones.png}
-    \caption{Mockup de la interfaz principal del módulo de comisiones examinadoras.}
-    \label{fig:mockup_listado_comisiones}
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.77\linewidth]{imagenes/mockups/listado_comisiones.png}
+  \caption{Mockup de la interfaz principal del módulo de comisiones examinadoras.}
+  \label{fig:mockup_listado_comisiones}
 \end{figure}
 
 Ambas interfaces son similares, ya que la tabla mantiene la misma estructura. Comenzando
@@ -22,44 +24,44 @@ por la parte superior, se mantiene el selector de periodo académico y el botón
 \textit{Sincronizar}. El botón \textit{Descargar} es equivalente al botón
 \textit{Exportar} de la interfaz original, solo cambia el texto y el ícono. Se agregó un
 botón con ícono de gráfico que permite mostrar y esconder un gráfico con la cantidad de
-comisiones examinadoras y memorias guíadas por cada profesor en el periodo académico
+comisiones examinadoras y memorias guiadas por cada profesor en el periodo académico
 seleccionado, que se muestra en la figura \ref{fig:mockup_grafico_comisiones}, las columnas
 están ordenadas de forma descendiente por la cantidad de carga de cada profesor. Como se
 trata de varios profesores, se decidió que el gráfico no tenga etiquetas en el eje X,
 pues no serían visibles y saturaría el gráfico. En su lugar, se muestra el nombre del profesor y
-la cantidad de comisiones examinadoras y memorias guíadas al pasar el mouse por encima de
+la cantidad de comisiones examinadoras y memorias guiadas al pasar el mouse por encima de
 una barra del gráfico.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\linewidth]{imagenes/mockups/grafico_comisiones.png}
-    \caption{Mockup del gráfico de comisiones examinadoras.}
-    \label{fig:mockup_grafico_comisiones}
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.8\linewidth]{imagenes/mockups/grafico_comisiones.png}
+  \caption{Mockup del gráfico de comisiones examinadoras.}
+  \label{fig:mockup_grafico_comisiones}
 \end{figure}
 
 También se agregó el botón \textit{Publicar} que permite publicar las comisiones
-examinadoras en el sistema de titulación, permitiendo que las comisiones asignadas se
+examinadoras en el Sistema de Titulación, permitiendo que las comisiones asignadas se
 muestren en la ficha del estudiante y estén disponibles para exportar. Al presionar
 \textit{Publicar}, aparece un modal con un mensaje de confirmación, indicando si es que
 quedan memorias sin comisión asignada y cuántas son, en caso de que haya. Esto se puede
 ver en la figura \ref{fig:mockup_confirmacion_subida_comisiones}.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.7\linewidth]{imagenes/mockups/confirmacion_subida_comisiones.png}
-    \caption{Mockup de la confirmación de la publicación de comisiones examinadoras.}
-    \label{fig:mockup_confirmacion_subida_comisiones}
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.7\linewidth]{imagenes/mockups/confirmacion_subida_comisiones.png}
+  \caption{Mockup de la confirmación de la publicación de comisiones examinadoras.}
+  \label{fig:mockup_confirmacion_subida_comisiones}
 \end{figure}
 
 Más abajo, al costado del buscador, se agregó un filtro que permite ajustar si en la
 tabla se muestran todas las memorias, solo las memorias con comisión incompleta o solo
 las memorias con comisión completa. Este filtro se puede ver en la figura \ref{fig:mockup_filtro_comisiones}.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\linewidth]{imagenes/mockups/filtro_comisiones_zoom.png}
-    \caption{Mockup del filtro de la interfaz principal del módulo de comisiones examinadoras.}
-    \label{fig:mockup_filtro_comisiones}
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.8\linewidth]{imagenes/mockups/filtro_comisiones_zoom.png}
+  \caption{Mockup del filtro de la interfaz principal del módulo de comisiones examinadoras.}
+  \label{fig:mockup_filtro_comisiones}
 \end{figure}
 
 Por último, en la tabla se decidió que en los botones de acción, es decir,
@@ -79,9 +81,9 @@ indicando el rol dentro de la comisión, una imagen del integrante, su nombre y 
 electrónico.
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.8\linewidth]{imagenes/mockups/ficha_estudiante.png}
-    \caption{Mockup de la ficha de un estudiante desde la vista de un estudiante
-        con la comisión examinadora asignada.}
-    \label{fig:mockup_ficha_estudiante}
+  \centering
+  \includegraphics[width=0.8\linewidth]{imagenes/mockups/ficha_estudiante.png}
+  \caption{Mockup de la ficha de un estudiante desde la vista de un estudiante
+    con la comisión examinadora asignada.}
+  \label{fig:mockup_ficha_estudiante}
 \end{figure}

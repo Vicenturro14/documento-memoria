@@ -2,7 +2,7 @@
 Antes de comenzar este trabajo existían varios proyectos y sistemas relacionados con el
 proceso de titulación en el DCC. Algunos de estos proyectos sirvieron para el desarrollo
 de esta memoria, ya sea como insumo o como inspiración, mientras que otros directamente
-no fueron utilizados. Dentro de estos se encuentran el sistema de titulación del DCC, el
+no fueron utilizados. Dentro de estos se encuentran el Sistema de Titulación del DCC, el
 Sistema de Seguimiento de Memorias \cite{SistemaMonitoreoMemorias}, un sistema de
 recomendación de comisiones \cite{SistemaRecomendacion} y un sistema de asignación de
 comisiones desarrollado por un grupo del curso CC5401 Ingeniería de Software II. A
@@ -11,7 +11,7 @@ relacionadas con la asignación de comisiones examinadoras.
 
 \section{Sistema de Titulación DCC}\label{sec:sa:titulacion}
 
-El sistema de titulación del DCC es un sistema web en producción que ofrece distintas
+El Sistema de Titulación del DCC es un sistema web en producción que ofrece distintas
 funcionalidades dependiendo de si se es estudiante, profesor o coordinador de titulación.
 Como estudiante, se pueden ver un listado de temas para trabajos de título como se muestra
 en la figura \ref{fig:titulacion_temas}, solicitar la inscripción en un tema, subir
@@ -22,10 +22,10 @@ memoria y el informe final de Introducción al
 Trabajo de Título, en caso de haber subido.
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.9\linewidth]{imagenes/titulacion_temas.png}
-    \caption{Listado de temas de trabajo de título en el sistema de titulación del DCC.}
-    \label{fig:titulacion_temas}
+  \centering
+  \includegraphics[width=0.9\linewidth]{imagenes/titulacion_temas.png}
+  \caption{Listado de temas de trabajo de título en el Sistema de Titulación del DCC.}
+  \label{fig:titulacion_temas}
 \end{figure}
 
 Si se es profesor, se pueden publicar temas de trabajo de título y ver solicitudes de
@@ -36,10 +36,10 @@ los memoristas, sumado a lo que puede ver un profesor.
 \newpage
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.9\linewidth]{imagenes/titulacion_ficha.png}
-    \caption{Ficha de un estudiante en el sistema de titulación del DCC.}
-    \label{fig:titulacion_ficha}
+  \centering
+  \includegraphics[width=0.9\linewidth]{imagenes/titulacion_ficha.png}
+  \caption{Ficha de un estudiante en el Sistema de Titulación del DCC.}
+  \label{fig:titulacion_ficha}
 \end{figure}
 
 Originalmente, las funcionalidades de este sistema están enfocadas en el ramo Introducción
@@ -66,10 +66,10 @@ coordinación de estudios, una vez la coordinación de titulación realice la as
 comisiones. Esto sucede a más tardar en la semana académica número 12 de cada semestre.
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.9\linewidth]{imagenes/smm_main.png}
-    \caption{Vista principal del SSM que muestra un listado de memoristas.}
-    \label{fig:smm_principal}
+  \centering
+  \includegraphics[width=0.9\linewidth]{imagenes/smm_main.png}
+  \caption{Vista principal del SSM que muestra un listado de memoristas.}
+  \label{fig:smm_principal}
 \end{figure}
 
 El SSM ofrece dos formas de ingresar miembros de comisiones examinadoras. La primera es de
@@ -79,24 +79,24 @@ para agregar varias memorias simultáneamente, como se muestra en la figura
 \ref{fig:smm_csv}. Cada línea del archivo representa una memoria y debe contener
 las siguientes columnas:
 \begin{multicols}{3}
-    \begin{itemize}
-        \item Estudiante
-        \item Correo Estudiante
-        \item Tema
-        \item Guías
-        \item Correos Guías
-        \item Coguías
-        \item Correos Coguías
-        \item Integrantes
-        \item Correos Integrantes
-    \end{itemize}
+  \begin{itemize}
+    \item Estudiante
+    \item Correo Estudiante
+    \item Tema
+    \item Guías
+    \item Correos Guías
+    \item Coguías
+    \item Correos Coguías
+    \item Integrantes
+    \item Correos Integrantes
+  \end{itemize}
 \end{multicols}
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.9\linewidth]{imagenes/smm_csv.png}
-    \caption{Formulario de subida de archivo CSV del SSM.}
-    \label{fig:smm_csv}
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.9\linewidth]{imagenes/smm_csv.png}
+  \caption{Formulario de subida de archivo CSV del SSM.}
+  \label{fig:smm_csv}
 \end{figure}
 
 La principal limitación del SSM respecto a la asignación de comisiones examinadoras es
@@ -122,11 +122,11 @@ coguía o integrante de la comisión. Como por cada comisión se requieren al me
 el formulario por cada comisión, lo que resulta ineficiente y tedioso.
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.9\linewidth]{imagenes/smm_form.png}
-    \caption{Formulario del SSM para agregar a un integrante a la comisión de una
-        memoria, seleccionando el profesor deseado y el rol que tendrá.}
-    \label{fig:smm_form}
+  \centering
+  \includegraphics[width=0.9\linewidth]{imagenes/smm_form.png}
+  \caption{Formulario del SSM para agregar a un integrante a la comisión de una
+    memoria, seleccionando el profesor deseado y el rol que tendrá.}
+  \label{fig:smm_form}
 \end{figure}
 
 \section{Sistema de recomendación de comisiones}\label{sec:sa:recomendacion}
@@ -155,7 +155,7 @@ El Sistema de Asignación de Comisiones es un sistema piloto que fue desarrollad
 equipo del curso CC5401 Ingeniería de Software II del DCC durante el semestre de otoño de 2025.
 Los integrantes de este equipo fueron Daniel Sarazua Y., Ignacio Silva Ghisolfo, J. Andreu Díaz P.,
 Manuel Saavedra Soto, Monserrat Montero y Ricardo Fernández Reyes.
-El piloto trata de una primera versión de una extensión del sistema de titulación del DCC que
+El piloto trata de una primera versión de una extensión del Sistema de Titulación del DCC que
 agrega un módulo para asignar comisiones examinadoras para los trabajos de título. La
 interfaz principal de este módulo lista los estudiantes que están cursando el ramo Trabajo
 de Título del periodo académico seleccionado. Cada fila indica el título de una memoria,
@@ -167,10 +167,10 @@ se le haya asignado una. Esta interfaz se puede apreciar en la figura
 búsqueda que permite buscar filas por el contenido de cualquiera de sus campos.
 
 \begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.85\linewidth]{imagenes/ingsoft_comisiones.png}
-    \caption{Interfaz principal del Sistema de Asignación de Comisiones.}
-    \label{fig:ingsoft_comisiones}
+  \centering
+  \includegraphics[width=0.9\linewidth]{imagenes/ingsoft_comisiones.png}
+  \caption{Interfaz principal del Sistema de Asignación de Comisiones.}
+  \label{fig:ingsoft_comisiones}
 \end{figure}
 
 Sobre la barra de búsqueda se encuentran los botones de \textit{Sincronizar} y
@@ -186,24 +186,24 @@ titulación para obtener a los integrantes del ramo Trabajo de Título. El botó
 Este tiene las siguientes columnas:
 
 \begin{multicols}{3}
-    \begin{itemize}
-        \item Título
-        \item Periodo
-        \item Estudiante
-        \item Guía
-        \item Coguía
-        \item Estado
-        \item Evaluadores
-        \item Correos
-    \end{itemize}
+  \begin{itemize}
+    \item Título
+    \item Periodo
+    \item Estudiante
+    \item Guía
+    \item Coguía
+    \item Estado
+    \item Evaluadores
+    \item Correos
+  \end{itemize}
 \end{multicols}
 
 El archivo exportado tiene el potencial de ser utilizado para importar comisiones
 examinadoras asignadas al SSM, ya que contiene toda la información requerida por este
 sistema e incluso más, sin embargo, las columnas tienen distintos nombres y la
 información se encuentra en otro formato. Por ejemplo, el archivo CSV generado tiene el
-caracter \texttt{;} (punto y coma) como separador, mientras que el SSM requiere que ese
-caracter sea utilizado para separar los nombres y los correos de los integrantes de la
+carácter \texttt{;} (punto y coma) como separador, mientras que el SSM requiere que ese
+carácter sea utilizado para separar los nombres y los correos de los integrantes de la
 comisión examinadora en las columnas \textit{Integrantes} y \textit{Correos Integrantes},
 respectivamente.
 
@@ -216,30 +216,32 @@ buscar profesores por nombre y área de conocimiento, como se puede ver en la fi
 \ref{subfig:ingsoft_buscar}.
 
 \begin{figure}[ht]
-    \begin{subfigure}[b]{0.4\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{imagenes/ingsoft_agregar_miembros.png}
-        \caption{Formulario que permite agregar varios miembros a una comisión examinadora.}
-        \label{subfig:ingsoft_agregar}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.4\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{imagenes/ingsoft_buscar_miembros.png}
-        \caption{Selector que permite buscar profesores por nombre y área de conocimiento.}
-        \label{subfig:ingsoft_buscar}
-    \end{subfigure}
-    \caption{Formulario de asignación de comisiones examinadoras en el Sistema de Asignación de Comisiones.}
-    \label{fig:ingsoft}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/ingsoft_agregar_miembros.png}
+    \caption{Formulario que permite agregar varios miembros a una comisión examinadora.}
+    \label{subfig:ingsoft_agregar}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/ingsoft_buscar_miembros.png}
+    \caption{Selector que permite buscar profesores por nombre y área de conocimiento.}
+    \label{subfig:ingsoft_buscar}
+  \end{subfigure}
+  \caption{Formulario de asignación de comisiones examinadoras en el Sistema de Asignación de Comisiones.}
+  \label{fig:ingsoft}
 \end{figure}
+
+\newpage
 
 Como se mencionó anteriormente, el Sistema de Asignación de Comisiones es un sistema
 piloto, por lo que no tiene todas las características deseadas. En primer lugar, faltan
 validaciones al momento de asignar miembros a una comisión examinadora, haciendo posible
 asignar a los profesores guía y coguía como integrantes de la misma comisión examinadora,
 quedando registrados dos veces en la comisión. En segundo lugar, no se encuentra bien
-integrado con el sistema de titulación, sobre el cual fue desarrollado. Esto se debe a
+integrado con el Sistema de Titulación, sobre el cual fue desarrollado. Esto se debe a
 que el sistema permite asignar comisiones examinadoras a memoristas y exportarlas, pero
-las comisiones asignadas no son visibles en otros módulos del sistema de titulación, en
+las comisiones asignadas no son visibles en otros módulos del Sistema de Titulación, en
 los que sería deseable verlas, como por ejemplo las fichas de los estudiantes. En tercer
 lugar, el sistema no se encuentra directamente integrado con el SSM.
