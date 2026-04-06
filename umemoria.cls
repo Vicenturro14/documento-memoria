@@ -84,16 +84,16 @@
 
 %% Entornos nuevos
 \newenvironment{abstract}{%
-\clearpage
-\if@en
-	\chapter*{Abstract}
-\else
-	\chapter*{Resumen}
-\fi
+	\clearpage
+	\if@en
+		\chapter*{Abstract}
+	\else
+		\chapter*{Resumen}
+	\fi
 }{\vfill\null}
 
 \newenvironment{resumen}{%
-\chapter*{Resumen}
+	\chapter*{Resumen}
 }{\vfill\null}
 
 \newenvironment{dedicatoria}{\clearpage\null\vspace{\stretch{1}}\begin{flushright}\itshape}{\end{flushright}\vspace{\stretch{2}}\null}
@@ -106,7 +106,7 @@
 	\else
 		\chapter*{Agradecimientos}
 	\fi
-	
+
 }
 {\vfill\null}
 
@@ -238,7 +238,7 @@
 
 		\vspace{2cm}
 		\centering
-			\MakeUppercase\@title
+		\MakeUppercase\@title
 
 		\vspace{1cm}
 		\if\@tesis\@empty\else
@@ -251,36 +251,36 @@
 			\if\@tesis\@empty\else
 				\\\bigskip
 			\fi
-			 MEMORIA PARA OPTAR AL TÍTULO DE\\\MakeUppercase\@memoria
+			MEMORIA PARA OPTAR AL TÍTULO DE\\\MakeUppercase\@memoria
 		\fi
 
 		\vspace{1cm}
-			\MakeUppercase\@author
+		\MakeUppercase\@author
 
 		\vspace{2cm}
-			\foreach \x [count=\xi] in \@guia {
-				PROFESOR GUÍA\ifnum\xi>1 \ \xi \fi:\\ \MakeUppercase\x\\
-			}
+		\foreach \x [count=\xi] in \@guia {
+			PROFESORA GUÍA\ifnum\xi>1 \ \xi \fi:\\ \MakeUppercase\x\\
+		}
 
 		\vspace{1cm}
-			\foreach \x [count=\xi] in \@coguia {
-				PROFESOR CO-GUÍA\ifnum\xi>1 \ \xi \fi:\\ \MakeUppercase\x\\
-			}
+		\foreach \x [count=\xi] in \@coguia {
+			PROFESOR CO-GUÍA\ifnum\xi>1 \ \xi \fi:\\ \MakeUppercase\x\\
+		}
 
 		\vspace{1cm}
-			MIEMBROS DE LA COMISIÓN:\\
-			\foreach \x in \@comision { \MakeUppercase\x\\ }
+		MIEMBROS DE LA COMISIÓN:\\
+		\foreach \x in \@comision { \MakeUppercase\x\\ }
 
 		\if\@auspicio\@empty\else
-		\vfill
+			\vfill
 			\normalfont
 			Este trabajo ha sido parcialmente financiado por \@auspicio
 		\fi
 
 		\vfill
-			\MakeUppercase\@lugar\\ \MakeUppercase\@anho
+		\MakeUppercase\@lugar\\ \MakeUppercase\@anho
 	\end{titlepage}
-	
+
 	%% Configuración de hyperref
 	%%  (... tenemos en título, autor, etc., acá)
 	\hypersetup{

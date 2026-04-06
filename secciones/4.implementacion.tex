@@ -20,10 +20,10 @@ y evitar que la barra de navegación se llene de pestañas, como se muestra en l
 la implementación de esta separación con más detalle.
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.4\textwidth]{imagenes/implementaciones/selector_seccion_trabajo_titulo.png}
-  \caption{Captura de pantalla de la barra de navegación con pestañas de Trabajo de Título.}
-  \label{fig:barra_navegacion_trabajo_titulo}
+    \centering
+    \includegraphics[width=0.4\textwidth]{imagenes/implementaciones/selector_seccion_trabajo_titulo.png}
+    \caption{Captura de pantalla de la barra de navegación con pestañas de Trabajo de Título.}
+    \label{fig:barra_navegacion_trabajo_titulo}
 \end{figure}
 
 Una segunda diferencia está en el botón para exportar las comisiones asignadas al SSM,
@@ -41,10 +41,10 @@ evaluador. La implementación actual se puede ver en la figura
 \ref{fig:cambios_grafico_carga_evaluadores}.
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=\textwidth]{imagenes/implementaciones/grafico_evaluadores.png}
-  \caption{Captura de pantalla del gráfico de carga de evaluadores.}
-  \label{fig:cambios_grafico_carga_evaluadores}
+    \centering
+    \includegraphics[width=\textwidth]{imagenes/implementaciones/grafico_evaluadores.png}
+    \caption{Captura de pantalla del gráfico de carga de evaluadores.}
+    \label{fig:cambios_grafico_carga_evaluadores}
 \end{figure}
 
 Por último, dos de las interfaces diseñadas en los mockups no se implementaron,
@@ -85,35 +85,35 @@ todos los módulos y el resto de módulos no requieren un título personalizado.
 
 
 \begin{figure}[ht]
-  \begin{subfigure}[b]{0.47\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_cerrado.png}
-    \caption{Captura de pantalla del selector cerrado en la barra de navegación en el módulo de Introducción al Trabajo de Título.}
-    \label{fig:implementacion_selector_cerrado}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.47\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_abierto.png}
-    \caption{Captura de pantalla del selector abierto en la barra de navegación en el módulo de Introducción al Trabajo de Título.}
-    \label{fig:implementacion_selector_abierto}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.47\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_trabajo_titulo.png}
-    \caption{Captura de pantalla del selector cerrado en la barra de navegación en el módulo de Trabajo de Título.}
-    \label{fig:implementacion_selector_trabajo_titulo}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.47\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_trabajo_titulo_abierto.png}
-    \caption{Captura de pantalla del selector abierto en la barra de navegación en el módulo de Trabajo de Título.}
-    \label{fig:implementacion_selector_trabajo_titulo_abierto}
-  \end{subfigure}
-  \caption{Capturas de pantalla del selector en la barra de navegación.}
-  \label{fig:implementacion_selector}
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_cerrado.png}
+        \caption{Captura de pantalla del selector cerrado en la barra de navegación en el módulo de Introducción al Trabajo de Título.}
+        \label{fig:implementacion_selector_cerrado}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_abierto.png}
+        \caption{Captura de pantalla del selector abierto en la barra de navegación en el módulo de Introducción al Trabajo de Título.}
+        \label{fig:implementacion_selector_abierto}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_trabajo_titulo.png}
+        \caption{Captura de pantalla del selector cerrado en la barra de navegación en el módulo de Trabajo de Título.}
+        \label{fig:implementacion_selector_trabajo_titulo}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.47\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/implementaciones/selector_seccion_trabajo_titulo_abierto.png}
+        \caption{Captura de pantalla del selector abierto en la barra de navegación en el módulo de Trabajo de Título.}
+        \label{fig:implementacion_selector_trabajo_titulo_abierto}
+    \end{subfigure}
+    \caption{Capturas de pantalla del selector en la barra de navegación.}
+    \label{fig:implementacion_selector}
 \end{figure}
 
 \begin{lstlisting}[language=HTML, caption={Código de la parte central de la barra de navegación}, label={lst:barra_navegacion}]
@@ -161,15 +161,15 @@ de su memoria, su guía, su coguía si tiene y un botón que redirige a su ficha
 tabla al costado derecho se encuentra una barra de búsqueda que permite buscar por nombre
 de estudiante, título de memoria, nombre de guía y nombre de coguía. Sobre esta barra, se
 encuentra un filtro que permite elegir el semestre académico de los estudiantes que se
-mostrarán en la tabla. Por defecto se mostrarán los estudiantes del semestre académico
+muestran en la tabla. Por defecto se muestran los estudiantes del semestre académico
 activo. Por último, al costado derecho de este filtro está el botón de
 \textit{Sincronizar}, que permite actualizar la tabla con los estudiantes.
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=\linewidth]{imagenes/implementaciones/listado_estudiantes_f.png}
-  \caption{Captura de pantalla de la vista del listado de estudiantes de Trabajo de Título.}
-  \label{fig:listado_estudiantes_f}
+    \centering
+    \includegraphics[width=\linewidth]{imagenes/implementaciones/listado_estudiantes_f.png}
+    \caption{Captura de pantalla de la vista del listado de estudiantes de Trabajo de Título.}
+    \label{fig:listado_estudiantes_f}
 \end{figure}
 
 Para la actualización del registro se tomó en cuenta que los estudiantes deben estar
@@ -198,10 +198,10 @@ Una vez que termina la ejecución del comando, se recarga la página y se muestr
 actualizada de estudiantes de Trabajo de Título.
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.6\linewidth]{imagenes/implementaciones/estudiante_sin_tema.png}
-  \caption{Captura de pantalla de la notificación de que un estudiante no tiene un tema registrado.}
-  \label{fig:estudiante_sin_tema}
+    \centering
+    \includegraphics[width=0.6\linewidth]{imagenes/implementaciones/estudiante_sin_tema.png}
+    \caption{Captura de pantalla de la notificación de que un estudiante no tiene un tema registrado.}
+    \label{fig:estudiante_sin_tema}
 \end{figure}
 
 Como se mencionó en la descripción del comando, puede suceder que haya estudiantes que no
@@ -209,7 +209,7 @@ tengan una instancia de Tema y Propuesta con estado Aprobado. Esto sucede por lo
 asunción puede no ser cierta para estudiantes que hayan solicitado la vía rápida, pues
 actualmente ese proceso no se encuentra implementado en el Sistema de Titulación y se
 realiza directamente con la coordinación de titulación. El caso de la vía rápida no
-se manejará en esta memoria, ya que al momento del desarrollo de este trabajo de título,
+se maneja en esta memoria, ya que al momento del desarrollo de este trabajo de título,
 había otro tema de memoria sobre la incorporación de un módulo de vía rápida. Mientras
 que tanto, basta con crear una instancia de Tema y Propuesta con estado Aprobado para
 cada estudiante de vía rápida mediante el administrador de Django o por consola para que
@@ -233,21 +233,21 @@ su guía, su coguía si tiene y un botón a la ficha del estudiante. El resto de
 igual que la vista para Introducción al Trabajo de Título.
 
 \begin{figure}[ht]
-  \centering
-  \begin{subfigure}[t]{\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{imagenes/implementaciones/mis_memoristas_e.png}
-    \caption{Captura de pantalla de la vista de \textit{Mis Memoristas} para Introducción al Trabajo de Título.}
-    \label{subfig:implementacion_mis_memoristas_e}
-  \end{subfigure}
-  \begin{subfigure}[t]{\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{imagenes/implementaciones/mis_memoristas_f.png}
-    \caption{Captura de pantalla de la vista de \textit{Mis Memoristas} para Trabajo de Título.}
-    \label{subfig:implementacion_mis_memoristas_f}
-  \end{subfigure}
-  \caption{Vista de \textit{Mis Memoristas} para académicos con selector de ramo de titulación.}
-  \label{fig:implementacion_mis_memoristas}
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/implementaciones/mis_memoristas_e.png}
+        \caption{Captura de pantalla de la vista de \textit{Mis Memoristas} para Introducción al Trabajo de Título.}
+        \label{subfig:implementacion_mis_memoristas_e}
+    \end{subfigure}
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/implementaciones/mis_memoristas_f.png}
+        \caption{Captura de pantalla de la vista de \textit{Mis Memoristas} para Trabajo de Título.}
+        \label{subfig:implementacion_mis_memoristas_f}
+    \end{subfigure}
+    \caption{Vista de \textit{Mis Memoristas} para académicos con selector de ramo de titulación.}
+    \label{fig:implementacion_mis_memoristas}
 \end{figure}
 
 % \begin{lstlisting}[language=HTML]
@@ -280,10 +280,10 @@ Al final de cada fila se encuentra un botón que permite asignar evaluadores a l
 \ref{fig:comisiones_asignacion} muestra la lista de memorias con sus comisiones examinadoras.
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.8\linewidth]{imagenes/implementaciones/lista_comisiones.png}
-  \caption{Captura de pantalla de la lista de memorias con sus comisiones examinadoras.}
-  \label{fig:comisiones_asignacion}
+    \centering
+    \includegraphics[width=0.8\linewidth]{imagenes/implementaciones/lista_comisiones.png}
+    \caption{Captura de pantalla de la lista de memorias con sus comisiones examinadoras.}
+    \label{fig:comisiones_asignacion}
 \end{figure}
 
 \subsection{Filtro de Comisiones Examinadoras}
@@ -301,10 +301,10 @@ query parameter a la URL que indica el filtro seleccionado. Desde el backend se 
 las comisiones según el query parameter, como se muestra en el código \ref{lst:filtro_comisiones}.
 
 \begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.8\linewidth]{imagenes/implementaciones/comisiones_filtradas.png}
-  \caption{Captura de pantalla de la lista de comisiones examinadoras filtrada por comisiones completas.}
-  \label{fig:comisiones_filtradas}
+    \centering
+    \includegraphics[width=0.8\linewidth]{imagenes/implementaciones/comisiones_filtradas.png}
+    \caption{Captura de pantalla de la lista de comisiones examinadoras filtrada por comisiones completas.}
+    \label{fig:comisiones_filtradas}
 \end{figure}
 
 \begin{lstlisting}[language=Python, caption={Filtrado de comisiones examinadoras.}, label={lst:filtro_comisiones}]
@@ -359,10 +359,10 @@ mediante un botón que se encuentra bajo la barra de navegación, entre el filtr
 y el botón de sincronización.
 
 \begin{figure}[ht!]
-  \centering
-  \includegraphics[width=0.95\linewidth]{imagenes/implementaciones/grafico_evaluadores.png}
-  \caption{Captura de pantalla del gráfico de carga de evaluadores.}
-  \label{fig:grafico_carga_evaluadores}
+    \centering
+    \includegraphics[width=0.95\linewidth]{imagenes/implementaciones/grafico_evaluadores.png}
+    \caption{Captura de pantalla del gráfico de carga de evaluadores.}
+    \label{fig:grafico_carga_evaluadores}
 \end{figure}
 
 
@@ -374,10 +374,10 @@ MemoriaEnF en vez de AlumnoCursandoMemoria. Además, en el modal se agregó el n
 En la figura \ref{fig:modal_asignacion_comisiones} se muestra el modal con los cambios realizados.
 
 \begin{figure}[ht!]
-  \centering
-  \includegraphics[width=0.5\linewidth]{imagenes/implementaciones/modal.png}
-  \caption{Captura de pantalla del modal de asignación de comisiones.}
-  \label{fig:modal_asignacion_comisiones}
+    \centering
+    \includegraphics[width=0.5\linewidth]{imagenes/implementaciones/modal.png}
+    \caption{Captura de pantalla del modal de asignación de comisiones.}
+    \label{fig:modal_asignacion_comisiones}
 \end{figure}
 
 Un cambio importante es que se agregaron validaciones en la asignación de comisiones. En
@@ -415,29 +415,29 @@ comision.evaluadores.add(*evaluadores)
 \newpage
 
 \begin{figure}[ht!]
-  \centering
-  \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{imagenes/implementaciones/validacion_minimo_2.png}
-    \caption{Mensaje de error indicando que se debe agregar al menos dos evaluadores.}
-    \label{subfig:validacion_minimo_2}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.45\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{imagenes/implementaciones/validacion_guia_evaluador.png}
-    \caption{Mensaje de error indicando que un integrante de la comisión es guía o coguía.}
-    \label{subfig:validacion_guia_evaluador}
-  \end{subfigure}
-  \begin{subfigure}[b]{0.45\textwidth}
-    \centering
-    \vspace{0.5cm}
-    \includegraphics[width=\linewidth]{imagenes/implementaciones/validacion_ajc_ajp.png}
-    \caption{Mensaje de error indicando que al menos un integrante debe ser ajc o ajp.}
-    \label{subfig:validacion_ajc_ajp}
-  \end{subfigure}
-  \caption{Mensajes de error por validaciones de comisión examinadora.}
-  \label{fig:validaciones_comision}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/implementaciones/validacion_minimo_2.png}
+        \caption{Mensaje de error indicando que se debe agregar al menos dos evaluadores.}
+        \label{subfig:validacion_minimo_2}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{imagenes/implementaciones/validacion_guia_evaluador.png}
+        \caption{Mensaje de error indicando que un integrante de la comisión es guía o coguía.}
+        \label{subfig:validacion_guia_evaluador}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \vspace{0.5cm}
+        \includegraphics[width=\linewidth]{imagenes/implementaciones/validacion_ajc_ajp.png}
+        \caption{Mensaje de error indicando que al menos un integrante debe ser ajc o ajp.}
+        \label{subfig:validacion_ajc_ajp}
+    \end{subfigure}
+    \caption{Mensajes de error por validaciones de comisión examinadora.}
+    \label{fig:validaciones_comision}
 \end{figure}
 
 
@@ -722,14 +722,14 @@ la extensión de Django llamada Django Rest Framework (DRF) al proyecto, que pro
 herramientas para crear APIs Restful y extiende las posibilidades de autenticación para
 endpoints. Entonces, se creó un usuario para el Sistema de Titulación, de nombre
 \verb|sistema_titulacion|, al cual se le generó un token de autenticación. Con este token
-el Sistema de Titulación podrá autenticarse y hacer peticiones POST al endpoint de la
+el Sistema de Titulación puede autenticarse y hacer peticiones POST al endpoint de la
 API. Para la autenticación es necesario enviar en el header \texttt{Authorization} de la
 petición el token con el prefijo ``Token ''. Cómo se puede ver en el código
 \ref{lst:decorators}, para proteger el endpoint como se mencionó anteriormente, se
 utilizaron decoradores de DRF sobre la view de Django que define el endpoint. El
 decorador \verb|@permission_classes| es para restringir el acceso al endpoint y el
 decorador \verb|@authentication_classes| se utiliza para especificar el tipo de
-autenticación que se utilizará.
+autenticación que se utiliza.
 
 \begin{lstlisting}[language=Python, escapechar=|, label={lst:decorators}, caption={Decoradores utilizados en la API.}]
 @api_view(["POST"])
@@ -757,21 +757,21 @@ para enviar una notificación al usuario por cada curso sin fecha de entrega def
 como se puede ver en la figura \ref{subfig:notificacion_ssm}.
 
 \begin{figure}[ht]
-  \centering
-  \begin{subfigure}[b]{0.9\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{imagenes/implementaciones/ssm/listado_memorias_ssm.png}
-    \caption{Comisiones de un curso sin fecha de entrega definida}
-    \label{subfig:listado_memorias_ssm}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.5\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{imagenes/implementaciones/ssm/notificacion_ssm.png}
-    \caption{Notificación de cursos sin fecha de entrega}
-    \label{subfig:notificacion_ssm}
-  \end{subfigure}
-  \caption{Cambios en la interfaz del SSM para manejar cursos sin fecha de entrega}
+    \begin{subfigure}[b]{0.9\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{imagenes/implementaciones/ssm/listado_memorias_ssm.png}
+        \caption{Comisiones de un curso sin fecha de entrega definida}
+        \label{subfig:listado_memorias_ssm}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{imagenes/implementaciones/ssm/notificacion_ssm.png}
+        \caption{Notificación de cursos sin fecha de entrega}
+        \label{subfig:notificacion_ssm}
+    \end{subfigure}
+    \caption{Cambios en la interfaz del SSM para manejar cursos sin fecha de entrega}
 \end{figure}
 
 
@@ -897,10 +897,10 @@ es el despliegue del sistema en el servidor de producción y en esta sección se
 los pasos que se siguieron para llevar a cabo el despliegue tanto del Sistema de Titulación
 como del SSM con los cambios realizados.
 
-Como se mencionó en la sección \ref{sec:intro:despliegue}, el despliegue se realizará en
-los servidores del DCC para que pueda ser utilizada por la coordinación de titulación.
-Para ello, durante todo el desarrollo del sistema se utilizaron contenedores de Docker
-con Docker Compose para coordinar la creación de los contenedores de la base de datos
+Como se mencionó en la sección \ref{sec:intro:despliegue}, el despliegue de la herramienta
+fue realizado en los servidores del DCC para que pueda ser utilizada por la coordinación
+de titulación. Para ello, durante todo el desarrollo del sistema se utilizaron contenedores
+de Docker con Docker Compose para coordinar la creación de los contenedores de la base de datos
 Postgres y el servidor web Django, facilitando el despliegue. El uso de Docker Compose
 no es algo novedoso incorporado por esta memoria en el Sistema de Titulación y el SSM, ambos sistemas
 ya lo utilizaban.

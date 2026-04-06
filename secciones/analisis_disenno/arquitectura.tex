@@ -12,6 +12,7 @@ arquitectura. Los módulos son los siguientes:
 \begin{multicols}{3}
   \begin{itemize}
     \item Core
+    \item Kernel
     \item Servicios
     \item Comisiones
     \item Titulación
@@ -23,9 +24,9 @@ arquitectura. Los módulos son los siguientes:
   \end{itemize}
 \end{multicols}
 
-El módulo Core actúa como base transversal, conteniendo la configuración y
-funcionalidades utilizadas por todo el sistema. Por su parte, el módulo de Servicios
-gestiona las notificaciones, mientras que el de Docencia se ocupa de los periodos
+Los módulos Core y Kernel actúan como base transversal. Core contiene la configuración y
+funcionalidades utilizadas por todo el sistema, mientras que Kernel aporta con modelos base.
+Por su parte, el módulo de Servicios gestiona las notificaciones, mientras que el de Docencia se ocupa de los periodos
 académicos y los cursos. Asimismo, el módulo de Investigación administra las áreas de
 investigación, y el de Departamento es responsable de la gestión de estudiantes,
 funcionarios y sus respectivos roles. De igual manera, el módulo de Evaluación se encarga
@@ -42,6 +43,12 @@ asignación y exportación de dichas comisiones.
   \label{fig:arquitectura_interna}
 \end{figure}
 
+De los módulos mencionados anteriormente, los módulos Kernel, Core, Investigación,
+Servicios, Departamento, Docencia y Titulación se encontraban en producción antes de este
+trabajo. Cabe destacar que Departamento, Docencia y Titulación fueron modificados durante
+esta memoria. Por otra parte, los módulos de Evaluación, Trabajo de Título y Comisiones
+fueron llevados a producción por este trabajo.
+
 El Sistema de Titulación interactúa con otros sistemas, ya sea consumiendo sus APIs o
 exportando datos. Específicamente, el Sistema de Titulación se relaciona con el Sistema
 de Seguimiento de Memorias (SSM), la API de UCampus llamada Mufasa y el Portal DCC.
@@ -55,13 +62,6 @@ entregando datos del usuario al sistema una vez que este se ha autenticado. En l
 En particular, el Sistema de Titulación depende del Portal DCC para el inicio de sesión de los
 usuarios y la obtención de sus datos, como nombre, rut, roles y permisos dentro del DCC.
 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=0.7\linewidth]{imagenes/arquitectura/sso_dcc.png}
-  \caption{Flujo de autenticación con el SSO del Portal DCC obtenido del repositorio del proyecto Django Utils \cite{SSO_DCC}.}
-  \label{fig:sso_dcc}
-\end{figure}
-
 Por otro lado, el sistema utiliza la API de UCampus para obtener los periodos académicos,
 los ramos relacionados con el proceso de titulación, sus respectivas secciones y estudiantes
 inscritos en estas secciones. Finalmente, el sistema exporta datos sobre las memorias y las
@@ -69,6 +69,13 @@ comisiones examinadoras asignadas al Sistema de Seguimiento de Memorias (SSM), m
 petición POST autenticada con un token generado por el SSM. Un resumen de las interacciones
 entre el Sistema de Titulación y los otros sistemas puede verse en la figura
 \ref{fig:arquitectura_externa}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.7\linewidth]{imagenes/arquitectura/sso_dcc.png}
+  \caption{Flujo de autenticación con el SSO del Portal DCC obtenido del repositorio del proyecto Django Utils \cite{SSO_DCC}.}
+  \label{fig:sso_dcc}
+\end{figure}
 
 \begin{figure}[ht!]
   \centering
